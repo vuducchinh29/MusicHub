@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body class="container">
-<div class="panel panel-default">
-    <div class="panel-body">
-        <form th:action="@{/register}" th:method="post" role="form" th:object="${userForm}">
-            <legend>Register</legend>
-
-            <div class="form-group">
-                <label th:field="*{id}"></label>
-                <input th:type="hidden" class="form-control" th:field="*{id}">
-                <label th:field="*{email}">Email:</label>
-                <input class="form-control" type="email" th:field="*{email}">
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:text="*{#fields.errors('email')}"></div>
-                <div class="alert alert-danger" role="alert" th:if="${message}" th:text="${message}"></div>
-            </div>
-
-            <div class="form-group">
-                <label th:field="*{name}">Name:</label>
-                <input class="form-control" type="text" th:field="*{name}">
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:text="*{#fields.errors('email')}"></div>
-            </div>
-
-            <div class="form-group">
-                <label th:field="*{password}">Password:</label>
-                <input class="form-control" type="password" th:field="*{password}">
-                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:text="*{#fields.errors('password')}"></div>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+<head>
+  <meta charset="utf-8">
+  <title>Registration Form</title>
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Main Style Css -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="form-v9">
+<div class="page-content" style="background-image: url('images/form-v9.jpg'); background-size: cover">
+  <div class="form-v9-content">
+    <div class="row">
+      <img src="images/MusicHub_logo.png" alt="" class="logo">
     </div>
+    <form class="form-detail" th:action="@{/register}" th:method="post" role="form" th:object="${userForm}">
+      <h2>Registration Form</h2>
+      <input type="hidden" class="form-control" th:field="*{id}">
+      <p class="message error" role="alert" th:if="${#fields.hasErrors('email')}" th:text="*{#fields.errors('email')}"></p>
+      <p class="message error" role="alert" th:if="${message}" th:text="${message}"></p>
+      <p class="message error" role="alert" th:if="${#fields.hasErrors('name')}" th:text="*{#fields.errors('name')}"></p>
+      <p class="message error" role="alert" th:if="${#fields.hasErrors('password')}" th:text="*{#fields.errors('password')}"></p>
+      <div class="form-row-total">
+        <div class="form-row">
+          <input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name" required th:field="*{name}">
+        </div>
+        <div class="form-row">
+          <input type="email" name="your-email" id="your-email" class="input-text" placeholder="Your Email" required th:field="*{email}">
+        </div>
+      </div>
+      <div class="form-row-total">
+        <div class="form-row">
+          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required th:field="*{password}">
+        </div>
+        <div class="form-row">
+          <input type="password" name="confirm_password" id="confirm_password" class="input-text"
+                 placeholder="Confirm Password" required>
+        </div>
+      </div>
+      <div class="form-row-last">
+        <input type="submit" name="register" class="register" value="Register">
+      </div>
+    </form>
+  </div>
 </div>
 </body>
+<script src="js/confirmPW.js"></script>
 </html>
