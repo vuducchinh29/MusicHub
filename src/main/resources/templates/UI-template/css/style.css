@@ -249,9 +249,6 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 
 @media screen and (max-width: 1199px) {
-  /*.form-v9-content {*/
-  /*  margin: 50px 20px;*/
-  /*}*/
   .logo {
     width: 250px;
     margin: 0 auto;
