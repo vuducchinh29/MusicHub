@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="us">
 <head>
-    <meta charset="UTF-8" />
-    <title>Login Page</title>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  <meta charset="utf-8">
+  <title>Registration Form</title>
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Main Style Css -->
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
-<div class="main-content">
-    <p th:if="${param.error}" class="error">Invalid email/password or Account is not active.</p>
-    <p th:if="${param.logout}" class="success">You have been logged out</p>
-    <h3>Login to continue</h3>
-    <form th:action="@{/login}" method="POST">
-        <input type="text" name="email" placeholder="Your email" /><br />
-        <input type="password" name="password" placeholder="Your password" /><br />
-        <input type="checkbox" name="remember-me" />
-        <button type="submit">Login</button> <br />
+<body class="form-v9">
+<div class="page-content" style="background-image: url('images/form-v9.jpg'); background-size: cover">
+  <div class="form-v9-content">
+    <div class="row">
+      <img src="images/MusicHub_logo.png" alt="" class="logo">
+    </div>
+    <form class="form-detail" th:action="@{/login}" method="POST">
+      <h2>Login Form</h2>
+      <p th:if="${param.error}" class="message error">Invalid email or password</p>
+      <p th:if="${param.logout}" class="message success">You have been logged out</p>
+      <div class="form-row-total">
+        <div class="form-row form-login">
+          <input type="text" name="email" class="input-text" placeholder="Your Name">
+        </div>
+      </div>
+      <div class="form-row-total">
+        <div class="form-row form-login">
+          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password">
+        </div>
+      </div>
+      <div class="form-row-last">
+        <div class="form-row form-2button">
+          <input type="submit" name="login" class="button register" value="Login">
+          <span>OR</span>
+          <button type="button" name="register" class="button login" value="Register"><a th:href="@{/register}">Register</a></button>
+        </div>
+      </div>
     </form>
+  </div>
 </div>
 </body>
 </html>
