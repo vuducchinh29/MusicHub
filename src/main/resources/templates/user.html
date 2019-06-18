@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Index Page</title>
+</head>
+<body>
+Logged user: <span th:text="${userInfo.getUsername()}"></span> <br/>
+Roles: <span th:text="${userInfo.authorities}"></span>
+<form action="#" th:action="@{/logout}" method="POST">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>
