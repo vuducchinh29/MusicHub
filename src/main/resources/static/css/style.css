@@ -97,23 +97,6 @@ a{
   background: rgba(255, 255, 255, 0.2)
 }
 
-.form-v9-content .form-login input {
-  width: 100%;
-  padding: 14.5px 0px 14.5px 30px;
-  border: 2px solid #ccc;
-  appearance: unset;
-  -moz-appearance: unset;
-  -webkit-appearance: unset;
-  outline: none;
-  border-radius: 27.5px;
-  -moz-border-radius: 27.5px;
-  -webkit-border-radius: 27.5px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.2)
-}
-
 .form-v9-content .form-detail input:focus {
   border: 2px solid #999;
 }
@@ -229,7 +212,6 @@ input:-moz-placeholder { /* Firefox 18- */
 .form-2button {
   display: flex;
   margin: auto;
-  padding-left: 30px;
 }
 
 .form-v9-content .form-detail .form-row-last .form-2button .button {
@@ -242,6 +224,7 @@ input:-moz-placeholder { /* Firefox 18- */
 
 .message {
   text-align: center;
+  margin-bottom: 40px;
 }
 
 /* Responsive */
