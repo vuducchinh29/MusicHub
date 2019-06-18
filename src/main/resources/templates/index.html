@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Index Page</title>
+</head>
+<body>
+<a th:href="@{/}">Home</a>
+
+| &nbsp;
+
+<a th:href="@{/user}">User Info</a>
+
+| &nbsp;
+
+<a th:href="@{/admin}">Admin</a>
+
+| &nbsp;
+
+<a th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
+ or
+<a th:if="${#request.userPrincipal == null}" th:href="@{/register}">Register</a>
+
+<form th:if="${#request.userPrincipal != null}" action="#" th:action="@{/logout}" method="POST">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>
