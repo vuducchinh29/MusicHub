@@ -98,16 +98,16 @@ public class LoginController {
     return "login";
   }
 
-  @GetMapping("/resetPassword")
+  @GetMapping("/reset-password")
   public String resetPasswordForm() {
     return "resetPassword";
   }
 
-  @PostMapping("/resetPassword")
+  @PostMapping("/reset-password")
   public String resetPassword(@RequestParam String email) {
     UserDTO userDTO = userDTOService.findByEmail(email);
     if (userDTO == null) {
-      return "redirect:/resetPassword?error";
+      return "redirect:/reset-password?error";
     } else {
       TokenVerifyDTO tokenVerifyDTO = tokenVerifyDTOService.findByUserId(userDTO.getId());
       if (tokenVerifyDTO != null) {
@@ -115,15 +115,15 @@ public class LoginController {
       }
       sendMailResetPassword(userDTO);
     }
-    return "redirect:/resetPassword";
+    return "redirect:/reset-password";
   }
 
-  @GetMapping("/user/updatePassword")
+  @GetMapping("/user/update-password")
   public String updatePasswordForm() {
     return "updatePassword";
   }
 
-  @PostMapping("/user/updatePassword")
+  @PostMapping("/user/update-password")
   public String updatePassword(@ModelAttribute PasswordDTO passwordDTO) {
     UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext()
             .getAuthentication().getPrincipal();
@@ -167,7 +167,7 @@ public class LoginController {
 
     message.setTo(user.getEmail());
     message.setSubject("Reset Password");
-    message.setText("Click link to reset password: http://localhost:8080/user/resetPassword?id=" + user.getId() + "&token=" + token.getToken());
+    message.setText("Click link to reset password: http://localhost:8080/user/reset-password?id=" + user.getId() + "&token=" + token.getToken());
     this.javaMailSender.send(message);
   }
 }

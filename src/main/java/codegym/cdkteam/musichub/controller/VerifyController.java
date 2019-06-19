@@ -43,7 +43,7 @@ public class VerifyController {
     }
   }
 
-  @GetMapping("/user/resetPassword")
+  @GetMapping("/user/reset-password")
   public String resetPassword(@RequestParam(name = "id") Optional<Long> userId, @RequestParam Optional<String> token) {
     if (!(userId.isPresent() || token.isPresent())) return "redirect:/404";
 
@@ -51,7 +51,7 @@ public class VerifyController {
     if (result != null) {
       return "redirect:/404";
     }
-    return "redirect:/user/updatePassword";
+    return "redirect:/user/update-password";
   }
 
   public String validatePasswordResetToken(long userId, String token) {
