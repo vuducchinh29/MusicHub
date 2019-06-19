@@ -14,7 +14,7 @@
     <div class="row">
       <img src="images/MusicHub_logo.png" alt="" class="logo">
     </div>
-    <form class="form-detail" th:action="@{/register}" th:method="post" role="form" th:object="${userForm}">
+    <form class="form-detail" th:action="@{/register}" th:method="post" role="form" th:object="${userDTO}">
       <h2>Registration Form</h2>
       <input type="hidden" class="form-control" th:field="*{id}">
       <p class="message error" role="alert" th:if="${#fields.hasErrors('email')}" th:text="*{#fields.errors('email')}"></p>
@@ -24,19 +24,19 @@
       <p class="message error" role="alert" th:if="${param.active}">Please check your email and active account</p>
       <div class="form-row-total">
         <div class="form-row">
-          <input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name" required th:field="*{name}">
+          <input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name"  th:field="*{name}">
         </div>
         <div class="form-row">
-          <input type="email" name="your-email" id="your-email" class="input-text" placeholder="Your Email" required th:field="*{email}">
+          <input type="email" name="your-email" id="your-email" class="input-text" placeholder="Your Email"  th:field="*{email}">
         </div>
       </div>
       <div class="form-row-total">
         <div class="form-row">
-          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required minlength="6" th:field="*{password}">
+          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" th:field="*{password}">
         </div>
         <div class="form-row">
           <input type="password" name="confirm_password" id="confirm_password" class="input-text"
-                 placeholder="Confirm Password" required>
+                 placeholder="Confirm Password">
         </div>
       </div>
       <div class="form-row-last">
