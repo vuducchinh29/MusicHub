@@ -57,7 +57,10 @@ public class LoginController {
   }
 
   @GetMapping("/register")
-  public String registerForm(Model model) {
+  public String registerForm(Model model, Principal principal) {
+    if (principal != null) {
+      return "redirect:/";
+    }
     model.addAttribute("userDTO", new UserDTO());
     return "register";
   }
