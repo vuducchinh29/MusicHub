@@ -29,8 +29,8 @@ public class UserDTOServiceImpl implements UserDTOService {
   }
 
   @Override
-  public void save(UserDTO userDTO) {
-    userDTORepository.save(userDTO);
+  public UserDTO save(UserDTO userDTO) {
+    return userDTORepository.save(userDTO);
   }
 
   @Override

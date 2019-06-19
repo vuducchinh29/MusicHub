@@ -19,23 +19,19 @@ public class VerifyController {
   @Autowired
   private UserDTOService userDTOService;
 
-  @GetMapping("verify/{userId}")
-  public String verify(@PathVariable long userId, @RequestParam Optional<String> token) {
+  @GetMapping("/user/active")
+  public String active(@RequestParam("id") long userId, @RequestParam Optional<String> token) {
     TokenVerifyDTO tokenVerifyDTO = tokenVerifyDTOService.findByUserId(userId);
     if (tokenVerifyDTO == null) {
-      System.out.println("null token");
       return "redirect:/404";
     } else {
       String realToken = tokenVerifyDTO.getToken();
-      System.out.println(token);
-      System.out.println(realToken);
       if (token.get().equals(realToken)) {
         UserDTO user = userDTOService.findById(userId).get();
         user.setEnabled(true);
         userDTOService.save(user);
         tokenVerifyDTOService.delete(tokenVerifyDTO);
       } else {
-        System.out.println("not equal");
         return "redirect:/404";
       }
       return "redirect:/";

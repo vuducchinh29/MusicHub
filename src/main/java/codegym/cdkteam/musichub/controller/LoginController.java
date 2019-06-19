@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +52,7 @@ public class LoginController {
     if (!userDTO.isEnabled()) {
       return "verify";
     }
-    org.springframework.security.core.userdetails.User loginedUser = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
+    User loginedUser = (User) ((Authentication) principal).getPrincipal();
     model.addAttribute("userInfo", loginedUser);
     return "user";
   }
@@ -75,25 +76,8 @@ public class LoginController {
       return "register";
     }
 
-    UserDTO userDTO = new UserDTO();
-    userDTO.setEmail(userForm.getEmail());
-    userDTO.setName(userForm.getName());
-    userDTO.setPassword(passwordEncoder.encode(userForm.getPassword()));
-    HashSet<RoleDTO> roles = new HashSet<>();
-    roles.add(roleDTOService.findByName("ROLE_MEMBER"));
-    userDTO.setRoles(roles);
-    userDTOService.save(userDTO);
-
-    TokenVerifyDTO tokenVerifyDTO = new TokenVerifyDTO(UUID.randomUUID().toString(), userDTOService.findById(userDTO.getId()).get());
-    tokenVerifyDTOService.save(tokenVerifyDTO);
-
-    SimpleMailMessage message = new SimpleMailMessage();
-
-    message.setTo(userDTO.getEmail());
-    message.setSubject("Please Active Your Account");
-    message.setText("Click link to active your account: http://localhost:8080/verify/" + userDTO.getId() + "?token=" + tokenVerifyDTO.getToken());
-    this.javaMailSender.send(message);
-
+    UserDTO savedUser = saveUserDTO(userForm);
+    sendMailActive(savedUser);
     return "redirect:/login";
   }
 
@@ -115,20 +99,26 @@ public class LoginController {
     return "login";
   }
 
-  @GetMapping("/resetPassword")
-  public String resetPasswordForm() {
-    return "resetPassword";
+  private UserDTO saveUserDTO(UserDTO userForm) {
+    UserDTO userDTO = new UserDTO();
+    userDTO.setEmail(userForm.getEmail());
+    userDTO.setName(userForm.getName());
+    userDTO.setPassword(passwordEncoder.encode(userForm.getPassword()));
+    HashSet<RoleDTO> roles = new HashSet<>();
+    roles.add(roleDTOService.findByName("ROLE_MEMBER"));
+    userDTO.setRoles(roles);
+    return userDTOService.save(userDTO);
   }
 
-  @GetMapping("/resetPassword/{email}")
-  public String resetPassword(@PathVariable String email) {
-    UserDTO userDTO = userDTOService.findByEmail(email);
-    if (userDTO == null) {
-      return "redirect:/resetPassword";
-    } else {
-      TokenVerifyDTO token = new TokenVerifyDTO(UUID.randomUUID().toString(), userDTOService.findById(userDTO.getId()).get());
-      tokenVerifyDTOService.save(token);
-    }
-    return "resetPassword1";
+  private void sendMailActive(UserDTO user) {
+    TokenVerifyDTO tokenVerifyDTO = new TokenVerifyDTO(UUID.randomUUID().toString(), userDTOService.findById(user.getId()).get());
+    tokenVerifyDTOService.save(tokenVerifyDTO);
+
+    SimpleMailMessage message = new SimpleMailMessage();
+
+    message.setTo(user.getEmail());
+    message.setSubject("Please Active Your Account");
+    message.setText("Click link to active your account: http://localhost:8080/user/active?id=" + user.getId() + "&token=" + tokenVerifyDTO.getToken());
+    this.javaMailSender.send(message);
   }
 }

@@ -9,6 +9,6 @@ public interface UserDTOService {
     List<UserDTO> findAll();
     UserDTO findByEmail(String email);
     Optional<UserDTO> findById(long id);
-    void save(UserDTO user);
+    UserDTO save(UserDTO user);
     void delete(long id);
 }
