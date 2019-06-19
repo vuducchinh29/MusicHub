@@ -14,8 +14,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.UUID;
@@ -56,24 +58,24 @@ public class LoginController {
 
   @GetMapping("/register")
   public String registerForm(Model model) {
-    model.addAttribute("userForm", new UserDTO());
+    model.addAttribute("userDTO", new UserDTO());
     return "register";
   }
 
   @PostMapping("/register")
-  public String register(@ModelAttribute UserDTO userForm, Model model) {
-//    if (result.hasFieldErrors()) {
-//      return "register";
-//    }
+  public String register(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, Model model) {
+    if (result.hasFieldErrors()) {
+      return "register";
+    }
 
-    UserDTO checkUser = userDTOService.findByEmail(userForm.getEmail());
+    UserDTO checkUser = userDTOService.findByEmail(userDTO.getEmail());
     if (checkUser != null) {
-      model.addAttribute("userForm", userForm);
+      model.addAttribute("userDTO", userDTO);
       model.addAttribute("message", "Email exist");
       return "register";
     }
 
-    UserDTO savedUser = saveUserDTO(userForm);
+    UserDTO savedUser = saveUserDTO(userDTO);
     sendMailActive(savedUser);
     return "redirect:/login";
   }

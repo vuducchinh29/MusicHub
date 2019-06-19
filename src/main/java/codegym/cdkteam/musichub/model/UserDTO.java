@@ -25,15 +25,15 @@ public class UserDTO {
   private Long id;
 
   @NotEmpty(message = "Email is required")
-  @Email(message = "Please input your email")
+  @Email(message = "Email invalid")
   @Column(name = "email", unique = true, nullable = false)
   private String email;
 
-  @NotNull(message = "Name is required")
+  @NotEmpty(message = "Name is required")
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Size(min = 6)
+  @Size(min = 6, message = "Password must be more than 6 characters")
   @Column(name = "password", nullable = false)
   private String password;
 
