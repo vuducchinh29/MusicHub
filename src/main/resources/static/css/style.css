@@ -214,8 +214,9 @@ input:-moz-placeholder { /* Firefox 18- */
   margin: auto;
 }
 
-.form-v9-content .form-detail .form-row-last .form-2button .button {
-  margin: 0 10px 90px 10px;
+.form-v9-content .form-detail .form-row-last .form-2button .button,
+.form-v9-content .form-detail .form-row-last .register-btn{
+  margin: 0 10px 15px 10px;
 }
 
 .form-2button span {
@@ -240,8 +241,9 @@ input:-moz-placeholder { /* Firefox 18- */
     margin: 0 auto;
     display: block;
   }
-  .form-v9-content .form-detail .form-row-last .form-2button .button {
-    margin: 0 10px 115px 10px;
+  .form-v9-content .form-detail .form-row-last .form-2button .button,
+  .form-v9-content .form-detail .form-row-last .register-btn {
+    margin: 0 10px 40px 10px;
   }
 }
 
@@ -261,8 +263,9 @@ input:-moz-placeholder { /* Firefox 18- */
     margin: 0 auto;
     display: block;
   }
-  .form-v9-content .form-detail .form-row-last .form-2button .button {
-    margin: 0 10px 145px 10px;
+  .form-v9-content .form-detail .form-row-last .form-2button .button,
+  .form-v9-content .form-detail .form-row-last .register-btn {
+    margin: 0 10px 70px 10px;
   }
 }
 
@@ -277,9 +280,6 @@ input:-moz-placeholder { /* Firefox 18- */
     display: block;
   }
 
-  .form-v9-content .form-detail .form-row-last .form-2button .button {
-    margin: 0 10px 145px 10px;
-  }
 }
 
 .form-rs-pw{
@@ -287,4 +287,11 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 .form-rs-pw .rs-pw-btn{
   margin: 0 0 130px 0!important;
+}
+.link{
+  color: #0888f2;
+  text-decoration: underline;
+}
+.link:hover{
+  color: #f25d5d;
 }
