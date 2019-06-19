@@ -39,7 +39,7 @@ public class VerifyController {
       } else {
         return "redirect:/404";
       }
-      return "redirect:/";
+      return "redirect:/login";
     }
   }
 

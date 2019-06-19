@@ -77,7 +77,7 @@ public class LoginController {
 
     UserDTO savedUser = saveUserDTO(userDTO);
     sendMailActive(savedUser);
-    return "redirect:/login";
+    return "redirect:/register?active";
   }
 
   @GetMapping("/admin")
@@ -115,7 +115,7 @@ public class LoginController {
       }
       sendMailResetPassword(userDTO);
     }
-    return "redirect:/reset-password";
+    return "redirect:/reset-password?sent";
   }
 
   private UserDTO saveUserDTO(UserDTO userForm) {

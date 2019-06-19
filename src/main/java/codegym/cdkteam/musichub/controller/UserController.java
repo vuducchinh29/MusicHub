@@ -33,7 +33,8 @@ public class UserController {
 
 
   @GetMapping("/user/update-password")
-  public String updatePasswordForm() {
+  public String updatePasswordForm(Model model) {
+    model.addAttribute("passwordDTO", new PasswordDTO());
     return "updatePassword";
   }
 
