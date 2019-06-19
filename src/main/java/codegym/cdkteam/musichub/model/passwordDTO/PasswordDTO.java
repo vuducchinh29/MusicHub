@@ -12,6 +12,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PasswordDTO {
-  @Size(min = 6, message = "Password > 6")
+  @Size(min = 6, message = "Password must be more than 6 character")
   private String password;
 }

@@ -38,7 +38,10 @@ public class UserController {
   }
 
   @PostMapping("/user/update-password")
-  public String updatePassword(@ModelAttribute PasswordDTO passwordDTO) {
+  public String updatePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult result) {
+    if (result.hasFieldErrors()) {
+      return "updatePassword";
+    }
     UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext()
             .getAuthentication().getPrincipal();
     userDTO.setPassword(passwordEncoder.encode(passwordDTO.getPassword()));
