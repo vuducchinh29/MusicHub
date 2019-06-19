@@ -10,9 +10,9 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-    public static final String APP_EMAIL = "pnk.leeyanji@gmail.com"; // your email
+    public static final String APP_EMAIL = "hotro.musichub@gmail.com"; // your email
 
-    public static final String APP_PASSWORD = "axytytrikmpvngtg"; // your password
+    public static final String APP_PASSWORD = "jdwnsgvrefkbwtoc"; // your password
 
     @Bean
     public JavaMailSender getJavaMailSender() {
