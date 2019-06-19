@@ -118,24 +118,6 @@ public class LoginController {
     return "redirect:/reset-password";
   }
 
-  @GetMapping("/user/update-password")
-  public String updatePasswordForm() {
-    return "updatePassword";
-  }
-
-  @PostMapping("/user/update-password")
-  public String updatePassword(@ModelAttribute PasswordDTO passwordDTO) {
-    UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext()
-            .getAuthentication().getPrincipal();
-    userDTO.setPassword(passwordEncoder.encode(passwordDTO.getPassword()));
-    userDTOService.save(userDTO);
-    TokenVerifyDTO tokenVerifyDTO = tokenVerifyDTOService.findByUserId(userDTO.getId());
-    tokenVerifyDTOService.delete(tokenVerifyDTO);
-    SecurityContextHolder.clearContext();
-
-    return "redirect:/login";
-  }
-
   private UserDTO saveUserDTO(UserDTO userForm) {
     UserDTO userDTO = new UserDTO();
     userDTO.setEmail(userForm.getEmail());
