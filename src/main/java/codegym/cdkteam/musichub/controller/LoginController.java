@@ -1,6 +1,5 @@
 package codegym.cdkteam.musichub.controller;
 
-import codegym.cdkteam.musichub.model.PasswordDTO;
 import codegym.cdkteam.musichub.model.RoleDTO;
 import codegym.cdkteam.musichub.model.TokenVerifyDTO;
 import codegym.cdkteam.musichub.model.UserDTO;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -116,24 +114,6 @@ public class LoginController {
       sendMailResetPassword(userDTO);
     }
     return "redirect:/reset-password";
-  }
-
-  @GetMapping("/user/update-password")
-  public String updatePasswordForm() {
-    return "updatePassword";
-  }
-
-  @PostMapping("/user/update-password")
-  public String updatePassword(@ModelAttribute PasswordDTO passwordDTO) {
-    UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext()
-            .getAuthentication().getPrincipal();
-    userDTO.setPassword(passwordEncoder.encode(passwordDTO.getPassword()));
-    userDTOService.save(userDTO);
-    TokenVerifyDTO tokenVerifyDTO = tokenVerifyDTOService.findByUserId(userDTO.getId());
-    tokenVerifyDTOService.delete(tokenVerifyDTO);
-    SecurityContextHolder.clearContext();
-
-    return "redirect:/login";
   }
 
   private UserDTO saveUserDTO(UserDTO userForm) {
