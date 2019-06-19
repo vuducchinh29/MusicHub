@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/register").permitAll()
                 .antMatchers("/user").access("hasAnyRole('MEMBER', 'ADMIN')")
                 .antMatchers("/admin").access("hasRole('ADMIN')")
-                .antMatchers("/user/updatePassword").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
+                .antMatchers("/user/update-password").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .and()
                 .formLogin()
                 .loginPage("/login")
