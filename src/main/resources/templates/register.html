@@ -21,6 +21,7 @@
       <p class="message error" role="alert" th:if="${message}" th:text="${message}"></p>
       <p class="message error" role="alert" th:if="${#fields.hasErrors('name')}" th:text="*{#fields.errors('name')}"></p>
       <p class="message error" role="alert" th:if="${#fields.hasErrors('password')}" th:text="*{#fields.errors('password')}"></p>
+      <p class="message error" role="alert" th:if="${param.active}">Please check your email and active account</p>
       <div class="form-row-total">
         <div class="form-row">
           <input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name" required th:field="*{name}">
@@ -39,9 +40,10 @@
         </div>
       </div>
       <div class="form-row-last">
-        <input type="submit" name="register" class="register" value="Register">
+        <input type="submit" name="register" class="register register-btn" value="Register">
       </div>
     </form>
+    <p class="message error">Do you have account? Please <a class="link" th:href="@{/login}">click here</a> to login.</p>
   </div>
 </div>
 </body>
