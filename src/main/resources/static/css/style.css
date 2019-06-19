@@ -281,3 +281,10 @@ input:-moz-placeholder { /* Firefox 18- */
     margin: 0 10px 145px 10px;
   }
 }
+
+.form-rs-pw{
+  margin: 0 auto!important;
+}
+.form-rs-pw .rs-pw-btn{
+  margin: 0 0 130px 0!important;
+}

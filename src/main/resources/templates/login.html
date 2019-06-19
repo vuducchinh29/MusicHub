@@ -16,11 +16,10 @@
     </div>
     <form class="form-detail" th:action="@{/login}" method="POST">
       <h2>Login Form</h2>
-      <p th:if="${param.error}" class="message error">Invalid email or password</p>
-      <p th:if="${param.logout}" class="message success">You have been logged out</p>
+      <p th:if="${param.error}" class="message error">Invalid email/password or account is not active</p>
       <div class="form-row-total">
         <div class="form-row form-login">
-          <input type="text" name="email" class="input-text" placeholder="Your Name">
+          <input type="text" name="email" class="input-text" placeholder="Your Email">
         </div>
       </div>
       <div class="form-row-total">
