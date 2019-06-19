@@ -31,7 +31,7 @@
       </div>
       <div class="form-row-total">
         <div class="form-row">
-          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required th:field="*{password}">
+          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required minlength="6" th:field="*{password}">
         </div>
         <div class="form-row">
           <input type="password" name="confirm_password" id="confirm_password" class="input-text"
