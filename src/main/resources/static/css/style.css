@@ -293,6 +293,9 @@ input:-moz-placeholder { /* Firefox 18- */
     padding-left: 2px
   }
 
+  .title-403{
+    font-size: 200px;
+  }
 }
 
 .form-rs-pw{

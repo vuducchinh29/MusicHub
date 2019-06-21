@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>403 Page</title>
+    <meta charset="UTF-8">
+    <title>403 Error</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
 </head>
 <body>
-<h2>403 Error: Access denied</h2>
+<div class="page-content" style="background-image: url('images/form-v9.jpg'); background-size: cover">
+    <div class="form-v9-content">
+        <div class="text-403">
+            <p class="title-403">403</p>
+            <p class="subtitle-403">FORBIDDEN</p>
+            <p class="decs-403">Access denied, please contact to CDK Team :)</p>
+            <a href="login.html"><input class="btn-403" type="button" value="Back to Home page"></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
