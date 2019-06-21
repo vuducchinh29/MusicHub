@@ -296,6 +296,10 @@ input:-moz-placeholder { /* Firefox 18- */
   .title-403{
     font-size: 200px;
   }
+
+  .btn-403{
+    margin-bottom: 120px;
+  }
 }
 
 .form-rs-pw{
