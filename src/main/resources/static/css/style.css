@@ -256,6 +256,11 @@ input:-moz-placeholder { /* Firefox 18- */
 
   .form-v9-content .form-row {
     width: 100%;
+    padding-left: 7px
+  }
+
+  .form-v9-content .form-2button {
+    padding-left: 7px
   }
 
   .logo {
@@ -270,14 +275,22 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 
 @media screen and (max-width: 575px) {
+  .form-v9-content{
+    width: 100%;
+  }
+
   .form-v9-content .form-detail {
-    padding: 30px 45px 30px 10px;
+    padding: 30px 10px 30px 0;
   }
 
   .logo {
     width: 200px;
     margin: 0 auto;
     display: block;
+  }
+
+  .form-v9-content .form-2button {
+    padding-left: 2px
   }
 
 }
