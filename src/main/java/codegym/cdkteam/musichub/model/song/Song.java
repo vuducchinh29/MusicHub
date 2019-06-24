@@ -14,4 +14,7 @@ public class Song {
   @NotEmpty(message = "Name of song is required")
   @Column(name = "name", nullable = false)
   private String name;
+
+  @Column(name = "description")
+  private String description;
 }
