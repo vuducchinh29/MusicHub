@@ -1,6 +1,8 @@
 package codegym.cdkteam.musichub.model.song;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "songs")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Song {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
