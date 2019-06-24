@@ -21,4 +21,7 @@ public class Song {
   @NotEmpty(message = "Link of song is required")
   @Column(name = "linksong", nullable = false)
   private String linksong;
+
+  @Column(name = "avatar")
+  private String avatar;
 }
