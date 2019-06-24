@@ -14,21 +14,21 @@ public class SongServiceImpl implements SongService {
 
   @Override
   public List<Song> findAll() {
-    return null;
+    return songRepository.findAll();
   }
 
   @Override
   public Optional<Song> findById(long id) {
-    return Optional.empty();
+    return songRepository.findById(id);
   }
 
   @Override
   public Song save(Song song) {
-    return null;
+    return songRepository.save(song);
   }
 
   @Override
   public void delete(long id) {
-
+    songRepository.deleteById(id);
   }
 }
