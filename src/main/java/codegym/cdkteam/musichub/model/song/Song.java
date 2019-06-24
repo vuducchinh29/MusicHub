@@ -17,4 +17,8 @@ public class Song {
 
   @Column(name = "description")
   private String description;
+
+  @NotEmpty(message = "Link of song is required")
+  @Column(name = "linksong", nullable = false)
+  private String linksong;
 }
