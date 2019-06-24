@@ -4,10 +4,11 @@ import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.repository.SongRepository;
 import codegym.cdkteam.musichub.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class SongServiceImpl implements SongService {
   @Autowired
   SongRepository songRepository;
