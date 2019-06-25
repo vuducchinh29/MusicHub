@@ -45,4 +45,12 @@ public class UploadRESTController {
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
             .body(file);
   }
+
+  @GetMapping("/files/image/{filename:.+}")
+  public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+    Resource file = storageService.loadFile(filename, StorageService.IMAGE_LOCATION);
+    return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+            .body(file);
+  }
 }
