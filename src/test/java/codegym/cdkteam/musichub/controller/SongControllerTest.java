@@ -16,14 +16,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SongControllerTest {
   private MockMvc mockMvc;
 
-  @InjectMocks
-  private SongController songController;
-
-  @Before
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    mockMvc = MockMvcBuilders.standaloneSetup(songController).build();
-  }
+//  @InjectMocks
+//  private SongController songController;
+//
+//  @Before
+//  public void setUp() {
+//    MockitoAnnotations.initMocks(this);
+//    mockMvc = MockMvcBuilders.standaloneSetup(songController).build();
+//  }
 
   @Test
   public void testAccessCreateTestSongPage() throws Exception {
