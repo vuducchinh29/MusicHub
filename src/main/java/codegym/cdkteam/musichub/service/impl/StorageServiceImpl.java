@@ -4,12 +4,15 @@ import codegym.cdkteam.musichub.service.StorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.nio.file.Paths;
+@Service
 public class StorageServiceImpl implements StorageService {
   @Value("${application.address}")
   public String applecationAddress;
@@ -32,5 +35,15 @@ public class StorageServiceImpl implements StorageService {
   @Override
   public Resource loadFile(String fileName, Path location) {
     return null;
+  }
+  @Override
+  public void init() {
+    try {
+      Files.createDirectory(Paths.get("files"));
+      Files.createDirectory(StorageService.SONG_LOCATION);
+      Files.createDirectory(StorageService.IMAGE_LOCATION);
+    } catch (IOException e) {
+      throw new RuntimeException("Could not initialize storage!");
+    }
   }
 }

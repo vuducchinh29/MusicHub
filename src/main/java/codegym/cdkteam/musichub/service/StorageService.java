@@ -12,6 +12,7 @@ public interface StorageService {
   Path IMAGE_LOCATION = Paths.get("files/image");
   String uploadFile(MultipartFile file, Path location);
   Resource loadFile(String fileName, Path location);
+  void init();
   static String renameFile(String fileName){
     return FilenameUtils.getBaseName(fileName)+"-"+System.nanoTime()+"."+FilenameUtils.getExtension(fileName);
   }
