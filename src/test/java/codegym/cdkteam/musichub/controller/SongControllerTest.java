@@ -14,13 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebAppConfiguration
 public class SongControllerTest {
-  private static Song emptySong;
   private MockMvc mockMvc;
-
-  static {
-    emptySong = Song.builder()
-            .build();
-  }
 
   @InjectMocks
   private SongController songController;
@@ -30,12 +24,12 @@ public class SongControllerTest {
     MockitoAnnotations.initMocks(this);
     mockMvc = MockMvcBuilders.standaloneSetup(songController).build();
   }
+
   @Test
   public void testAccessCreateTestSongPage() throws Exception {
     mockMvc
             .perform(get("/song"))
             .andExpect(status().isOk())
-            .andExpect(view().name("song/create"))
-            .andExpect(model().attribute("song", emptySong));
+            .andExpect(view().name("song/create"));
   }
 }
