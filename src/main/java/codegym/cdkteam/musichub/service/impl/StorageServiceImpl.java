@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Service
 public class StorageServiceImpl implements StorageService {
   @Value("${application.address}")
-  public String applecationAddress;
+  public String applicationAddress;
 
   @Override
   public String uploadFile(MultipartFile file, Path location) {
@@ -25,7 +25,7 @@ public class StorageServiceImpl implements StorageService {
     try {
       String nameFile = StorageService.renameFile(file.getOriginalFilename());
       Files.copy(file.getInputStream(), location.resolve(nameFile));
-      String linkFile =  applecationAddress + "/" + location.toString() + "/" + nameFile;
+      String linkFile =  applicationAddress + "/" + location.toString() + "/" + nameFile;
       return linkFile;
     } catch (Exception e) {
       throw new RuntimeException("FAIL!");
@@ -34,7 +34,17 @@ public class StorageServiceImpl implements StorageService {
 
   @Override
   public Resource loadFile(String fileName, Path location) {
-    return null;
+    try {
+      Path file = location.resolve(fileName);
+      Resource resource = new UrlResource(file.toUri());
+      if (resource.exists() || resource.isReadable()) {
+        return resource;
+      } else {
+        return null;
+      }
+    } catch (MalformedURLException e) {
+      throw new RuntimeException("FAIL!");
+    }
   }
   @Override
   public void init() {
