@@ -47,6 +47,13 @@ public class SongController {
     return modelAndView;
   }
 
+  @GetMapping("/play/{id}")
+  public ModelAndView playMusic(@PathVariable long id){
+    Song song = songService.findById(id).get();
+    ModelAndView modelAndView = new ModelAndView("song/play");
+    modelAndView.addObject("song", song);
+    return modelAndView;
+  }
 //  @GetMapping("/")
 //  public ModelAndView showAllSong() {
 //    List<Song> songs = songService.findAll();
