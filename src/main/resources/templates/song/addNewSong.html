@@ -3,63 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/uploadSong.js"></script>
+  <script src="js/uploadImage.js"></script>
 </head>
-<body>
-<form th:action="@{/create-song}" th:object="${song}" method="post">
+<body class="container">
+<th:block th:if="${message}">
+  <p th:text="${message}"></p>
+</th:block>
+<h1>Upload new song</h1>
+<div class="text-center">
+  <form th:action="@{/create-song}" th:object="${song}" method="post">
+    <table align="left">
+      <tr>
+        <td style="text-align: left">Name of song</td>
+        <td>
+          <label>
+            <input type="text" style="width: 300px; padding: 5px;" th:field="*{name}"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Description</td>
+        <td>
+          <label>
+            <textarea type="text" rows="5" style="width: 300px; padding: 5px;" th:field="*{description}"></textarea>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Upload file of song</td>
+        <td>
+          <input type="text" id="linkSong" style="width: 300px; padding: 5px;" th:field="*{linksong}"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Upload avatar</td>
+        <td>
+          <input type="text" id="linkAvatar" style="width: 300px; padding: 5px;" th:field="*{avatar}"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Add new song"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="text-center">
   <table align="center">
     <tr>
-      <td style="text-align: left">Name of song</td>
       <td>
-        <label>
-          <input type="text" style="width: 300px; padding: 5px;" th:field="*{name}"/>
-        </label>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Description</td>
-      <td>
-        <label>
-          <textarea type="text" rows="5" style="width: 300px; padding: 5px;" th:field="*{description}"></textarea>
-        </label>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Upload file of song</td>
-      <td>
-        <form enctype="multipart/form-data" id="songUploadForm">
+        <form method="post" enctype="multipart/form-data" id="songUploadForm">
           Choose file to upload: <input type="file" name="file"/>
           <button type="button" id="uploadSongButton">Upload</button>
         </form>
       </td>
-    </tr>
     <tr>
-      <td></td>
-      <td>
-        <input type="text" id="linkSong" style="width: 300px; padding: 5px;" th:field="*{linksong}"/>
-      </td>
-    </tr>
     <tr>
-      <td style="text-align: left">Upload avatar</td>
       <td>
-        <form enctype="multipart/form-data" id="avatarUploadForm">
+        <form method="post" enctype="multipart/form-data" id="avatarUploadForm">
           Choose file to upload: <input type="file" name="file"/>
           <button type="button" id="uploadAvatarButton">Upload</button>
         </form>
       </td>
-    <tr>
-      <td></td>
-      <td>
-        <input type="text" id="linkAvatar" style="width: 300px; padding: 5px;" th:field="*{avatar}"/>
-      </td>
-    </tr>
-    </tr>
-    <tr>
-      <td></td>
-      <td><input type="submit" value="Them"></td>
     </tr>
   </table>
-</form>
+</div>
 </body>
-<script src="js/uploadImage.js"></script>
-<script src="js/uploadSong.js"></script>
 </html>
