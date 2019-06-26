@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Song detail</title>
+</head>
+<body>
+<div class="container text-center">
+  <h1>Song Detail</h1>
+  <div th:object="${song}">
+    <div style="float: left">
+      <img th:src="${song.getAvatar()}" alt="1" width="300px">
+    </div>
+    <div>
+      <table>
+        <tr>
+          <td>Song ID</td>
+          <td th:text="${song.getId()}"></td>
+        </tr>
+        <tr>
+          <td>Song Name</td>
+          <td th:text="${song.getName()}"></td>
+        </tr>
+        <tr>
+          <td>Song Description</td>
+          <td th:text="${song.getDescription()}"></td>
+        </tr>
+        <tr>
+          <td>Link of song</td>
+          <td th:text="${song.getLinksong()}"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
