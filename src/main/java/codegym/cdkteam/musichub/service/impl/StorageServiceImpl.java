@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 @Service
 public class StorageServiceImpl implements StorageService {
   @Value("${application.address}")
@@ -25,7 +26,7 @@ public class StorageServiceImpl implements StorageService {
     try {
       String nameFile = StorageService.renameFile(file.getOriginalFilename());
       Files.copy(file.getInputStream(), location.resolve(nameFile));
-      String linkFile =  applicationAddress + "/" + location.toString() + "/" + nameFile;
+      String linkFile = applicationAddress + "/" + location.toString() + "/" + nameFile;
       return linkFile;
     } catch (Exception e) {
       throw new RuntimeException("FAIL!");
@@ -46,12 +47,15 @@ public class StorageServiceImpl implements StorageService {
       throw new RuntimeException("FAIL!");
     }
   }
+
   @Override
   public void init() {
     try {
-      Files.createDirectory(Paths.get("files"));
-      Files.createDirectory(StorageService.SONG_LOCATION);
-      Files.createDirectory(StorageService.IMAGE_LOCATION);
+      if (!Files.exists(Paths.get("files"))) {
+        Files.createDirectory(Paths.get("files"));
+        Files.createDirectory(StorageService.SONG_LOCATION);
+        Files.createDirectory(StorageService.IMAGE_LOCATION);
+      }
     } catch (IOException e) {
       throw new RuntimeException("Could not initialize storage!");
     }
