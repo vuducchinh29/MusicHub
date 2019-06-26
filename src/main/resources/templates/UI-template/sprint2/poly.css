@@ -46,8 +46,7 @@ ul{
     border-radius: 0;
     width: 50vw;
     height: 30vh;
-    right: 0;
-    top: 60vmin;
+    right: 25%;
     overflow-x: hidden;
     overflow-y: scroll;
     position: absolute;
