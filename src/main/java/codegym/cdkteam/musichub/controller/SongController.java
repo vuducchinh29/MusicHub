@@ -4,7 +4,11 @@ import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -13,9 +17,22 @@ public class SongController {
   SongService songService;
 
   @GetMapping("/add-new-song")
-  public ModelAndView addStaff() {
+  public ModelAndView addNewSong() {
     ModelAndView modelAndView = new ModelAndView("song/addNewSong");
     modelAndView.addObject("song", new Song());
+    return modelAndView;
+  }
+
+  @PostMapping("/add-new-song")
+  public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult) {
+    if (bindingResult.hasFieldErrors()){
+      ModelAndView modelAndView = new ModelAndView("song/addNewSong");
+      return modelAndView;
+    }
+    songService.save(song);
+    ModelAndView modelAndView = new ModelAndView("song/addNewSong");
+    modelAndView.addObject("song", new Song());
+    modelAndView.addObject("message", "Upload success!");
     return modelAndView;
   }
 }
