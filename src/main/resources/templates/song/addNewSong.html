@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/uploadSong.js"></script>
+  <script src="js/uploadImage.js"></script>
+  <style>
+    td {
+      padding: 5px;
+    }
+  </style>
+</head>
+<body class="container">
+<th:block th:if="${message}">
+  <p th:text="${message}"></p>
+</th:block>
+<h1>Upload new song</h1>
+<div class="col-md-6">
+  <form th:action="@{/add-new-song}" th:object="${song}" method="post">
+    <table align="left" cellpadding="5">
+      <tr>
+        <td style="text-align: left">Name of song</td>
+        <td>
+          <label>
+            <input type="text" style="width: 300px; padding: 5px;" th:field="*{name}"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Description</td>
+        <td>
+          <label>
+            <textarea type="text" rows="5" style="width: 300px; padding: 5px;" th:field="*{description}"></textarea>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Upload file of song</td>
+        <td>
+          <input type="text" id="linkSong" style="width: 300px; padding: 5px;" th:field="*{linksong}"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Upload avatar</td>
+        <td>
+          <input type="text" id="linkAvatar" style="width: 300px; padding: 5px;" th:field="*{avatar}"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Add new song"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="col-md-5 offset-md-1">
+  <table align="center" cellpadding="5">
+    <tr>
+      <td>
+        <form method="post" enctype="multipart/form-data" id="songUploadForm">
+          Choose song file to upload: <input type="file" name="file"/>
+        </form>
+      </td>
+      <td>
+        <button type="button" id="uploadSongButton">Upload</button>
+      </td>
+    <tr>
+    <tr>
+      <td>
+        <form method="post" enctype="multipart/form-data" id="avatarUploadForm">
+          Choose image file to upload: <input type="file" name="file"/>
+        </form>
+      </td>
+      <td>
+        <button type="button" id="uploadAvatarButton">Upload</button>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

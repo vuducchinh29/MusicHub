@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Song detail</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">Song Detail</h1>
+  <div th:object="${song}">
+    <div style="float: left">
+      <img th:src="${song.getAvatar()}" alt="Song thumbnail" width="300px">
+    </div>
+    <div>
+      <table>
+        <tr>
+          <td>Song ID</td>
+          <td th:text="${song.getId()}"></td>
+        </tr>
+        <tr>
+          <td>Song Name</td>
+          <td><a th:href="@{/play/__${song.id}__}"><p th:text="${song.getName()}"></p></a></td>
+        </tr>
+        <tr>
+          <td>Song Description</td>
+          <td th:text="${song.getDescription()}"></td>
+        </tr>
+        <tr>
+          <td>Link of song</td>
+          <td th:text="${song.getLinksong()}"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
