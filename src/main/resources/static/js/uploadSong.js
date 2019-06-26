@@ -12,7 +12,7 @@ function uploadSong() {
   $.ajax({
     type: "POST",
     enctype: 'multipart/form-data',
-    url: "http://localhost:8080/uploadSong",
+    url: "http://localhost:8080/files/upload-song",
     data: data,
     processData: false,
     contentType: false,
@@ -22,6 +22,7 @@ function uploadSong() {
       linkSong.value = data;
     },
     error: function () {
+      linkSong.value = "Fail to upload. Please refresh page and try again."
     }
   });
 }

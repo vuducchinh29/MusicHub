@@ -12,7 +12,7 @@ function uploadAvatar() {
   $.ajax({
     type: "POST",
     enctype: 'multipart/form-data',
-    url: "http://localhost:8080/uploadSong",
+    url: "http://localhost:8080/files/upload-image",
     data: data,
     processData: false,
     contentType: false,
@@ -22,6 +22,7 @@ function uploadAvatar() {
       linkAvatar.value = data;
     },
     error: function () {
+      linkAvatar.value = "Fail to upload. Please refresh page and try again."
     }
   });
 }
