@@ -6,17 +6,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+@RestController
 public class UploadRESTController {
   @Autowired
   private StorageService storageService;
 
-  @PostMapping(value = "/upload-song", consumes = {"multipart/form-data"})
+  @PostMapping(value = "files/upload-song", consumes = {"multipart/form-data"})
   public ResponseEntity uploadSong(@RequestParam MultipartFile file) {
     try {
       String link = storageService.uploadFile(file, StorageService.SONG_LOCATION);
@@ -27,7 +24,7 @@ public class UploadRESTController {
     }
   }
 
-  @PostMapping(value = "/upload-image", consumes = {"multipart/form-data"})
+  @PostMapping(value = "files/upload-image", consumes = {"multipart/form-data"})
   public ResponseEntity uploadImage(@RequestParam MultipartFile file) {
     try {
       String link = storageService.uploadFile(file, StorageService.IMAGE_LOCATION);
@@ -41,6 +38,9 @@ public class UploadRESTController {
   @GetMapping("/files/song/{filename:.+}")
   public ResponseEntity<Resource> getSong(@PathVariable String filename) {
     Resource file = storageService.loadFile(filename, StorageService.SONG_LOCATION);
+    if (file == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
             .body(file);
@@ -49,6 +49,9 @@ public class UploadRESTController {
   @GetMapping("/files/image/{filename:.+}")
   public ResponseEntity<Resource> getImage(@PathVariable String filename) {
     Resource file = storageService.loadFile(filename, StorageService.IMAGE_LOCATION);
+    if (file == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
             .body(file);
