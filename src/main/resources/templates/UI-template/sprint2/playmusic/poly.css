@@ -1,0 +1,90 @@
+
+
+/*html, body, .container {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*}*/
+
+/*body{*/
+/*    margin: 0;*/
+/*    background-image: url("img/form-v9.jpg");*/
+/*    background-size: cover;*/
+/*}*/
+
+/*img {*/
+/*    width: 50%;*/
+/*}*/
+/*h1, .h1 {*/
+/*    color: white;*/
+/*    font-size: 2rem;*/
+/*}*/
+/*.row {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    margin-right: -15px;*/
+/*    margin-left: -15px;*/
+/*    padding-bottom: 5%;*/
+/*}*/
+/*ul{*/
+/*    color: white;*/
+/*}*/
+
+/*.list .lstcnt {*/
+/*    width: auto;*/
+/*    height: 100%;*/
+/*    overflow-y: scroll;*/
+/*}*/
+/*.nano>.nano-content {*/
+/*    position: absolute;*/
+/*    overflow-y: scroll;*/
+/*    overflow-x: hidden;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*}*/
+/*.list {*/
+/*    border-radius: 0;*/
+/*    width: 50vw;*/
+/*    height: 30vh;*/
+/*    right: 25%;*/
+/*    overflow-x: hidden;*/
+/*    overflow-y: scroll;*/
+/*    position: absolute;*/
+/*    color: white;*/
+/*    background: rgba(0,0,0,.92);*/
+/*    padding: 1vmin 0;*/
+/*    visibility: visible;*/
+/*    will-change: height;*/
+/*    transition: visibility .5s,height .5s cubic-bezier(0,1,.5,1);*/
+/*}*/
+/*.list div {*/
+/*    outline: none;*/
+/*}*/
+/*li {*/
+/*    display: list-item;*/
+/*    text-align: -webkit-match-parent;*/
+/*}*/
+/*.lstcnt div li:nth-child(1) {*/
+/*    width: 3%;*/
+/*    border-radius: 15%;*/
+/*    padding-left: 3vmin;*/
+/*}*/
+/*.list div li {*/
+/*    display: table-cell;*/
+/*    padding-left: 1vmin;*/
+/*    line-height: 6vmin;*/
+/*    height: 5vmin;*/
+/*    white-space: nowrap;*/
+/*    font-size: 2.0vmin;*/
+/*    overflow: hidden;*/
+/*    transition: all .2s ease;*/
+/*}*/
+
+/*audio {*/
+/*    width: 300px;*/
+/*    height: 35px;*/
+/*    margin-left: 25%;*/
+/*}*/
+
+
+
