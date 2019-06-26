@@ -9,15 +9,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="js/uploadSong.js"></script>
   <script src="js/uploadImage.js"></script>
+  <style>
+    td {
+      padding: 5px;
+    }
+  </style>
 </head>
 <body class="container">
 <th:block th:if="${message}">
   <p th:text="${message}"></p>
 </th:block>
 <h1>Upload new song</h1>
-<div class="text-center">
-  <form th:action="@{/create-song}" th:object="${song}" method="post">
-    <table align="left">
+<div class="col-md-6">
+  <form th:action="@{/add-new-song}" th:object="${song}" method="post">
+    <table align="left" cellpadding="5">
       <tr>
         <td style="text-align: left">Name of song</td>
         <td>
@@ -53,22 +58,26 @@
     </table>
   </form>
 </div>
-<div class="text-center">
-  <table align="center">
+<div class="col-md-5 offset-md-1">
+  <table align="center" cellpadding="5">
     <tr>
       <td>
         <form method="post" enctype="multipart/form-data" id="songUploadForm">
           Choose file to upload: <input type="file" name="file"/>
-          <button type="button" id="uploadSongButton">Upload</button>
         </form>
+      </td>
+      <td>
+        <button type="button" id="uploadSongButton">Upload</button>
       </td>
     <tr>
     <tr>
       <td>
         <form method="post" enctype="multipart/form-data" id="avatarUploadForm">
           Choose file to upload: <input type="file" name="file"/>
-          <button type="button" id="uploadAvatarButton">Upload</button>
         </form>
+      </td>
+      <td>
+        <button type="button" id="uploadAvatarButton">Upload</button>
       </td>
     </tr>
   </table>
