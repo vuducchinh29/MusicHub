@@ -381,3 +381,6 @@ input:-moz-placeholder { /* Firefox 18- */
 .nameSong:hover{
   color: red;
 }
+.sidebar-heading a{
+  color: #0a0a0a;
+}
