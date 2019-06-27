@@ -1,29 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Index Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>User Dashboard</title>
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-<a th:href="@{/}">Home</a>
-
-| &nbsp;
-
-<a th:href="@{/user}">User Info</a>
-
-| &nbsp;
-
-<a th:href="@{/admin}">Admin</a>
-
-| &nbsp;
-
-<a th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
- or
-<a th:if="${#request.userPrincipal == null}" th:href="@{/register}">Register</a>
-
-<form th:if="${#request.userPrincipal != null}" action="#" th:action="@{/logout}" method="POST">
-    <button type="submit">Logout</button>
-</form>
+<div class="d-flex toggled" id="wrapper">
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><a th:href="@{/}"><b>Music Hub</b></a></div>
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+      <a th:href="@{/user}" class="list-group-item list-group-item-action bg-light">Profile</a>
+      <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Playlist</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+    </div>
+  </div>
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <span class="navbar-toggler-icon" id="menu-toggle"></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/register}">Register</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" th:if="${#request.userPrincipal != null}"
+               th:text="${#request.userPrincipal.getName()}">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" th:href="@{/user/change-password}">Change Password</a>
+              <a class="dropdown-item" href="#">User Manager</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item">
+                <form th:if="${#request.userPrincipal != null}" action="#" th:action="@{/logout}" method="POST">
+                  <button type="submit">Logout</button>
+                </form>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid mt-50">
+      <div class="row">
+        <img th:src="@{images/MusicHub_logo.jpg}" alt="" class="logo">
+      </div>
+      <h1 class="text-center mt-200">Welcome to MusicHub Application</h1>
+      <h3 class="text-center mt-50">Enjoy your relax time</h3>
+    </div>
+  </div>
+</div>
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../js/toggleMenu.js"></script>
 </body>
 </html>
