@@ -25,6 +25,7 @@ public class Song {
   private String name;
 
   @Column(name = "description")
+  @Lob
   private String description;
 
   @NotEmpty(message = "Link of song is required")
