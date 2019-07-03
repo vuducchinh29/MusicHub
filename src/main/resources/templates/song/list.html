@@ -1,37 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>list song</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>User Dashboard</title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
-<body style="text-align: center">
-<h1>List Song</h1>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<form>
-    <input name="song" type="text" placeholder="name song">
-    <input type="submit" value="Search">
-    <p>
-        <a th:href="@{/}">Back to song home</a>
-    </p>
-</form>
-<br/>
-<form>
-    <table border="1" align="center">
-        <tr>
-            <td style="width: 30px">STT</td>
-            <td style="width: 200px">Name of song</td>
-            <td colspan="2">Options</td>
-        </tr>
-        <tr th:each="song,i : ${songs}">
-            <td th:text="${i.count}"></td>
-            <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>
-            </td>
-            <td style="width: 60px"><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>
-            <td style="width: 60px"><a th:href="@{/delete-song/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
-        </tr>
-    </table>
-</form>
+<body>
+<div class="d-flex" id="wrapper">
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><b>Music Hub</b></div>
+        <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+            <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>
+            <a th:href="@{/list}"  class="list-group-item list-group-item-action bg-light">Playlist</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+        </div>
+    </div>
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <span class="navbar-toggler-icon" id="menu-toggle"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Admin</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Option
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Change Password</a>
+                            <a class="dropdown-item" href="#">User Manager</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Log out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid mt-50">
+            <h1>List Song</h1>
+            <th:block th:if="${message}">
+                <p th:text="${message}"></p>
+            </th:block>
+            <form th:align="center">
+                <input name="song" type="text" placeholder="name song">
+                <input type="submit" value="Search">
+                <p>
+                    <a th:href="@{/}">Back to song home</a>
+                </p>
+            </form>
+            <br/>
+            <form>
+                <table border="1" align="center">
+                    <tr>
+                        <td >STT</td>
+                        <td >Name of song</td>
+                        <td colspan="2">Options</td>
+                    </tr>
+                    <tr th:each="song,i : ${songs}">
+                        <td th:text="${i.count}"></td>
+                        <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>
+                        </td>
+                        <td ><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>
+                        <td ><a th:href="@{/delete-song/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../js/toggleMenu.js"></script>
+<script src="../js/uploadSong.js"></script>
+<script src="../js/uploadImage.js"></script>
 </body>
 </html>
