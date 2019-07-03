@@ -61,4 +61,12 @@ public class SongController {
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
+  @GetMapping("/edit-song/{id}")
+  public ModelAndView showEditSong(@PathVariable Long id){
+    Song song = songService.findById(id).get();
+    ModelAndView modelAndView = new ModelAndView("song/editsong");
+    modelAndView.addObject("song", song);
+    return modelAndView;
+  }
+
 }
