@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>list song</title>
 </head>
-<body>
-
+<body style="text-align: center">
+<h1>List Song</h1>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form>
+    <input name="song" type="text" placeholder="name song">
+    <input type="submit" value="Search">
+    <p>
+        <a th:href="@{/}">Back to song home</a>
+    </p>
+</form>
+<br/>
+<form>
+    <table border="1" align="center">
+        <tr>
+            <td style="width: 30px">STT</td>
+            <td style="width: 200px">Name of song</td>
+            <td colspan="2">Options</td>
+        </tr>
+        <tr th:each="song,i : ${songs}">
+            <td th:text="${i.count}"></td>
+            <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>
+            </td>
+            <td style="width: 60px"><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>
+            <td style="width: 60px"><a th:href="@{/delete-song/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
