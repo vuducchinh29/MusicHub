@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -68,5 +69,10 @@ public class SongController {
     modelAndView.addObject("song", song);
     return modelAndView;
   }
-
+  @PostMapping("/edit-song")
+    public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirect){
+      songService.save(song);
+      redirect.addFlashAttribute("message", "The song has been updated");
+      return "redirect:/list";
+  }
 }
