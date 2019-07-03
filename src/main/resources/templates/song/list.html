@@ -55,9 +55,6 @@
         </nav>
         <div class="container-fluid mt-50">
             <h1>List Song</h1>
-            <th:block th:if="${message}">
-                <p th:text="${message}"></p>
-            </th:block>
             <form th:align="center">
                 <input name="song" type="text" placeholder="name song">
                 <input type="submit" value="Search">
@@ -82,6 +79,9 @@
                     </tr>
                 </table>
             </form>
+            <th:block th:if="${message}">
+                <p th:text="${message}" th:align="center"></p>
+            </th:block>
         </div>
     </div>
 </div>
