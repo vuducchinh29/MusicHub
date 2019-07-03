@@ -34,4 +34,9 @@ public class SongServiceImpl implements SongService {
   public void delete(long id) {
     songRepository.deleteById(id);
   }
+
+  @Override
+  public Page<Song> findAllNameContaining(String name, Pageable pageable) {
+    return songRepository.findAllByNameContaining(name, pageable);
+  }
 }
