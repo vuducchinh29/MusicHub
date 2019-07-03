@@ -36,7 +36,7 @@ public class SongServiceImpl implements SongService {
   }
 
   @Override
-  public Page<Song> findAllNameContaining(String name, Pageable pageable) {
+  public Page<Song> findAllByNameContaining(String name, Pageable pageable) {
     return songRepository.findAllByNameContaining(name, pageable);
   }
 }
