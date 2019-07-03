@@ -78,7 +78,7 @@
                         <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>
                         </td>
                         <td ><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>
-                        <td ><a th:href="@{/delete-song/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
+                        <td ><a th:href="@{/delete/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
                     </tr>
                 </table>
             </form>
