@@ -55,9 +55,6 @@
         </nav>
         <div class="container-fluid mt-50">
             <h1>List Song</h1>
-            <th:block th:if="${message}">
-                <p th:text="${message}"></p>
-            </th:block>
             <form th:align="center">
                 <input name="song" type="text" placeholder="name song">
                 <input type="submit" value="Search">
@@ -78,10 +75,13 @@
                         <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>
                         </td>
                         <td ><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>
-                        <td ><a th:href="@{/delete-song/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
+                        <td ><a th:href="@{/delete/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
                     </tr>
                 </table>
             </form>
+            <th:block th:if="${message}">
+                <p th:text="${message}" th:align="center"></p>
+            </th:block>
         </div>
     </div>
 </div>

@@ -75,4 +75,11 @@ public class SongController {
       redirect.addFlashAttribute("message", "The song has been updated");
       return "redirect:/list";
   }
+  @GetMapping("/delete/{id}")
+  public  ModelAndView showDelete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+    songService.delete(id);
+    ModelAndView modelAndView = new ModelAndView("redirect:/list");
+    redirectAttributes.addFlashAttribute("message", "The song has been delete");
+    return modelAndView;
+  }
 }
