@@ -54,11 +54,11 @@ public class SongController {
     modelAndView.addObject("song", song);
     return modelAndView;
   }
-//  @GetMapping("/")
-//  public ModelAndView showAllSong() {
-//    List<Song> songs = songService.findAll();
-//    ModelAndView modelAndView = new ModelAndView("song/index");
-//    modelAndView.addObject("songs", songs);
-//    return modelAndView;
-//  }
+  @GetMapping("/list")
+  public ModelAndView showAllSong() {
+    List<Song> songs = songService.findAll();
+    ModelAndView modelAndView = new ModelAndView("song/list");
+    modelAndView.addObject("songs", songs);
+    return modelAndView;
+  }
 }
