@@ -385,6 +385,12 @@ input:-moz-placeholder { /* Firefox 18- */
   color: #0a0a0a;
 }
 .h1, h1 {
+  margin-bottom: 1.5rem;
   font-size: 4.5rem;
   text-align: center;
+  font-weight: bolder;
+}
+p {
+  margin-top: 20px;
+  margin-bottom: 0rem;
 }
