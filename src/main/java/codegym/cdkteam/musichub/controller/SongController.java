@@ -3,6 +3,8 @@ package codegym.cdkteam.musichub.controller;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -56,8 +58,8 @@ public class SongController {
     return modelAndView;
   }
   @GetMapping("/list")
-  public ModelAndView showAllSong() {
-    List<Song> songs = songService.findAll();
+  public ModelAndView showAllSong(Pageable pageable) {
+    Page<Song> songs = songService.findAll(pageable);
     ModelAndView modelAndView = new ModelAndView("song/list");
     modelAndView.addObject("songs", songs);
     return modelAndView;
