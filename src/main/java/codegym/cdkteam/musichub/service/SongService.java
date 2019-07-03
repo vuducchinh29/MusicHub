@@ -11,4 +11,5 @@ public interface SongService {
   Optional<Song> findById(long id);
   Song save(Song song);
   void delete(long id);
+  Page<Song>findAllNameContaining(String name, Pageable pageable);
 }
