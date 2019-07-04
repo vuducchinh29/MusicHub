@@ -78,6 +78,11 @@
                         <td ><a th:href="@{/delete/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>
                     </tr>
                 </table>
+                <div class="paging" style="text-align: center">
+                    <a th:href="@{'/list'(page=${songs.number - 1})}" th:if="${songs.hasPrevious()}">Previous</a>
+                    <span th:text="${songs.number + 1}"></span>/<span th:text="${songs.totalPages}"></span>
+                    <a th:href="@{'/list'(page=${songs.number + 1})}" th:if="${songs.hasNext()}">Next</a>
+                </div>
             </form>
             <th:block th:if="${message}">
                 <p th:text="${message}" th:align="center"></p>
