@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,5 +35,25 @@ public class PlaylistController {
     ModelAndView modelAndView = new ModelAndView("playlist/addNewPlaylist");
     modelAndView.addObject("playlist", new Playlist());
     return modelAndView;
+  }
+
+  @PostMapping("/create")
+  public ModelAndView addNewPlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
+    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/create");
+    convertIdToSong(playlist);
+    redirectAttributes.addFlashAttribute("message", "Create playlist success!");
+    return modelAndView;
+  }
+
+  private void convertIdToSong(@ModelAttribute("playlist") Playlist playlist) {
+    String[] listupdateSongID = playlist.getSongIDs();
+    List<Song> updateListSong = new ArrayList<>();
+    for (int i = 0; i < listupdateSongID.length; i++) {
+      Long songID = Long.parseLong(listupdateSongID[i]);
+      Song song = songService.findById(songID).get();
+      updateListSong.add(song);
+    }
+    playlist.setSongs(updateListSong);
+    playlistService.save(playlist);
   }
 }
