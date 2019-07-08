@@ -100,4 +100,12 @@ public class PlaylistController {
     redirectAttributes.addFlashAttribute("message", "Playlist was update!");
     return modelAndView;
   }
+
+  @GetMapping("/delete/{id}")
+  public ModelAndView deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/list");
+    playlistService.remove(id);
+    redirectAttributes.addFlashAttribute("message", "Playlist was deleted");
+    return modelAndView;
+  }
 }
