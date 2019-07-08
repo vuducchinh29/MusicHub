@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class SongServiceImpl implements SongService {
@@ -18,6 +19,11 @@ public class SongServiceImpl implements SongService {
   @Override
   public Page<Song> findAll(Pageable pageable) {
     return songRepository.findAll(pageable);
+  }
+
+  @Override
+  public List<Song> findAll() {
+    return songRepository.findAll();
   }
 
   @Override
