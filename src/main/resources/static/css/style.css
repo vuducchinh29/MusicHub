@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 a{
-  color: #ffffff;
+  color: black;
   text-decoration: none;
 }
 .page-content {
@@ -383,4 +383,14 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 .sidebar-heading a{
   color: #0a0a0a;
+}
+.h1, h1 {
+  margin-bottom: 1.5rem;
+  font-size: 4.5rem;
+  text-align: center;
+  font-weight: bolder;
+}
+p {
+  margin-top: 20px;
+  margin-bottom: 0rem;
 }
