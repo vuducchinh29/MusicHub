@@ -6,15 +6,13 @@ import codegym.cdkteam.musichub.service.PlaylistService;
 import codegym.cdkteam.musichub.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/playlist")
@@ -62,6 +60,21 @@ public class PlaylistController {
     List<Playlist> playlists = playlistService.findAll();
     ModelAndView modelAndView = new ModelAndView("playlist/list");
     modelAndView.addObject("playlists", playlists);
+    return modelAndView;
+  }
+
+  @GetMapping("/detail/{id}")
+  public ModelAndView detailPlaylist(@PathVariable Long id) {
+    Optional<Playlist> playlist = playlistService.findById(id);
+    ModelAndView modelAndView;
+    if (!playlist.isPresent()){
+      modelAndView = new ModelAndView("404");
+      return modelAndView;
+    }
+    List<Song> songs = playlist.get().getSongs();
+    modelAndView = new ModelAndView("playlist/detail");
+    modelAndView.addObject("playlist",playlist.get());
+    modelAndView.addObject("songs", songs);
     return modelAndView;
   }
 }
