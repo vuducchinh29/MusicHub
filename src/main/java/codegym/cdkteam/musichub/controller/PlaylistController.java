@@ -56,4 +56,12 @@ public class PlaylistController {
     playlist.setSongs(updateListSong);
     playlistService.save(playlist);
   }
+
+  @GetMapping("/list")
+  public ModelAndView allPlaylist(){
+    List<Playlist> playlists = playlistService.findAll();
+    ModelAndView modelAndView = new ModelAndView("playlist/list");
+    modelAndView.addObject("playlists", playlists);
+    return modelAndView;
+  }
 }
