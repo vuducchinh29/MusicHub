@@ -77,4 +77,19 @@ public class PlaylistController {
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
+
+  @GetMapping("/edit/{id}")
+  public ModelAndView editPlaylist(@PathVariable Long id) {
+    Optional<Playlist> playlist = playlistService.findById(id);
+    List<Song> allsongs = songService.findAll();
+    List<Song> songs = playlist.get().getSongs();
+    List<Song> uncheckSongs = playlistService.uncheckedSongs(allsongs,songs);
+
+    ModelAndView modelAndView = new ModelAndView("playlist/edit");
+    modelAndView.addObject("playlist",playlist.get());
+    modelAndView.addObject("allsongs", allsongs);
+    modelAndView.addObject("songs", songs);
+    modelAndView.addObject("unchecksongs", uncheckSongs);
+    return modelAndView;
+  }
 }
