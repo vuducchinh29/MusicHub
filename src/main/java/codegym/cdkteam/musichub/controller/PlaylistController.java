@@ -92,4 +92,12 @@ public class PlaylistController {
     modelAndView.addObject("unchecksongs", uncheckSongs);
     return modelAndView;
   }
+
+  @PostMapping("/edit")
+  public ModelAndView updatePlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
+    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/edit/"+ playlist.getId());
+    convertIdToSong(playlist);
+    redirectAttributes.addFlashAttribute("message", "Playlist was update!");
+    return modelAndView;
+  }
 }
