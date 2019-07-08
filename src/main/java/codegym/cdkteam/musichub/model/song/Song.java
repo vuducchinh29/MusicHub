@@ -7,9 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
-@Entity
-@Table(name = "songs")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,21 +16,21 @@ import javax.validation.constraints.NotEmpty;
 public class Song {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
   private Long id;
 
   @NotEmpty(message = "Name of song is required")
-  @Column(name = "name", nullable = false)
   private String name;
 
   @Column(name = "description")
-  @Lob
   private String description;
 
   @NotEmpty(message = "Link of song is required")
-  @Column(name = "linksong", nullable = false)
-  private String linksong;
+  private String linkSong;
 
-  @Column(name = "avatar")
-  private String avatar;
+  @NotEmpty(message = "Link of image is required")
+  private String linkImage;
+
+  private String tags;
+
+  private Date createdAt;
 }
