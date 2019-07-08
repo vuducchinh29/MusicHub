@@ -386,7 +386,6 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 .h1, h1 {
   margin-bottom: 1.5rem;
-  font-size: 4.5rem;
   text-align: center;
   font-weight: bolder;
 }

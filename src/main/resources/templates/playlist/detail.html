@@ -56,7 +56,7 @@
     </nav>
     <div class="container-fluid mt-50" th:object="${playlist}">
       <h1 style="text-align: center">Playlist <span th:text="${playlist.getName()}"></span></h1>
-      <p th:text="${playlist.getDescription()}"></p>
+      <p class="text-center" th:text="${playlist.getDescription()}"></p>
       <div class="row mt-50">
         <div class="col-md-6 text-center mx-auto">
           <table align="left" cellpadding="5" border="1px">
