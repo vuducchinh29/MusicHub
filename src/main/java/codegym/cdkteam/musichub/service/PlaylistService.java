@@ -15,5 +15,5 @@ public interface PlaylistService {
 
   void remove(Long id);
 
-  List<Song> uncheckedSongs(List<Song> allsongs, List<Song> songs);
+  List<Song> uncheckedSongs(List<Song> allsongs, List<Song> checkedsongs);
 }
