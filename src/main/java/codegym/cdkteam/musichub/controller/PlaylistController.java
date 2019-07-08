@@ -2,8 +2,9 @@ package codegym.cdkteam.musichub.controller;
 
 import codegym.cdkteam.musichub.model.Playlist;
 import codegym.cdkteam.musichub.model.song.Song;
+import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.PlaylistService;
-import codegym.cdkteam.musichub.service.SongService;
+import codegym.cdkteam.musichub.service.SongDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,10 @@ public class PlaylistController {
   PlaylistService playlistService;
 
   @Autowired
-  SongService songService;
+  SongDTOService songService;
 
   @ModelAttribute("songs")
-  public List<Song> songs() {
+  public List<SongDTO> songs() {
     return songService.findAll();
   }
 
@@ -45,10 +46,10 @@ public class PlaylistController {
 
   private void convertIdToSong(@ModelAttribute("playlist") Playlist playlist) {
     String[] listupdateSongID = playlist.getSongIDs();
-    List<Song> updateListSong = new ArrayList<>();
+    List<SongDTO> updateListSong = new ArrayList<>();
     for (int i = 0; i < listupdateSongID.length; i++) {
       Long songID = Long.parseLong(listupdateSongID[i]);
-      Song song = songService.findById(songID).get();
+      SongDTO song = songService.findById(songID).get();
       updateListSong.add(song);
     }
     playlist.setSongs(updateListSong);
@@ -71,7 +72,7 @@ public class PlaylistController {
       modelAndView = new ModelAndView("404");
       return modelAndView;
     }
-    List<Song> songs = playlist.get().getSongs();
+    List<SongDTO> songs = playlist.get().getSongs();
     modelAndView = new ModelAndView("playlist/detail");
     modelAndView.addObject("playlist",playlist.get());
     modelAndView.addObject("songs", songs);
@@ -81,9 +82,9 @@ public class PlaylistController {
   @GetMapping("/edit/{id}")
   public ModelAndView editPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
-    List<Song> allsongs = songService.findAll();
-    List<Song> songs = playlist.get().getSongs();
-    List<Song> uncheckSongs = playlistService.uncheckedSongs(allsongs,songs);
+    List<SongDTO> allsongs = songService.findAll();
+    List<SongDTO> songs = playlist.get().getSongs();
+    List<SongDTO> uncheckSongs = playlistService.uncheckedSongs(allsongs,songs);
 
     ModelAndView modelAndView = new ModelAndView("playlist/edit");
     modelAndView.addObject("playlist",playlist.get());

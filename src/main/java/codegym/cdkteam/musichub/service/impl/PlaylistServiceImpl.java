@@ -2,6 +2,7 @@ package codegym.cdkteam.musichub.service.impl;
 
 import codegym.cdkteam.musichub.model.Playlist;
 import codegym.cdkteam.musichub.model.song.Song;
+import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.repository.PlaylistRepository;
 import codegym.cdkteam.musichub.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class PlaylistServiceImpl implements PlaylistService {
   }
 
   @Override
-  public List<Song> uncheckedSongs(List<Song> allsongs, List<Song> checkedsongs){
-    List<Song> uncheckedSongs = new ArrayList<>();
+  public List<SongDTO> uncheckedSongs(List<SongDTO> allsongs, List<SongDTO> checkedsongs){
+    List<SongDTO> uncheckedSongs = new ArrayList<>();
     for (int i = 0; i < allsongs.size(); i++) {
       boolean check = false;
       for (int a = 0; a < checkedsongs.size(); a++) {
