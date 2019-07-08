@@ -5,11 +5,12 @@ import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.repository.PlaylistRepository;
 import codegym.cdkteam.musichub.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class PlaylistServiceImpl implements PlaylistService {
   @Autowired
   PlaylistRepository playlistRepository;
