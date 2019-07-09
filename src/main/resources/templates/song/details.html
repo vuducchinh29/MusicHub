@@ -57,7 +57,7 @@
       <h1 class="text-center">Song Detail</h1>
       <div class="container row mt-50" th:object="${song}">
         <div class="col-md-4">
-          <img th:src="${song.getAvatar()}" alt="Song thumbnail" width="100%">
+          <img th:src="${song.getLinkImage()}" alt="Song thumbnail" width="100%">
         </div>
         <div class="col-md-8">
           <table border="1">
@@ -75,7 +75,13 @@
             </tr>
             <tr>
               <td class="col-md-3">Link of song</td>
-              <td class="col-md-9" th:text="${song.getLinksong()}"></td>
+              <td class="col-md-9" th:text="${song.getLinkSong()}"></td>
+            </tr>
+            <tr>
+              <td class="col-md-3">Tags</td>
+              <td class="col-md-9">
+                <span class="badge badge-pill badge-primary" th:each="tag: ${song.getTags()}" th:text="${tag.name}"></span>
+              </td>
             </tr>
           </table>
         </div>

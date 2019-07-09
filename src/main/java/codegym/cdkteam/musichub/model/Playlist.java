@@ -1,6 +1,7 @@
 package codegym.cdkteam.musichub.model;
 
 import codegym.cdkteam.musichub.model.song.Song;
+import codegym.cdkteam.musichub.model.song.SongDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class Playlist {
       name = "song_playlist",
       joinColumns = @JoinColumn(name = "playlist_id"),
       inverseJoinColumns = @JoinColumn(name = "song_id"))
-  private List<Song> songs;
+  private List<SongDTO> songs;
 
   private String[] songIDs;
 }
