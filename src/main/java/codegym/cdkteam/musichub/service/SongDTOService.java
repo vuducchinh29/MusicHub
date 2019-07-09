@@ -17,4 +17,5 @@ public interface SongDTOService {
   void delete(long id);
 
   Page<SongDTO> findAllByNameContaining(String name, Pageable pageable);
+  Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable);
 }
