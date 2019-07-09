@@ -6,8 +6,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>User Dashboard</title>
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/tag.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -18,7 +20,7 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
             <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>
-            <a th:href="@{/list}"  class="list-group-item list-group-item-action bg-light">Playlist</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Playlist</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
         </div>
     </div>
@@ -58,8 +60,8 @@
             <div class="row mt-50">
                 <div class="col-md-6">
                     <form th:action="@{/edit-song}" th:object="${song}" method="post">
-                        <input type="hidden" th:field="*{id}">
                         <table align="left" cellpadding="5">
+                            <input type="hidden" th:field="*{id}">
                             <tr class="form-group">
                                 <td style="text-align: left">Name of song</td>
                                 <td>
@@ -76,18 +78,24 @@
                             <tr class="form-group">
                                 <td style="text-align: left">Upload file of song</td>
                                 <td>
-                                    <input type="text" class="form-control" id="linkSong" th:field="*{getLinkSong}" placeholder="Input link or choose file"/>
+                                    <input type="text" class="form-control" id="linkSong" th:field="*{linkSong}" placeholder="Input link or choose file"/>
                                 </td>
                             </tr>
                             <tr class="form-group">
                                 <td style="text-align: left">Upload avatar</td>
                                 <td>
-                                    <input type="text" class="form-control" id="linkAvatar" th:field="*{getLinkImage}" placeholder="Input link or choose file"/>
+                                    <input type="text" class="form-control" id="linkAvatar" th:field="*{linkImage}" placeholder="Input link or choose file"/>
+                                </td>
+                            </tr>
+                            <tr class="form-group">
+                                <td style="text-align: left">Tags</td>
+                                <td>
+                                    <input type="text" class="form-control tagged" data-removeBtn="true" th:field="*{tags}">
                                 </td>
                             </tr>
                             <tr class="form-group">
                                 <td></td>
-                                <td><input type="submit" class="btn btn-success" value="update song"></td>
+                                <td><input type="submit" class="btn btn-success" value="Save"></td>
                             </tr>
                         </table>
                     </form>
@@ -118,12 +126,16 @@
                 </div>
             </div>
         </div>
+        <th:block th:if="${message}">
+            <h3 th:text="${message}" class="message text-success"></h3>
+        </th:block>
     </div>
 </div>
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../js/toggleMenu.js"></script>
-<script src="../js/uploadSong.js"></script>
-<script src="../js/uploadImage.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/toggleMenu.js"></script>
+<script src="/js/uploadSong.js"></script>
+<script src="/js/uploadImage.js"></script>
+<script src="/js/tag.js"></script>
 </body>
 </html>
