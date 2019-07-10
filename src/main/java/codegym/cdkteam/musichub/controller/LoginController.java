@@ -7,6 +7,7 @@ import codegym.cdkteam.musichub.service.RoleDTOService;
 import codegym.cdkteam.musichub.service.TokenVerifyDTOService;
 import codegym.cdkteam.musichub.service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,9 @@ import java.util.UUID;
 
 @Controller
 public class LoginController {
+  @Value("${application.address}")
+  public String applicationAddress;
+
   @Autowired
   private PasswordEncoder passwordEncoder;
 
@@ -140,7 +144,7 @@ public class LoginController {
 
     message.setTo(user.getEmail());
     message.setSubject("Please Active Your Account");
-    message.setText("Click link to active your account: http://localhost:8080/user/active?id=" + user.getId() + "&token=" + tokenVerifyDTO.getToken());
+    message.setText("Click link to active your account: " + applicationAddress + "/user/active?id=" + user.getId() + "&token=" + tokenVerifyDTO.getToken());
     this.javaMailSender.send(message);
   }
 
@@ -152,7 +156,7 @@ public class LoginController {
 
     message.setTo(user.getEmail());
     message.setSubject("Reset Password");
-    message.setText("Click link to reset password: http://localhost:8080/user/reset-password?id=" + user.getId() + "&token=" + token.getToken());
+    message.setText("Click link to reset password: " + applicationAddress + "/user/reset-password?id=" + user.getId() + "&token=" + token.getToken());
     this.javaMailSender.send(message);
   }
 }

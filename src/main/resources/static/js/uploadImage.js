@@ -12,7 +12,7 @@ function uploadAvatar() {
   $.ajax({
     type: "POST",
     enctype: 'multipart/form-data',
-    url: "http://localhost:8080/files/upload-image",
+    url: "/files/upload-image",
     data: data,
     processData: false,
     contentType: false,
