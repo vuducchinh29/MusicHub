@@ -49,6 +49,9 @@ public class UserDTO {
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedUsers")
   private Set<SongDTO> likedSongs;
 
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedUsers")
+  private Set<SongDTO> likedPlaylists;
+
   @Column(name = "enabled")
   private boolean enabled;
 
