@@ -1,5 +1,6 @@
 package codegym.cdkteam.musichub.service;
 
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,6 @@ public interface SongDTOService {
 
   Page<SongDTO> findAllByNameContaining(String name, Pageable pageable);
   Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable);
+
+  void like (SongDTO song, UserDTO user);
 }
