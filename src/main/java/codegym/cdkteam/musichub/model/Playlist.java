@@ -39,7 +39,7 @@ public class Playlist {
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
-          name = "playlist_list",
+          name = "playlist_like",
           joinColumns = @JoinColumn(name = "playlist_id"),
           inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<UserDTO> likedUsers;
