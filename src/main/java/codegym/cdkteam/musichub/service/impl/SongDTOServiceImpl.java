@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class SongDTOServiceImpl implements SongDTOService {
@@ -98,12 +97,13 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
-  public void like(SongDTO song, UserDTO user) {
+  public int like(SongDTO song, UserDTO user) {
     if (!song.getLikedUsers().contains(user)) {
       song.getLikedUsers().add(user);
     } else {
       song.getLikedUsers().remove(user);
     }
-    songRepository.save(song);
+    SongDTO savedSong = songRepository.save(song);
+    return savedSong.getLikedUsers().size();
   }
 }

@@ -20,5 +20,5 @@ public interface SongDTOService {
   Page<SongDTO> findAllByNameContaining(String name, Pageable pageable);
   Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
-  void like (SongDTO song, UserDTO user);
+  int like (SongDTO song, UserDTO user);
 }
