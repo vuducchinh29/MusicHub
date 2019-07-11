@@ -52,10 +52,9 @@ public class UserDTO {
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedUsers")
   private Set<SongDTO> likedPlaylists;
 
+  @OneToMany(mappedBy = "owner")
+  private Set<SongDTO> uploadedSongs;
+
   @Column(name = "enabled")
   private boolean enabled;
-
-
-
-
 }
