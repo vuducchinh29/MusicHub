@@ -56,7 +56,7 @@ public class UserDTO {
   private Set<SongDTO> uploadedSongs;
 
   @OneToMany(mappedBy = "owner")
-  private Set<Playlist> createdPlaylist;
+  private Set<Playlist> createdPlaylists;
 
   @Column(name = "enabled")
   private boolean enabled;
