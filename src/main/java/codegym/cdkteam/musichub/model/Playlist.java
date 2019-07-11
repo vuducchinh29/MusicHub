@@ -44,5 +44,9 @@ public class Playlist {
           inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<UserDTO> likedUsers;
 
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private UserDTO owner;
+
   private String[] songIDs;
 }

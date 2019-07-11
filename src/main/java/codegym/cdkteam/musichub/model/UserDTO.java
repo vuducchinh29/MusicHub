@@ -55,6 +55,9 @@ public class UserDTO {
   @OneToMany(mappedBy = "owner")
   private Set<SongDTO> uploadedSongs;
 
+  @OneToMany(mappedBy = "owner")
+  private Set<Playlist> createdPlaylist;
+
   @Column(name = "enabled")
   private boolean enabled;
 }
