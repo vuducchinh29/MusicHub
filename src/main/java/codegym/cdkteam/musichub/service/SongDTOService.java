@@ -14,7 +14,7 @@ public interface SongDTOService {
   Page<SongDTO> findAll(Pageable pageable);
   Optional<SongDTO> findById(long id);
   Song findByIdWithTagIsString(long id);
-  SongDTO save(Song song, UserDTO owner);
+  SongDTO save(Song song);
   void delete(long id);
 
   Page<SongDTO> findAllByNameContaining(String name, Pageable pageable);

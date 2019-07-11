@@ -34,11 +34,12 @@ public class SongController {
   }
 
   @PostMapping("/add-new-song")
-  public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult) {
+  public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult, Principal principal) {
     if (bindingResult.hasFieldErrors()){
       ModelAndView modelAndView = new ModelAndView("song/addNewSong");
       return modelAndView;
     }
+    song.setOwner(userService.findByEmail(principal.getName()));
     songService.save(song);
     ModelAndView modelAndView = new ModelAndView("song/addNewSong");
     modelAndView.addObject("song", new Song());

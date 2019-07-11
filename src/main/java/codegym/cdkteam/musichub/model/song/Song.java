@@ -1,5 +1,6 @@
 package codegym.cdkteam.musichub.model.song;
 
+import codegym.cdkteam.musichub.model.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,4 +34,6 @@ public class Song {
   private String tags;
 
   private Date createdAt;
+
+  private UserDTO owner;
 }
