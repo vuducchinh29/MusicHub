@@ -1,6 +1,7 @@
 package codegym.cdkteam.musichub.service.impl;
 
 import codegym.cdkteam.musichub.model.Playlist;
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.repository.PlaylistRepository;
@@ -51,5 +52,14 @@ public class PlaylistServiceImpl implements PlaylistService {
       }
     }
     return uncheckedSongs;
+  }
+  @Override
+  public int like (Playlist playlist, UserDTO user) {
+    if (!playlist.getLikedUsers().contains(user)) {
+      playlist.getLikedUsers().add(user);
+    } else {
+      playlist.getLikedUsers().remove(user);
+    }
+    return playlistRepository.save(playlist).getLikedUsers().size();
   }
 }

@@ -1,5 +1,6 @@
 package codegym.cdkteam.musichub.model;
 
+import codegym.cdkteam.musichub.model.song.SongDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,16 @@ public class UserDTO {
   )
   private Set<RoleDTO> roles;
 
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedUsers")
+  private Set<SongDTO> likedSongs;
+
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedUsers")
+  private Set<SongDTO> likedPlaylists;
+
   @Column(name = "enabled")
   private boolean enabled;
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package codegym.cdkteam.musichub.service.impl;
 
 import codegym.cdkteam.musichub.model.TagDTO;
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.repository.SongRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class SongDTOServiceImpl implements SongDTOService {
   @Autowired
@@ -92,5 +94,16 @@ public class SongDTOServiceImpl implements SongDTOService {
   @Override
   public Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable) {
     return songRepository.findAllByOrderByCreatedAtDesc(pageable);
+  }
+
+  @Override
+  public int like(SongDTO song, UserDTO user) {
+    if (!song.getLikedUsers().contains(user)) {
+      song.getLikedUsers().add(user);
+    } else {
+      song.getLikedUsers().remove(user);
+    }
+    SongDTO savedSong = songRepository.save(song);
+    return savedSong.getLikedUsers().size();
   }
 }

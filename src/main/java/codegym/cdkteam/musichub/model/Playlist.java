@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "playlist")
@@ -35,6 +36,13 @@ public class Playlist {
       joinColumns = @JoinColumn(name = "playlist_id"),
       inverseJoinColumns = @JoinColumn(name = "song_id"))
   private List<SongDTO> songs;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "playlist_like",
+          joinColumns = @JoinColumn(name = "playlist_id"),
+          inverseJoinColumns = @JoinColumn(name = "user_id"))
+  private Set<UserDTO> likedUsers;
 
   private String[] songIDs;
 }
