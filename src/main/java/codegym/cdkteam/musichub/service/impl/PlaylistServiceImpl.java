@@ -53,13 +53,13 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
     return uncheckedSongs;
   }
-
-  public void like (Playlist playlist, UserDTO user) {
+  @Override
+  public int like (Playlist playlist, UserDTO user) {
     if (!playlist.getLikedUsers().contains(user)) {
       playlist.getLikedUsers().add(user);
     } else {
       playlist.getLikedUsers().remove(user);
     }
-    playlistRepository.save(playlist);
+    return playlistRepository.save(playlist).getLikedUsers().size();
   }
 }

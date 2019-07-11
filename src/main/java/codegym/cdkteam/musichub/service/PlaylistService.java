@@ -1,6 +1,7 @@
 package codegym.cdkteam.musichub.service;
 
 import codegym.cdkteam.musichub.model.Playlist;
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 
@@ -17,4 +18,6 @@ public interface PlaylistService {
   void remove(Long id);
 
   List<SongDTO> uncheckedSongs(List<SongDTO> allsongs, List<SongDTO> checkedsongs);
+
+  int like (Playlist playlist, UserDTO user);
 }
