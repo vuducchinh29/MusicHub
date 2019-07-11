@@ -57,7 +57,7 @@ public class SongDTO {
   private Set<UserDTO> likedUsers;
 
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = false, updatable = false)
   private UserDTO owner;
 
 }

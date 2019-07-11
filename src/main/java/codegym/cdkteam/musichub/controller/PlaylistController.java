@@ -42,7 +42,8 @@ public class PlaylistController {
   }
 
   @PostMapping("/create")
-  public ModelAndView addNewPlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
+  public ModelAndView addNewPlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes, Principal principal) {
+    playlist.setOwner(userService.findByEmail(principal.getName()));
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/create");
     convertIdToSong(playlist);
     redirectAttributes.addFlashAttribute("message", "Create playlist success!");
