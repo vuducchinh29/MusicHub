@@ -3,6 +3,7 @@ package codegym.cdkteam.musichub.controller;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.SongDTOService;
+import codegym.cdkteam.musichub.service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
 public class SongController {
   @Autowired
   SongDTOService songService;
+
+  @Autowired
+  UserDTOService userService;
 
   @GetMapping("/add-new-song")
   public ModelAndView addNewSong() {
@@ -89,5 +94,19 @@ public class SongController {
     ModelAndView modelAndView = new ModelAndView("redirect:/list");
     redirectAttributes.addFlashAttribute("message", "The song has been delete");
     return modelAndView;
+  }
+
+  @GetMapping("/like/{id}")
+  @ResponseBody
+  public String likeSong (@PathVariable Long id, Principal principal) {
+    Optional<SongDTO> song = songService.findById(id);
+    if (song.isPresent() && principal != null) {
+      int like = songService.like(song.get(), userService.findByEmail(principal.getName()));
+      return Integer.toString(like);
+    } else if (principal == null) {
+      return "no login";
+    } else {
+      return "not found";
+    }
   }
 }
