@@ -57,13 +57,14 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
-  public SongDTO save(Song song) {
+  public SongDTO save(Song song, UserDTO owner) {
     SongDTO songDTO = new SongDTO();
     songDTO.setId(song.getId());
     songDTO.setDescription(song.getDescription());
     songDTO.setName(song.getName());
     songDTO.setLinkSong(song.getLinkSong());
     songDTO.setLinkImage(song.getLinkImage());
+    songDTO.setOwner(owner);
 
     HashSet<TagDTO> tags = new HashSet<>();
     String[] tagList = song.getTags().split(",");
