@@ -20,4 +20,6 @@ public interface PlaylistService {
   List<SongDTO> uncheckedSongs(List<SongDTO> allsongs, List<SongDTO> checkedsongs);
 
   int like (Playlist playlist, UserDTO user);
+
+  List<Playlist> findAllByOrderByCreatedAtDesc();
 }
