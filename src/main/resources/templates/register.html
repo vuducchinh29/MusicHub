@@ -1,51 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Registration Form</title>
-  <!-- Mobile Specific Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <!-- Main Style Css -->
-  <link rel="stylesheet" th:href="@{css/style.css}"/>
+  <title>Register - MusicHub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--===============================================================================================-->
+  <link rel="icon" type="image/png" th:href="@{/login-register/images/icons/favicon.ico}"/>
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/bootstrap/css/bootstrap.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/fonts/iconic/css/material-design-iconic-font.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/animate/animate.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/css-hamburgers/hamburgers.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/animsition/css/animsition.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/select2/select2.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/vendor/daterangepicker/daterangepicker.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/css/util.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/login-register/css/main.css}">
+  <!--===============================================================================================-->
 </head>
-<body class="form-v9">
-<div class="page-content" style="background-image: url('images/form-v9.jpg'); background-size: cover">
-  <div class="form-v9-content">
-    <div class="row">
-      <img th:src="@{images/MusicHub_logo.png}" alt="" class="logo">
-    </div>
-    <form class="form-detail" th:action="@{/register}" th:method="post" role="form" th:object="${userDTO}">
-      <h2>Registration Form</h2>
-      <input type="hidden" class="form-control" th:field="*{id}">
-      <p class="message error" role="alert" th:if="${#fields.hasErrors('email')}" th:text="*{#fields.errors('email')}"></p>
-      <p class="message error" role="alert" th:if="${message}" th:text="${message}"></p>
-      <p class="message error" role="alert" th:if="${#fields.hasErrors('name')}" th:text="*{#fields.errors('name')}"></p>
-      <p class="message error" role="alert" th:if="${#fields.hasErrors('password')}" th:text="*{#fields.errors('password')}"></p>
-      <p class="message error" role="alert" th:if="${param.active}">Please check your email and active account</p>
-      <div class="form-row-total">
-        <div class="form-row">
-          <input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name"  th:field="*{name}">
+<body>
+
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('/login-register/images/bg-01.jpg');">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" th:action="@{/register}" th:method="post" role="form" th:object="${userDTO}">
+					<span class="login100-form-title p-b-34 p-t-27">
+						Register
+					</span>
+        <p class="txt1 text-center font-weight-bold text-warning" role="alert" th:if="${#fields.hasErrors('email')}" th:text="*{#fields.errors('email')}"></p>
+        <p class="txt1 text-center font-weight-bold text-warning" role="alert" th:if="${message}" th:text="${message}"></p>
+        <p class="txt1 text-center font-weight-bold text-warning" role="alert" th:if="${#fields.hasErrors('name')}" th:text="*{#fields.errors('name')}"></p>
+        <p class="txt1 text-center font-weight-bold text-warning" role="alert" th:if="${#fields.hasErrors('password')}" th:text="*{#fields.errors('password')}"></p>
+        <p class="txt1 text-center font-weight-bold text-success" role="alert" th:if="${param.active}">Please check your email and active account</p>
+        <br>
+        <div class="wrap-input100 validate-input" data-validate = "Please enter name">
+          <input type="text" name="full-name" id="full-name" class="input100" placeholder="Your Name"  th:field="*{name}">
         </div>
-        <div class="form-row">
-          <input type="email" name="your-email" id="your-email" class="input-text" placeholder="Your Email"  th:field="*{email}">
+
+        <div class="wrap-input100 validate-input" data-validate = "Please enter email">
+          <input type="email" name="your-email" id="your-email" class="input100" placeholder="Your Email"  th:field="*{email}">
         </div>
-      </div>
-      <div class="form-row-total">
-        <div class="form-row">
-          <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" th:field="*{password}">
+
+        <div class="wrap-input100 validate-input" data-validate="Please enter password">
+          <input type="password" name="password" id="password" class="input100" placeholder="Your Password" th:field="*{password}">
         </div>
-        <div class="form-row">
-          <input type="password" name="confirm_password" id="confirm_password" class="input-text"
-                 placeholder="Confirm Password">
-        </div>
-      </div>
-      <div class="form-row-last">
-        <input type="submit" name="register" class="register register-btn" value="Register">
-      </div>
-    </form>
-    <p class="message error">Do you have account? Please <a class="link" th:href="@{/login}">click here</a> to login.</p>
-  </div>
-</div>
+
+        <div class="wrap-input100 validate-input" data-validate="Please enter confirm password">
+          <input type="password" name="confirm_password" id="confirm_password" class="input100" placeholder="Confirm Password">
+                  </div>
+
+                  <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                      Register
+                    </button>
+                  </div>
+
+                  <div class="text-center p-t-90">
+                    <a class="txt1" th:href="@{/login}">
+                      Login
+                    </a><br> <span class="txt1" style="color: black">or</span><br><a class="txt1" th:href="@{/reset-password}">
+                    Forgot Password?
+                  </a>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div id="dropDownSelect1"></div>
+
+          <!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/login-register/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/login-register/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/login-register/js/main.js}"></script>
+<script th:src="@{/js/confirmPW.js}"></script>
+
 </body>
-<script src="js/confirmPW.js"></script>
 </html>
