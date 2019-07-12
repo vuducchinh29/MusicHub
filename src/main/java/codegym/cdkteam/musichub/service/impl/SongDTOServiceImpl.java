@@ -47,6 +47,7 @@ public class SongDTOServiceImpl implements SongDTOService {
     song.setDescription(songDTO.getDescription());
     song.setLinkSong(songDTO.getLinkSong());
     song.setLinkImage(songDTO.getLinkImage());
+    song.setOwner(songDTO.getOwner());
     String tags = "";
     for (TagDTO tag: songDTO.getTags()) {
       tags += tag.getName() + ',';

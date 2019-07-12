@@ -48,23 +48,20 @@ public class SongController {
   }
 
   @GetMapping("/{id}")
-  public ModelAndView showSongDetail(@PathVariable long id){
+  public ModelAndView showSongDetail(@PathVariable long id, Principal principal){
+    UserDTO user = userService.findByEmail(principal.getName());
     Optional<SongDTO> song = songService.findById(id);
     ModelAndView modelAndView;
     if (song.isPresent()) {
-      modelAndView = new ModelAndView("song/details");
-      modelAndView.addObject("song", song.get());
+      if (song.get().getOwner() == user){
+        modelAndView = new ModelAndView("song/details");
+        modelAndView.addObject("song", song.get());
+      } else {
+        modelAndView = new ModelAndView("404");
+      }
     } else {
-      modelAndView = new ModelAndView("404");
+        modelAndView = new ModelAndView("404");
     }
-    return modelAndView;
-  }
-
-  @GetMapping("/play/{id}")
-  public ModelAndView playMusic(@PathVariable long id){
-    SongDTO song = songService.findById(id).get();
-    ModelAndView modelAndView = new ModelAndView("song/play");
-    modelAndView.addObject("song", song);
     return modelAndView;
   }
 
@@ -78,12 +75,17 @@ public class SongController {
   }
 
   @GetMapping("/update/{id}")
-  public ModelAndView showEditSong(@PathVariable Long id){
+  public ModelAndView showEditSong(@PathVariable Long id, Principal principal){
+    UserDTO user = userService.findByEmail(principal.getName());
     Song song = songService.findByIdWithTagIsString(id);
     ModelAndView modelAndView;
     if (song != null) {
-      modelAndView = new ModelAndView("song/editsong");
-      modelAndView.addObject("song", song);
+      if (song.getOwner() == user){
+        modelAndView = new ModelAndView("song/editsong");
+        modelAndView.addObject("song", song);
+      } else {
+        modelAndView = new ModelAndView("404");
+      }
     } else {
       modelAndView = new ModelAndView("404");
     }
@@ -93,7 +95,7 @@ public class SongController {
     public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirect){
       songService.save(song);
       redirect.addFlashAttribute("message", "The song has been updated");
-      return "redirect:/list";
+      return "redirect:/songs";
   }
   @GetMapping("/delete/{id}")
   public  ModelAndView showDelete(@PathVariable Long id, RedirectAttributes redirectAttributes){
