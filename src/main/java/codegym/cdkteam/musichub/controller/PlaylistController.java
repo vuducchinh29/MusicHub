@@ -1,7 +1,6 @@
 package codegym.cdkteam.musichub.controller;
 
 import codegym.cdkteam.musichub.model.Playlist;
-import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.PlaylistService;
 import codegym.cdkteam.musichub.service.SongDTOService;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/playlist")
+@RequestMapping("/playlists")
 public class PlaylistController {
   @Autowired
   PlaylistService playlistService;
@@ -34,14 +33,14 @@ public class PlaylistController {
     return songService.findAll();
   }
 
-  @GetMapping("/create")
+  @GetMapping("/add")
   public ModelAndView createNewPlaylist() {
     ModelAndView modelAndView = new ModelAndView("playlist/addNewPlaylist");
     modelAndView.addObject("playlist", new Playlist());
     return modelAndView;
   }
 
-  @PostMapping("/create")
+  @PostMapping("/add")
   public ModelAndView addNewPlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes, Principal principal) {
     playlist.setOwner(userService.findByEmail(principal.getName()));
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/create");
@@ -62,7 +61,7 @@ public class PlaylistController {
     playlistService.save(playlist);
   }
 
-  @GetMapping("/list")
+  @GetMapping
   public ModelAndView allPlaylist(){
     List<Playlist> playlists = playlistService.findAll();
     ModelAndView modelAndView = new ModelAndView("playlist/list");
@@ -70,7 +69,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @GetMapping("/detail/{id}")
+  @GetMapping("/{id}")
   public ModelAndView detailPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
     ModelAndView modelAndView;
@@ -85,7 +84,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @GetMapping("/edit/{id}")
+  @GetMapping("/update/{id}")
   public ModelAndView editPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
     List<SongDTO> allsongs = songService.findAll();
@@ -100,7 +99,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @PostMapping("/edit")
+  @PostMapping("/update")
   public ModelAndView updatePlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/edit/"+ playlist.getId());
     convertIdToSong(playlist);

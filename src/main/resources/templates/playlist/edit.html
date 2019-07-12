@@ -57,7 +57,7 @@
       <h1 style="text-align: center">Update playlist</h1>
       <div class="row mt-50">
         <div class="col-md-6">
-          <form th:action="@{/playlist/edit}" th:object="${playlist}" method="post">
+          <form th:action="@{/playlists/update}" th:object="${playlist}" method="post">
             <input type="text" hidden th:field="*{id}">
             <table align="left" cellpadding="5">
               <tr class="form-group">
