@@ -1,6 +1,7 @@
 package codegym.cdkteam.musichub.controller;
 
 import codegym.cdkteam.musichub.model.Playlist;
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.PlaylistService;
 import codegym.cdkteam.musichub.service.SongDTOService;
@@ -15,9 +16,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
-@RequestMapping("/playlists")
 public class PlaylistController {
   @Autowired
   PlaylistService playlistService;
@@ -33,17 +34,17 @@ public class PlaylistController {
     return songService.findAll();
   }
 
-  @GetMapping("/add")
+  @GetMapping("/playlists/add")
   public ModelAndView createNewPlaylist() {
     ModelAndView modelAndView = new ModelAndView("playlist/addNewPlaylist");
     modelAndView.addObject("playlist", new Playlist());
     return modelAndView;
   }
 
-  @PostMapping("/add")
+  @PostMapping("/playlists/add")
   public ModelAndView addNewPlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes, Principal principal) {
     playlist.setOwner(userService.findByEmail(principal.getName()));
-    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/create");
+    ModelAndView modelAndView = new ModelAndView("redirect:/playlists/add");
     convertIdToSong(playlist);
     redirectAttributes.addFlashAttribute("message", "Create playlist success!");
     return modelAndView;
@@ -61,15 +62,24 @@ public class PlaylistController {
     playlistService.save(playlist);
   }
 
-  @GetMapping
+  @GetMapping("/playlists")
   public ModelAndView allPlaylist(){
     List<Playlist> playlists = playlistService.findAll();
-    ModelAndView modelAndView = new ModelAndView("playlist/list");
+    ModelAndView modelAndView = new ModelAndView("playlist/playlists");
     modelAndView.addObject("playlists", playlists);
     return modelAndView;
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/myplaylists")
+  public ModelAndView myPlaylist(Principal principal){
+    UserDTO user = userService.findByEmail(principal.getName());
+    Set<Playlist> playlists = user.getCreatedPlaylists();
+    ModelAndView modelAndView = new ModelAndView("playlist/myplaylists");
+    modelAndView.addObject("playlists", playlists);
+    return modelAndView;
+  }
+
+  @GetMapping("/playlists/{id}")
   public ModelAndView detailPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
     ModelAndView modelAndView;
@@ -84,7 +94,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @GetMapping("/update/{id}")
+  @GetMapping("/playlists/update/{id}")
   public ModelAndView editPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
     List<SongDTO> allsongs = songService.findAll();
@@ -99,7 +109,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @PostMapping("/update")
+  @PostMapping("/playlists/update")
   public ModelAndView updatePlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/edit/"+ playlist.getId());
     convertIdToSong(playlist);
@@ -107,7 +117,7 @@ public class PlaylistController {
     return modelAndView;
   }
 
-  @GetMapping("/delete/{id}")
+  @GetMapping("/playlists/delete/{id}")
   public ModelAndView deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/list");
     playlistService.remove(id);
