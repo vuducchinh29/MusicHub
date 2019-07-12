@@ -89,13 +89,13 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
-  public Page<SongDTO> findAllByNameContaining(String name, Pageable pageable) {
-    return songRepository.findAllByNameContaining(name, pageable);
+  public List<SongDTO> findAllByNameContaining(String name) {
+    return songRepository.findAllByNameContaining(name);
   }
 
   @Override
-  public Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable) {
-    return songRepository.findAllByOrderByCreatedAtDesc(pageable);
+  public List<SongDTO> findAllByOrderByCreatedAtDesc() {
+    return songRepository.findAllByOrderByCreatedAtDesc();
   }
 
   @Override
