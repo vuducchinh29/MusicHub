@@ -83,7 +83,7 @@
 
             // create and add wrapper
             wrap = create('div', {
-                'className': 'tags-container',
+                'className': 'tags-container form-control'
             });
             field = create('input', {
                 'type': 'text',
