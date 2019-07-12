@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -27,8 +29,8 @@ public class Playlist {
   @Column(name = "name")
   private String name;
 
-  @Column(name = "description")
-  private String description;
+  @Column(name = "linkAvatar")
+  private String linkAvatar;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
@@ -49,4 +51,8 @@ public class Playlist {
   private UserDTO owner;
 
   private String[] songIDs;
+
+  @CreationTimestamp
+  @Column(name = "createdAt", updatable = false)
+  private Date createdAt;
 }
