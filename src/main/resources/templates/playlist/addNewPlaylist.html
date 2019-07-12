@@ -1,122 +1,267 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--  <meta name="description" content="">-->
+<!--  <meta name="author" content="">-->
+<!--  <title>User Dashboard</title>-->
+<!--  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+<!--  <link href="../css/style.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="d-flex" id="wrapper">-->
+<!--  <div class="bg-light border-right" id="sidebar-wrapper">-->
+<!--    <div class="sidebar-heading"><b>Music Hub</b></div>-->
+<!--    <div class="list-group list-group-flush">-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+<!--      <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>-->
+<!--      <a th:href="@{/list}" class="list-group-item list-group-item-action bg-light">Playlist</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div id="page-content-wrapper">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">-->
+<!--      <span class="navbar-toggler-icon" id="menu-toggle"></span>-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">-->
+<!--          <li class="nav-item active">-->
+<!--            <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="#">Admin</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
+<!--               aria-haspopup="true" aria-expanded="false">-->
+<!--              Option-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">-->
+<!--              <a class="dropdown-item" href="#">Change Password</a>-->
+<!--              <a class="dropdown-item" href="#">User Manager</a>-->
+<!--              <a class="dropdown-item" href="#">Something else here</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Log out</a>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--    <div class="container-fluid mt-50">-->
+<!--      <h1 style="text-align: center">Create new playlist</h1>-->
+<!--      <div class="row mt-50">-->
+<!--        <div class="col-md-6">-->
+<!--          <form th:action="@{/playlists/add}" th:object="${playlist}" method="post">-->
+<!--            <table align="left" cellpadding="5">-->
+<!--              <tr class="form-group">-->
+<!--                <td style="text-align: left">Name of playlist</td>-->
+<!--                <td>-->
+<!--                  <input type="text" class="form-control" th:field="*{name}" placeholder="Input name of song"-->
+<!--                         id="playlist-name"/>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr class="form-group">-->
+<!--                <td style="text-align: left">Description</td>-->
+<!--                <td>-->
+<!--                  <textarea type="text" class="form-control" rows="5" th:field="*{description}"-->
+<!--                  placeholder="Type something about playlist"></textarea>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr class="form-group">-->
+<!--                <td style="text-align: left">Choose song add to playlist</td>-->
+<!--                <td>-->
+<!--                  <ul style="list-style-type: none;" class="list-song">-->
+<!--                    <li th:each="song: ${songs}"><span th:text="${song.name}" class="name-of-song"></span>-->
+<!--                      <input type="checkbox" class="song-id" th:value="${song.id}"></li>-->
+<!--                  </ul>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr class="form-group" hidden>-->
+<!--                <td style="text-align: left" hidden>List song id</td>-->
+<!--                <td>-->
+<!--                  <input type="text" class="form-control" id="list-song-id" th:field="*{songIDs}"-->
+<!--                         placeholder="Input name of song" hidden/>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr class="form-group">-->
+<!--                <td></td>-->
+<!--                <td><input type="submit" class="btn btn-success" value="Create playlist" onclick="clearInput()"></td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <th:block th:if="${message}">-->
+<!--      <h3 th:text="${message}" class="message text-success"></h3>-->
+<!--    </th:block>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+<!--<script>-->
+<!--  $(document).ready(function () {-->
+<!--    $('.song-id').click(function () {-->
+<!--      var val = [];-->
+<!--      $("input[type = 'checkbox']:checked").each(function () {-->
+<!--        val.push($(this).val());-->
+<!--      });-->
+<!--      console.log(val);-->
+<!--      $('#list-song-id').val(val);-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+<!--<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="../js/toggleMenu.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+  <title>Dashboard - Create playlist</title>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>User Dashboard</title>
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/style.css" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-<div class="d-flex" id="wrapper">
-  <div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading"><b>Music Hub</b></div>
-    <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-      <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>
-      <a th:href="@{/list}" class="list-group-item list-group-item-action bg-light">Playlist</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top fixed-top py-0">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="http://musichub.scot/wp-content/uploads/2015/12/MusicHub_logo.jpg" height="50px" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav pull-left text-uppercase text-center">
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="index.html">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="playlists.html">Playlists</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="songs.html">Songs</a>
+        </li>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="singers.html">Singers</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 ml-auto position-relative">
+        <select name="type" id="typesearch" class="form-control position-absolute rounded-0 select-type px-2">
+          <option value="1">Song</option>
+          <option value="2">Playlist</option>
+          <option value="3">Singer</option>
+        </select>
+        <input class="form-control mr-sm-2 input-search rounded-0" type="search" placeholder="Search"
+               aria-label="Search">
+        <button class="btn btn-search position-absolute border-info bg-info rounded-0" type="submit"><i
+            class="fa fa-search text-white"></i></button>
+      </form>
+      <ul class="navbar-nav pull-right">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <span class="user-name">Kú Mèo</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item" href="#">Log out</a>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-  <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <span class="navbar-toggler-icon" id="menu-toggle"></span>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Admin</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-              Option
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Change Password</a>
-              <a class="dropdown-item" href="#">User Manager</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Log out</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container-fluid mt-50">
-      <h1 style="text-align: center">Create new playlist</h1>
-      <div class="row mt-50">
-        <div class="col-md-6">
-          <form th:action="@{/playlists/add}" th:object="${playlist}" method="post">
-            <table align="left" cellpadding="5">
-              <tr class="form-group">
-                <td style="text-align: left">Name of playlist</td>
-                <td>
-                  <input type="text" class="form-control" th:field="*{name}" placeholder="Input name of song"
-                         id="playlist-name"/>
-                </td>
-              </tr>
-              <tr class="form-group">
-                <td style="text-align: left">Description</td>
-                <td>
-                  <textarea type="text" class="form-control" rows="5" th:field="*{description}"
-                  placeholder="Type something about playlist"></textarea>
-                </td>
-              </tr>
-              <tr class="form-group">
-                <td style="text-align: left">Choose song add to playlist</td>
-                <td>
-                  <ul style="list-style-type: none;" class="list-song">
-                    <li th:each="song: ${songs}"><span th:text="${song.name}" class="name-of-song"></span>
-                      <input type="checkbox" class="song-id" th:value="${song.id}"></li>
-                  </ul>
-                </td>
-              </tr>
-              <tr class="form-group" hidden>
-                <td style="text-align: left" hidden>List song id</td>
-                <td>
-                  <input type="text" class="form-control" id="list-song-id" th:field="*{songIDs}"
-                         placeholder="Input name of song" hidden/>
-                </td>
-              </tr>
-              <tr class="form-group">
-                <td></td>
-                <td><input type="submit" class="btn btn-success" value="Create playlist" onclick="clearInput()"></td>
-              </tr>
-            </table>
-          </form>
+</nav>
+<div class="container position-relative below-nav bg-light">
+  <div class="row py-4">
+    <aside class="col-3 pl-5 dashboard-sidebar">
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+          <a href="dashboard.html" class="list-group-item list-group-item-action bg-light px-1">Dashboard</a>
+          <a href="uploadsong.html" class="list-group-item list-group-item-action bg-light px-1">Upload song</a>
+          <a href="dashboard-songs.html" class="list-group-item list-group-item-action bg-light px-1">Songs</a>
+          <a href="create-playlist.html" class="list-group-item list-group-item-action bg-light px-1 active">Create
+            playlist</a>
+          <a href="dashboard-playlists.html"
+             class="list-group-item list-group-item-action bg-light px-1">Playlists</a>
+          <a href="dashboard-singers.html" class="list-group-item list-group-item-action bg-light px-1">Singer</a>
         </div>
       </div>
-    </div>
-    <th:block th:if="${message}">
-      <h3 th:text="${message}" class="message text-success"></h3>
-    </th:block>
+    </aside>
+    <article class="col-9 pl-5">
+      <form th:action="@{/playlists/add}" th:object="${playlist}" method="post">
+        <div class="form-group">
+          <label for="playlistName">Name of playlist</label>
+          <input type="text" class="form-control" id="playlistName" th:field="*{name}">
+        </div>
+        <label for="listsongcheckbox">List of all songs</label>
+        <div class="form-group form-control h-auto" id="listsongcheckbox" th:each="song: ${songs}">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input playlist-name" th:value="${song.getId()}" th:text="${song.getName()}">
+            </label>
+          </div>
+        </div>
+        <div class="form-group col-6 pl-0 pr-5 mb-0">
+          <label for="linkAvatar">Upload image playlist</label>
+          <input type="text" class="form-control" id="linkAvatar" placeholder="Input link" th:field="*{linkAvatar}"/>
+          <span class="position-relative text-or">OR</span>
+        </div>
+        <div class="form-group" hidden>
+          <label for="songIDs">Song IDs (will be hidden)</label>
+          <input type="text" class="form-control" id="songIDs" th:field="*{songIDs}"/>
+        </div>
+        <button type="submit" class="btn btn-info">Save</button>
+      </form>
+      <div class="create-playlist form-upload-file form-upload-avatar position-relative">
+        <form method="post" enctype="multipart/form-data" id="avatarUploadForm">
+          <input type="file" name="file" accept="image/*" />
+          <button type="button" id="uploadAvatarButton" class="btn btn-info">Upload</button>
+        </form>
+      </div>
+      <th:block th:if="${message}">
+        <h4 th:text="${message}" style="margin-top: -70px;" class="message text-center text-success"></h4>
+      </th:block>
+    </article>
   </div>
 </div>
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.song-id').click(function () {
-      var val = [];
-      $("input[type = 'checkbox']:checked").each(function () {
-        val.push($(this).val());
-      });
-      console.log(val);
-      $('#list-song-id').val(val);
-    });
-  });
-</script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../js/toggleMenu.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script th:src="@{/js/getValueCheckbox.js}"></script>
+<script th:src="@{/js/uploadImage.js}"></script>
+
 </body>
+
 </html>
