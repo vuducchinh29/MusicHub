@@ -97,6 +97,11 @@ public class LoginController {
     return "403";
   }
 
+  @GetMapping("/404")
+  public String notFound() {
+    return "404";
+  }
+
   @GetMapping("/login")
   public String getLogin(Principal principal) {
     if (principal != null) {
