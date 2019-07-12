@@ -1,13 +1,11 @@
 package codegym.cdkteam.musichub.controller;
 
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.SongDTOService;
 import codegym.cdkteam.musichub.service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,16 +15,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
+@RequestMapping("/songs")
 public class SongController {
   @Autowired
   SongDTOService songService;
 
   @Autowired
   UserDTOService userService;
-
-  @RequestMapping("/songs")
 
   @GetMapping("/add")
   public ModelAndView addNewSong() {
@@ -51,10 +49,15 @@ public class SongController {
 
   @GetMapping("/{id}")
   public ModelAndView showSongDetail(@PathVariable long id){
-    SongDTO song = songService.findById(id).get();
-    ModelAndView modelAndView = new ModelAndView("song/details");
-    modelAndView.addObject("song", song);
-      return modelAndView;
+    Optional<SongDTO> song = songService.findById(id);
+    ModelAndView modelAndView;
+    if (song.isPresent()) {
+      modelAndView = new ModelAndView("song/details");
+      modelAndView.addObject("song", song.get());
+    } else {
+      modelAndView = new ModelAndView("404");
+    }
+    return modelAndView;
   }
 
   @GetMapping("/play/{id}")
@@ -64,25 +67,26 @@ public class SongController {
     modelAndView.addObject("song", song);
     return modelAndView;
   }
+
   @GetMapping
-  public ModelAndView showAllSong(@RequestParam("song") Optional<String> song,
-                                  @PageableDefault(value = 5) Pageable pageable) {
-    Page<SongDTO> songs;
-    if (song.isPresent()){
-        songs = songService.findAllByNameContaining(song.get(), pageable);
-    }
-    else {
-        songs = songService.findAllByOrderByCreatedAtDesc(pageable);
-    }
+  public ModelAndView showAllSong(Principal principal) {
+    UserDTO user = userService.findByEmail(principal.getName());
+    Set<SongDTO> songs = user.getUploadedSongs();
     ModelAndView modelAndView = new ModelAndView("song/list");
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
+
   @GetMapping("/update/{id}")
   public ModelAndView showEditSong(@PathVariable Long id){
     Song song = songService.findByIdWithTagIsString(id);
-    ModelAndView modelAndView = new ModelAndView("song/editsong");
-    modelAndView.addObject("song", song);
+    ModelAndView modelAndView;
+    if (song != null) {
+      modelAndView = new ModelAndView("song/editsong");
+      modelAndView.addObject("song", song);
+    } else {
+      modelAndView = new ModelAndView("404");
+    }
     return modelAndView;
   }
   @PostMapping("/update")
