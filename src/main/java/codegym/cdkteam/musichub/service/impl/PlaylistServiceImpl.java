@@ -62,4 +62,9 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
     return playlistRepository.save(playlist).getLikedUsers().size();
   }
+
+  @Override
+  public List<Playlist> findAllByOrderByCreatedAtDesc() {
+    return playlistRepository.findAllByOrderByCreatedAtDesc();
+  }
 }
