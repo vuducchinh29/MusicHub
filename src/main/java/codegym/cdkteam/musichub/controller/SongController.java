@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/songs")
 public class SongController {
   @Autowired
   SongDTOService songService;
@@ -26,14 +26,14 @@ public class SongController {
   @Autowired
   UserDTOService userService;
 
-  @GetMapping("/add")
+  @GetMapping("/songs/add")
   public ModelAndView addNewSong() {
     ModelAndView modelAndView = new ModelAndView("song/addNewSong");
     modelAndView.addObject("song", new Song());
     return modelAndView;
   }
 
-  @PostMapping("/add")
+  @PostMapping("/songs/add")
   public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult, Principal principal) {
     if (bindingResult.hasFieldErrors()){
       ModelAndView modelAndView = new ModelAndView("song/addNewSong");
@@ -47,34 +47,37 @@ public class SongController {
     return modelAndView;
   }
 
-  @GetMapping("/{id}")
-  public ModelAndView showSongDetail(@PathVariable long id, Principal principal){
-    UserDTO user = userService.findByEmail(principal.getName());
+  @GetMapping("/songs/{id}")
+  public ModelAndView showSongDetail(@PathVariable long id){
     Optional<SongDTO> song = songService.findById(id);
     ModelAndView modelAndView;
     if (song.isPresent()) {
-      if (song.get().getOwner() == user){
         modelAndView = new ModelAndView("song/details");
         modelAndView.addObject("song", song.get());
       } else {
-        modelAndView = new ModelAndView("404");
-      }
-    } else {
         modelAndView = new ModelAndView("404");
     }
     return modelAndView;
   }
 
-  @GetMapping
+  @GetMapping("/mysongs")
   public ModelAndView showAllSong(Principal principal) {
     UserDTO user = userService.findByEmail(principal.getName());
     Set<SongDTO> songs = user.getUploadedSongs();
-    ModelAndView modelAndView = new ModelAndView("song/list");
+    ModelAndView modelAndView = new ModelAndView("song/mysongs");
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
 
-  @GetMapping("/update/{id}")
+  @GetMapping("/songs")
+  public ModelAndView showAllSong() {
+    List<SongDTO> songs = songService.findAll();
+    ModelAndView modelAndView = new ModelAndView("song/songs");
+    modelAndView.addObject("songs", songs);
+    return modelAndView;
+  }
+
+  @GetMapping("/songs/update/{id}")
   public ModelAndView showEditSong(@PathVariable Long id, Principal principal){
     UserDTO user = userService.findByEmail(principal.getName());
     Song song = songService.findByIdWithTagIsString(id);
@@ -91,21 +94,28 @@ public class SongController {
     }
     return modelAndView;
   }
-  @PostMapping("/update")
+  @PostMapping("/songs/update")
     public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirect){
       songService.save(song);
       redirect.addFlashAttribute("message", "The song has been updated");
-      return "redirect:/songs";
+      return "redirect:/songs/update/" + song.getId();
   }
-  @GetMapping("/delete/{id}")
-  public  ModelAndView showDelete(@PathVariable Long id, RedirectAttributes redirectAttributes){
-    songService.delete(id);
-    ModelAndView modelAndView = new ModelAndView("redirect:/list");
-    redirectAttributes.addFlashAttribute("message", "The song has been delete");
+  @GetMapping("/songs/delete/{id}")
+  public  ModelAndView showDelete(@PathVariable Long id, RedirectAttributes redirectAttributes, Principal principal) {
+    UserDTO user = userService.findByEmail(principal.getName());
+    Optional<SongDTO> song = songService.findById(id);
+    ModelAndView modelAndView;
+    if (song.get().getOwner() == user) {
+      songService.delete(id);
+      modelAndView = new ModelAndView("redirect:/songs");
+      redirectAttributes.addFlashAttribute("message", "The song has been delete");
+    } else {
+      modelAndView = new ModelAndView("404");
+    }
     return modelAndView;
   }
 
-  @GetMapping("/like/{id}")
+  @GetMapping("/songs/like/{id}")
   @ResponseBody
   public String likeSong (@PathVariable Long id, Principal principal) {
     Optional<SongDTO> song = songService.findById(id);
