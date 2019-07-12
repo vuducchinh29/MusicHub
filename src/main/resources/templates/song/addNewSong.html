@@ -59,7 +59,7 @@
             <h1 style="text-align: center">Upload new song</h1>
             <div class="row mt-50">
                 <div class="col-md-6">
-                    <form th:action="@{/add-new-song}" th:object="${song}" method="post">
+                    <form th:action="@{/songs/add}" th:object="${song}" method="post">
                         <table align="left" cellpadding="5">
                             <tr class="form-group">
                                 <td style="text-align: left">Name of song</td>

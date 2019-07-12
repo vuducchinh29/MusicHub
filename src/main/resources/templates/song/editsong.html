@@ -59,7 +59,7 @@
             <h1 style="text-align: center">Edit song</h1>
             <div class="row mt-50">
                 <div class="col-md-6">
-                    <form th:action="@{/edit-song}" th:object="${song}" method="post">
+                    <form th:action="@{/songs/update}" th:object="${song}" method="post">
                         <table align="left" cellpadding="5">
                             <input type="hidden" th:field="*{id}">
                             <tr class="form-group">

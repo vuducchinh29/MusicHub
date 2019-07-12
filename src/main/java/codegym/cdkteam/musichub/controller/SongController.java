@@ -26,14 +26,16 @@ public class SongController {
   @Autowired
   UserDTOService userService;
 
-  @GetMapping("/add-new-song")
+  @RequestMapping("/songs")
+
+  @GetMapping("/add")
   public ModelAndView addNewSong() {
     ModelAndView modelAndView = new ModelAndView("song/addNewSong");
     modelAndView.addObject("song", new Song());
     return modelAndView;
   }
 
-  @PostMapping("/add-new-song")
+  @PostMapping("/add")
   public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult, Principal principal) {
     if (bindingResult.hasFieldErrors()){
       ModelAndView modelAndView = new ModelAndView("song/addNewSong");
@@ -47,7 +49,7 @@ public class SongController {
     return modelAndView;
   }
 
-  @GetMapping("/song-detail/{id}")
+  @GetMapping("/{id}")
   public ModelAndView showSongDetail(@PathVariable long id){
     SongDTO song = songService.findById(id).get();
     ModelAndView modelAndView = new ModelAndView("song/details");
@@ -62,7 +64,7 @@ public class SongController {
     modelAndView.addObject("song", song);
     return modelAndView;
   }
-  @GetMapping("/list")
+  @GetMapping
   public ModelAndView showAllSong(@RequestParam("song") Optional<String> song,
                                   @PageableDefault(value = 5) Pageable pageable) {
     Page<SongDTO> songs;
@@ -76,14 +78,14 @@ public class SongController {
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
-  @GetMapping("/edit-song/{id}")
+  @GetMapping("/update/{id}")
   public ModelAndView showEditSong(@PathVariable Long id){
     Song song = songService.findByIdWithTagIsString(id);
     ModelAndView modelAndView = new ModelAndView("song/editsong");
     modelAndView.addObject("song", song);
     return modelAndView;
   }
-  @PostMapping("/edit-song")
+  @PostMapping("/update")
     public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirect){
       songService.save(song);
       redirect.addFlashAttribute("message", "The song has been updated");
