@@ -5,8 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SongRepository extends JpaRepository<SongDTO, Long> {
-  Page<SongDTO> findAllByNameContaining(String name, Pageable pageable);
+import java.util.List;
 
-  Page<SongDTO> findAllByOrderByCreatedAtDesc(Pageable pageable);
+public interface SongRepository extends JpaRepository<SongDTO, Long> {
+  List<SongDTO> findAllByNameContaining(String name);
+
+  List<SongDTO> findAllByOrderByCreatedAtDesc();
 }
