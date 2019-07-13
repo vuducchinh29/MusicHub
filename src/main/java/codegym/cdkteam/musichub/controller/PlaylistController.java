@@ -117,14 +117,14 @@ public class PlaylistController {
   }
 
   @GetMapping("/playlists/delete/{id}")
-  public ModelAndView deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+  public ModelAndView deletePlaylist(@PathVariable Long id, RedirectAttributes redirectAttributes) {
     ModelAndView modelAndView = new ModelAndView("redirect:/playlist/list");
     playlistService.remove(id);
     redirectAttributes.addFlashAttribute("message", "Playlist was deleted");
     return modelAndView;
   }
 
-  @GetMapping("/like/{id}")
+  @GetMapping("playlists/like/{id}")
   @ResponseBody
   public String likeSong (@PathVariable Long id, Principal principal) {
     Optional<Playlist> playlist = playlistService.findById(id);
