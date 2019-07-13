@@ -32,6 +32,9 @@ public class Playlist {
   @Column(name = "linkAvatar")
   private String linkAvatar;
 
+  @Column(name = "listen")
+  private Integer listen;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "song_playlist",
