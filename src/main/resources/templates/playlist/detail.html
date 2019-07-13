@@ -216,34 +216,10 @@
       <div class="col-5 px-5">
         <h3 class="mb-3">Recomment playlist</h3>
         <ul class="list-group">
-          <li class="list-group-item p-0 my-2 mt-3 bg-light">
+          <li class="list-group-item p-0 my-2 mt-3 bg-light" th:each="playlist, i: ${recommend_playlists}">
             <a href="" class="name-of-song">
-              <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark">Name of playlist</h6>
-            </a>
-          </li>
-          <li class="list-group-item p-0 my-2 bg-light">
-            <a href="" class="name-of-song">
-              <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark">Name of playlist</h6>
-            </a>
-          </li>
-          <li class="list-group-item p-0 my-2 bg-light">
-            <a href="" class="name-of-song">
-              <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark">Name of playlist</h6>
-            </a>
-          </li>
-          <li class="list-group-item p-0 my-2 bg-light">
-            <a href="" class="name-of-song">
-              <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark">Name of playlist</h6>
-            </a>
-          </li>
-          <li class="list-group-item p-0 my-2 bg-light">
-            <a href="" class="name-of-song">
-              <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark">Name of playlist</h6>
+              <img th:src="${playlist.getLinkAvatar()}" alt="" class="img thumbnail pull-left mr-2">
+              <h6 class="mb-1 text-dark" th:text="${playlist.getName()}"></h6>
             </a>
           </li>
         </ul>
