@@ -33,4 +33,9 @@ public class SingerServiceImpl implements SingerService {
         singerRepository.deleteById(id);
     }
 
+    @Override
+    public List<Singer> findAllByNameContaining(String name) {
+        return singerRepository.findAllByNameContaining(name);
+    }
+
 }
