@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +57,13 @@ public class SingerController {
         Singer singer = singerService.findById(id).get();
         ModelAndView modelAndView = new ModelAndView("singer/edit");
         modelAndView.addObject("singer", singer);
+        return modelAndView;
+    }
+    @PostMapping("/edit")
+    public ModelAndView saveSinger(@ModelAttribute("singer") Singer singer, RedirectAttributes redirect){
+        singerService.save(singer);
+        ModelAndView modelAndView = new ModelAndView("redirect:/singers");
+        redirect.addFlashAttribute("message","Edit singer information successfully");
         return modelAndView;
     }
 }
