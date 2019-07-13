@@ -1,4 +1,9 @@
 package codegym.cdkteam.musichub.repository;
 
-public interface SingerRepository {
+import codegym.cdkteam.musichub.model.Singer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+
+public interface SingerRepository extends JpaRepository<Singer, Long> {
 }
