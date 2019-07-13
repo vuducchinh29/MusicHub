@@ -11,4 +11,5 @@ public interface SongRepository extends JpaRepository<SongDTO, Long> {
   List<SongDTO> findAllByNameContaining(String name);
 
   List<SongDTO> findAllByOrderByCreatedAtDesc();
+  List<SongDTO> findTop6ByOrderByCreatedAtDesc();
 }
