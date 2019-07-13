@@ -43,11 +43,6 @@ public class LoginController {
   @Autowired
   public JavaMailSender javaMailSender;
 
-  @GetMapping("/")
-  public String index() {
-    return "index";
-  }
-
   @GetMapping("/user")
   public String user(Model model, Principal principal) {
     String username = principal.getName();
