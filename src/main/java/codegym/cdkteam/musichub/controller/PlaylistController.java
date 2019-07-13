@@ -89,7 +89,7 @@ public class PlaylistController {
     }
     modelAndView = new ModelAndView("playlist/detail");
     modelAndView.addObject("playlist",playlist.get());
-    modelAndView.addObject("recommend_playlists", playlistService.findAll());
+    modelAndView.addObject("recommend_playlists", playlistService.findTop5ByOrderByCreatedAtDesc());
     return modelAndView;
   }
 
