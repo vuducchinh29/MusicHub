@@ -14,4 +14,6 @@ public interface SingerService {
 
     void remove(Long id);
 
+    List<Singer> findAllByNameContaining(String name);
+
 }
