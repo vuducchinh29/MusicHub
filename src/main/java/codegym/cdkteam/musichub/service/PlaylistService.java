@@ -22,4 +22,6 @@ public interface PlaylistService {
   int like (Playlist playlist, UserDTO user);
 
   List<Playlist> findAllByOrderByCreatedAtDesc();
+
+  List<Playlist> findTop5ByOrderByCreatedAtDesc();
 }
