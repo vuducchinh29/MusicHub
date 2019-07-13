@@ -108,4 +108,9 @@ public class SongDTOServiceImpl implements SongDTOService {
     SongDTO savedSong = songRepository.save(song);
     return savedSong.getLikedUsers().size();
   }
+
+  @Override
+  public void listen(SongDTO song) {
+    song.setListen(song.getListen() + 1);
+  }
 }

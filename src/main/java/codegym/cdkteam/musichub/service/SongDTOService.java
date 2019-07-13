@@ -21,4 +21,6 @@ public interface SongDTOService {
   List<SongDTO> findAllByOrderByCreatedAtDesc();
 
   int like (SongDTO song, UserDTO user);
+
+  void listen(SongDTO song);
 }
