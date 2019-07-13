@@ -31,4 +31,10 @@ public class SingerController {
         modelAndView.addObject("singers", singers);
         return modelAndView;
     }
+    @GetMapping("/create")
+    public ModelAndView createSinger(){
+        ModelAndView modelAndView = new ModelAndView("singer/create");
+        modelAndView.addObject("singer", new Singer());
+        return modelAndView;
+    }
 }
