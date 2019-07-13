@@ -224,9 +224,7 @@
   </section>
   <hr />
   <section class="comment my-4">
-    <div id="comment" class="border border-warning" style="height: 400px">
-      This is comment area
-    </div>
+    <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
   </section>
 </article>
 <div class="music-player fixed-bottom" style="height: 70px;">
