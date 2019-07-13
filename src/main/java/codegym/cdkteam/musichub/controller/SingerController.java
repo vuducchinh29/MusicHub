@@ -51,4 +51,11 @@ public class SingerController {
         modelAndView.addObject("singers", singers);
         return modelAndView;
     }
+    @GetMapping("/edit/{id}")
+    public ModelAndView editSinger(@PathVariable Long id){
+        Singer singer = singerService.findById(id).get();
+        ModelAndView modelAndView = new ModelAndView("singer/edit");
+        modelAndView.addObject("singer", singer);
+        return modelAndView;
+    }
 }
