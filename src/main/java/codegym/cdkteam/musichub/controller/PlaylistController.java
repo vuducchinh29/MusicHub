@@ -87,10 +87,9 @@ public class PlaylistController {
       modelAndView = new ModelAndView("404");
       return modelAndView;
     }
-    List<SongDTO> songs = playlist.get().getSongs();
     modelAndView = new ModelAndView("playlist/detail");
     modelAndView.addObject("playlist",playlist.get());
-    modelAndView.addObject("songs", songs);
+    modelAndView.addObject("recommend_playlists", playlistService.findAll());
     return modelAndView;
   }
 
