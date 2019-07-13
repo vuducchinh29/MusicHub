@@ -19,7 +19,7 @@ public class HomeController {
   @Autowired
   PlaylistService playlistService;
 
-  @GetMapping("/home")
+  @GetMapping({"/" , "/home"})
   public ModelAndView showIndex(){
     // Playlist moi nhat
     List<Playlist> newestPlaylists = playlistService.findAllByOrderByCreatedAtDesc();
