@@ -99,8 +99,8 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
-  public List<SongDTO> findTop6ByOrderByCreatedAtDesc() {
-    return songRepository.findTop6ByOrderByCreatedAtDesc();
+  public List<SongDTO> findTop6ByOrderByListenDesc() {
+    return songRepository.findTop6ByOrderByListenDesc();
   }
 
   @Override

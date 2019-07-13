@@ -28,7 +28,7 @@ public class HomeController {
     // Bai hat moi nhat
     List<SongDTO> newestSongs = songService.findAllByOrderByCreatedAtDesc();
     // Bai hat nhieu luot nghe nhat
-    List<SongDTO> mostPlayedSongs = songService.findAll();
+    List<SongDTO> mostPlayedSongs = songService.findTop6ByOrderByListenDesc();
 
     ModelAndView modelAndView = new ModelAndView("index");
     modelAndView.addObject("newestPlaylists", newestPlaylists);
