@@ -175,7 +175,7 @@
             <h2 th:text="${playlist.getName()}"></h2>
           </div>
           <div class="count-like-play text-white pull-right pr-3 mt-7">
-            <i class="fa fa-play"><span id=count-play class="count-like-play mx-2" th:text="${playlist.getLikedUsers().size()}"></span></i>
+            <i class="fa fa-play"><span id=count-play class="count-like-play mx-2" th:text="${playlist.getListen()}"></span></i>
             <i class="fa fa-heart"><span id=count-like class="count-like-play mx-2" th:text="${playlist.getLikedUsers().size()}"></span></i>
           </div>
         </div>
