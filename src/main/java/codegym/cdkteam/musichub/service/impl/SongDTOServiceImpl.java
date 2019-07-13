@@ -99,6 +99,11 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
+  public List<SongDTO> findTop6ByOrderByCreatedAtDesc() {
+    return songRepository.findTop6ByOrderByCreatedAtDesc();
+  }
+
+  @Override
   public int like(SongDTO song, UserDTO user) {
     if (!song.getLikedUsers().contains(user)) {
       song.getLikedUsers().add(user);

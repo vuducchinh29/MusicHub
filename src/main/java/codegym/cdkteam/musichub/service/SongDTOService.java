@@ -20,6 +20,8 @@ public interface SongDTOService {
   List<SongDTO> findAllByNameContaining(String name);
   List<SongDTO> findAllByOrderByCreatedAtDesc();
 
+  List<SongDTO> findTop6ByOrderByCreatedAtDesc();
+
   int like (SongDTO song, UserDTO user);
 
   void listen(SongDTO song);
