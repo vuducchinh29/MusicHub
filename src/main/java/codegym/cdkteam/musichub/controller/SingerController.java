@@ -66,4 +66,12 @@ public class SingerController {
         redirect.addFlashAttribute("message","Edit singer information successfully");
         return modelAndView;
     }
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteSinger(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        singerService.remove(id);
+        ModelAndView modelAndView = new ModelAndView("redirect:/singers");
+        redirectAttributes.addFlashAttribute("message", "successfully deleted");
+        return modelAndView;
+
+    }
 }
