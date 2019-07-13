@@ -4,13 +4,11 @@ import codegym.cdkteam.musichub.model.Singer;
 import codegym.cdkteam.musichub.service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/singers")
@@ -37,6 +35,20 @@ public class SingerController {
         ModelAndView modelAndView = new ModelAndView("singer/create");
         modelAndView.addObject("singer", new Singer());
         modelAndView.addObject("message", "Create a successful singer");
+        return modelAndView;
+    }
+    @GetMapping("/{id}")
+    public ModelAndView detailSinger(@PathVariable Long id) {
+        Optional<Singer> singer = singerService.findById(id);
+        ModelAndView modelAndView;
+        if (!singer.isPresent()) {
+            modelAndView = new ModelAndView("404");
+            return modelAndView;
+        }
+        Singer singers = singerService.findById(id).get();
+        modelAndView = new ModelAndView("singer/detail");
+        modelAndView.addObject("singer", singer.get());
+        modelAndView.addObject("singers", singers);
         return modelAndView;
     }
 }
