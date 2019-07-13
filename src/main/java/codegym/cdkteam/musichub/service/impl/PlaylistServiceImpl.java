@@ -72,4 +72,9 @@ public class PlaylistServiceImpl implements PlaylistService {
   public List<Playlist> findTop5ByOrderByCreatedAtDesc() {
     return playlistRepository.findTop5ByOrderByCreatedAtDesc();
   }
+
+  @Override
+  public List<Playlist> findTop6ByOrderByListenDesc() {
+    return playlistRepository.findTop6ByOrderByListenDesc();
+  }
 }

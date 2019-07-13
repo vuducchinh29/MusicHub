@@ -24,4 +24,6 @@ public interface PlaylistService {
   List<Playlist> findAllByOrderByCreatedAtDesc();
 
   List<Playlist> findTop5ByOrderByCreatedAtDesc();
+
+  List<Playlist> findTop6ByOrderByListenDesc();
 }

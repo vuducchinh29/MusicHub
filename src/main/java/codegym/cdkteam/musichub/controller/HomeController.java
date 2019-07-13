@@ -24,7 +24,7 @@ public class HomeController {
     // Playlist moi nhat
     List<Playlist> newestPlaylists = playlistService.findAllByOrderByCreatedAtDesc();
     // Playlist nhieu luot click nhat
-    List<Playlist> mostPlayedPlaylists = playlistService.findAll();
+    List<Playlist> mostPlayedPlaylists = playlistService.findTop6ByOrderByListenDesc();
     // Bai hat moi nhat
     List<SongDTO> newestSongs = songService.findAllByOrderByCreatedAtDesc();
     // Bai hat nhieu luot nghe nhat
