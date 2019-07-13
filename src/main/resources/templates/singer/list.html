@@ -54,7 +54,29 @@
             </div>
         </nav>
         <div class="container-fluid mt-50">
-
+            <h1>Singer List</h1>
+            <br/>
+            <form>
+                <form>
+                    <input name="s" type="text"/>
+                    <input type="submit" value="Search"/>
+                </form>
+                <br>
+                <table border="1" align="center">
+                    <tr>
+                        <td >STT</td>
+                        <td >Name</td>
+                        <td colspan="2">Options</td>
+                    </tr>
+                    <tr th:each="singer,i : ${singers}">
+                        <td th:text="${i.count}"></td>
+                        <td style="text-align: left"><span th:text="${singer.getName()}"></span>
+                        </td>
+                        <td ><a th:href="@{/singers/edit/__${singer.id}__}">Edit</a></td>
+                        <td ><a th:href="@{/singers/delete/__${singer.id}__}" onclick="return confirm('Are you sure to delete this singer???')">Delete</a></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
