@@ -77,4 +77,11 @@ public class PlaylistServiceImpl implements PlaylistService {
   public List<Playlist> findTop6ByOrderByListenDesc() {
     return playlistRepository.findTop6ByOrderByListenDesc();
   }
+
+
+  @Override
+  public void listen (Playlist playlist) {
+    playlist.setListen(playlist.getListen() + 1);
+    playlistRepository.save(playlist);
+  }
 }
