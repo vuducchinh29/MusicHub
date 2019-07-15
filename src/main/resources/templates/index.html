@@ -122,16 +122,21 @@
           <a class="nav-link" href="singers.html">Singers</a>
         </li>
       </ul>
-      <form class="form-inline my-2 ml-auto position-relative">
-        <select name="type" id="typesearch" class="form-control position-absolute rounded-0 select-type px-2">
-          <option value="1">Song</option>
-          <option value="2">Playlist</option>
-          <option value="3">Singer</option>
-        </select>
-        <input class="form-control mr-sm-2 input-search rounded-0" type="search" placeholder="Search"
-               aria-label="Search">
-        <button class="btn btn-search position-absolute border-info bg-info rounded-0" type="submit"><i
-            class="fa fa-search text-white"></i></button>
+      <form class="form-inline my-2 ml-auto position-relative" method="get" action="/search">
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect04" name="type" style="border-radius: 25px 0px 0px 25px;">
+            <option value="song" selected>Song</option>
+            <option value="playlist">Playlist</option>
+            <option value="singer">Singer</option>
+          </select>
+          <div class="input-group-append">
+            <input type="text" name="query">
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-info" type="submit" style="border-radius: 0px 25px 25px 0px;"><i
+                    class="fa fa-search text-white"></i></button>
+          </div>
+        </div>
       </form>
       <ul class="navbar-nav pull-right">
         <li class="nav-item">
