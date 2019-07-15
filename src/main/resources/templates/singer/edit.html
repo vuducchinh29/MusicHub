@@ -144,76 +144,12 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top fixed-top py-0">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <img src="http://musichub.scot/wp-content/uploads/2015/12/MusicHub_logo.jpg" height="50px" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav pull-left text-uppercase text-center">
-                <li class="nav-item mr-2">
-                    <a class="nav-link" href="index.html">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item mr-2">
-                    <a class="nav-link" href="playlists.html">Playlists</a>
-                </li>
-                <li class="nav-item mr-2">
-                    <a class="nav-link" href="songs.html">Songs</a>
-                </li>
-                </li>
-                <li class="nav-item mr-2">
-                    <a class="nav-link" href="singers.html">Singers</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 ml-auto position-relative">
-                <select name="type" id="typesearch" class="form-control position-absolute rounded-0 select-type px-2">
-                    <option value="1">Song</option>
-                    <option value="2">Playlist</option>
-                    <option value="3">Singer</option>
-                </select>
-                <input class="form-control mr-sm-2 input-search rounded-0" type="search" placeholder="Search"
-                       aria-label="Search">
-                <button class="btn btn-search position-absolute border-info bg-info rounded-0" type="submit"><i
-                        class="fa fa-search text-white"></i></button>
-            </form>
-            <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="user-name">Kú Mèo</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-                        <a class="dropdown-item" href="#">Change Password</a>
-                        <a class="dropdown-item" href="#">Log out</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<nav th:replace="layout/navbar :: navbar('')"></nav>
+
 <div class="container position-relative below-nav bg-light">
     <div class="row py-4">
-        <aside class="col-3 pl-5 dashboard-sidebar">
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="list-group list-group-flush">
-                    <a href="dashboard.html" class="list-group-item list-group-item-action bg-light px-1">Dashboard</a>
-                    <a href="uploadsong.html" class="list-group-item list-group-item-action bg-light px-1">Upload song</a>
-                    <a href="dashboard-songs.html" class="list-group-item list-group-item-action bg-light px-1">Songs</a>
-                    <a href="create-playlist.html" class="list-group-item list-group-item-action bg-light px-1">Create
-                        playlist</a>
-                    <a href="dashboard-playlists.html"
-                       class="list-group-item list-group-item-action bg-light px-1">Playlists</a>
-                    <a href="dashboard-singers.html" class="list-group-item list-group-item-action bg-light px-1 active">Singer</a>
-                </div>
-            </div>
-        </aside>
+        <aside th:replace="layout/dashboard :: dashboard('singer')"></aside>
+
         <article class="col-9 pl-5">
             <form th:action="@{/singers/update}" th:object="${singer}" method="post">
                 <input type="hidden" th:field="*{id}">

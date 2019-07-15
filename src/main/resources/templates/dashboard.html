@@ -75,18 +75,7 @@
 </nav>
 <div class="container position-relative below-nav bg-light">
   <div class="row py-4">
-    <aside class="col-3 pl-5 dashboard-sidebar">
-      <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="list-group list-group-flush">
-          <a href="dashboard.html" class="list-group-item list-group-item-action bg-light px-1 active">Dashboard</a>
-          <a href="uploadsong.html" class="list-group-item list-group-item-action bg-light px-1">Upload song</a>
-          <a href="dashboard-songs.html" class="list-group-item list-group-item-action bg-light px-1">Songs</a>
-          <a href="create-playlist.html" class="list-group-item list-group-item-action bg-light px-1">Create playlist</a>
-          <a href="dashboard-playlists.html" class="list-group-item list-group-item-action bg-light px-1">Playlists</a>
-          <a href="dashboard-singers.html" class="list-group-item list-group-item-action bg-light px-1">Singer</a>
-        </div>
-      </div>
-    </aside>
+    <aside th:replace="layout/dashboard :: dashboard('dashboard')"></aside>
     <article class="col-9 pl-5">
       <section>
         <h4 class="font-weight-bold">Songs</h4>
