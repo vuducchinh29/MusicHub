@@ -50,7 +50,7 @@ public class Playlist {
   private Set<UserDTO> likedUsers;
 
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "user_id", updatable = false)
   private UserDTO owner;
 
   private String[] songIDs;
