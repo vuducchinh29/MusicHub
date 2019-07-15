@@ -60,19 +60,19 @@ public class SongController {
     return modelAndView;
   }
 
-  @GetMapping("/mysongs")
+  @GetMapping("/songs")
   public ModelAndView showAllSong(Principal principal) {
     UserDTO user = userService.findByEmail(principal.getName());
     Set<SongDTO> songs = user.getUploadedSongs();
-    ModelAndView modelAndView = new ModelAndView("song/mysongs");
+    ModelAndView modelAndView = new ModelAndView("song/songs");
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
 
-  @GetMapping("/songs")
+  @GetMapping("/allsongs")
   public ModelAndView showAllSong() {
     List<SongDTO> songs = songService.findAll();
-    ModelAndView modelAndView = new ModelAndView("song/songs");
+    ModelAndView modelAndView = new ModelAndView("song/allsongs");
     modelAndView.addObject("songs", songs);
     return modelAndView;
   }
