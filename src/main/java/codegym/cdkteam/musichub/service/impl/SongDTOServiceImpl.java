@@ -133,6 +133,7 @@ public class SongDTOServiceImpl implements SongDTOService {
   @Override
   public void listen(SongDTO song) {
     song.setListen(song.getListen() + 1);
+    songRepository.save(song);
   }
 
   @Override

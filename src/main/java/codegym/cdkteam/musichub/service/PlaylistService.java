@@ -26,4 +26,8 @@ public interface PlaylistService {
   List<Playlist> findTop5ByOrderByCreatedAtDesc();
 
   List<Playlist> findTop6ByOrderByListenDesc();
+
+  List<Playlist> findAllByNameContaining(String name);
+
+  void listen(Playlist playlist);
 }
