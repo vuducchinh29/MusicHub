@@ -84,9 +84,12 @@
           <li class="list-group-item bg-light p-0 pb-4">
             <a href="#" class="name-of-song">
               <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
+              <i class="fa fa-play play-btn position-absolute"></i>
+            </a>
+            <a th:href="@{/songs/__${song.id}__}">
               <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
             </a>
-            <p class="mb-0 singer">Singer</p>
+            <p class="mb-0 singer">Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
           </li>
         </ul>
       </div>

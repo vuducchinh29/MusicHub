@@ -93,16 +93,16 @@
             <section class="mb-5">
                 <a href="create-singer.html"><span class="btn btn-info pull-right mr-2 btn-showall">Add new singer</span></a>
                 <h4 class="font-weight-bold mb-5">All singers</h4>
-                <div class="row mt-3" th:each="singer, i : ${singers}">
-                    <div class="col-4 my-2">
+                <div class="row mt-3">
+                    <div class="col-4 my-2" th:each="singer: ${singers}">
                         <div class="parent p-3">
                             <div class="child">
-                                <img class="d-block w-100 pull-left p-4 rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
-                                <a class="close-btn" th:href="@{/singers/delete/__${singer.id}__}" onclick="return confirm('Are you sure to delete this singer???')"><i class="fa fa-close"></i></a>
-                                <a class="edit-btn" th:href="@{/singers/edit/__${singer.id}__}"><i class="fa fa-edit"></i></a>
+                                <img class="d-block w-100 pull-left rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
+                                <a class="close-btn" th:href="@{/singers/delete/__${singer.id}__}" onclick="return confirm('Are you sure to remove this singer???')"><i class="fa fa-close"></i></a>
+                                <a class="edit-btn" th:href="@{/singers/update/__${singer.id}__}"><i class="fa fa-edit"></i></a>
                             </div>
                         </div>
-                        <a href="#" class="text-dark">
+                        <a th:href="@{/singers/__${singer.id}__}" class="text-dark">
                             <h6 class="py-3 font-weight-bold text-center" th:text="${singer.getName()}"></h6>
                         </a>
                     </div>

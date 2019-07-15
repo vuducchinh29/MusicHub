@@ -191,12 +191,17 @@
         <div class="row mt-5">
           <div class="col-12">
             <ul class="list-group" th:each="song : ${songs}">
-              <li class="list-group-item bg-light p-0 pb-4">
+              <li class="list-group-item bg-light p-0 py-3 song-of-list border-bottom">
                 <a href="#" class="name-of-song">
                   <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
+                  <i class="fa fa-play play-btn position-absolute"></i>
+                </a>
+                <a th:href="@{/songs/__${song.id}__}">
                   <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
                 </a>
-                <p class="mb-0 singer">Singer</p>
+                <a th:href="@{songs/delete/__${song.id}__}" class="pull-right song-close-btn"><i class="fa fa-close play-opacity position-absolute"></i></a>
+                <a th:href="@{songs/update/__${song.id}__}" class="pull-right song-edit-btn"><i class="fa fa-edit play-opacity position-absolute"></i></a>
+                <p class="mb-0 singer">Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
               </li>
             </ul>
           </div>

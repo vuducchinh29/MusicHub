@@ -177,7 +177,7 @@
   <section id="newplaylist">
     <div class="new-playlist mt-5 bg-white">
       <div class="p-5">
-        <a th:href="@{/playlists}"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
+        <a th:href="@{/allplaylists}"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
         <h4 class="ml-2 mb-3 font-weight-bold">New Playlist</h4>
         <div class="owl-carousel owl-theme">
 
@@ -197,7 +197,7 @@
   <section id="mostplaylist">
     <div class="most-playlist mt-5 bg-white">
       <div class="p-5">
-        <a href="playlists.html"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
+        <a th:href="@{/allplaylists}"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
         <h4 class="ml-2 mb-3 font-weight-bold">Most played playlist</h4>
         <div class="owl-carousel owl-theme">
 
@@ -230,7 +230,7 @@
             </li>
 
           </ul>
-          <a th:href="@{/songs}" class="text-info">
+          <a th:href="@{/allsongs}" class="text-info">
             <div class="text-center mt-3">Show all </div>
           </a>
         </div>
@@ -246,7 +246,7 @@
             </li>
 
           </ul>
-          <a th:href="@{/songs}" class="text-info">
+          <a th:href="@{/allsongs}" class="text-info">
             <div class="text-center mt-3">Show all</div>
           </a>
         </div>
@@ -256,32 +256,12 @@
   <section id="singer">
     <div class="most-playlist mt-5 bg-white">
       <div class="p-5">
-        <a href="singers.html"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
+        <a th:href="@{allsingers}"><span class="btn btn-info pull-right mr-2 btn-showall">Show all</span></a>
         <h4 class="ml-2 font-weight-bold">Featured singers</h4>
         <div class="owl-carousel owl-theme text-center">
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/tranchung.png" alt="Slide">
-            <h6 class="p-2">Chần Trung</h6>
-          </div>
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/thanhba.png" alt="Slide">
-            <h6 class="p-2">Thánh Bà</h6>
-          </div>
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/nguyenanh.png" alt="Slide">
-            <h6 class="p-2">Nguyên Em</h6>
-          </div>
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/duongdua.png" alt="Slide">
-            <h6 class="p-2">Đuông Dừa</h6>
-          </div>
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/dinhcu.png" alt="Slide">
-            <h6 class="p-2">Đinh Cụ</h6>
-          </div>
-          <div class="item">
-            <img class="d-block w-100 pull-left p-4 rounded-circle" src="images/duynguyen.png" alt="Slide">
-            <h6 class="p-2">Duy Nguyễn</h6>
+          <div class="item" th:each="singer: ${singers}">
+            <img class="d-block w-100 pull-left p-5 rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
+            <a th:href="@{singers/__${singer.id}__}" class="text-dark"><h6 class="p-2" th:text="${singer.getName()}"></h6></a>
           </div>
         </div>
       </div>

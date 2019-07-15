@@ -167,7 +167,7 @@
       <div class="lammonen row mx-0" style="background-color: rgba(0,0,0,.65);">
         <div class="col-3">
           <img
-                  th:src="${playlist.getLinkAvatar()}"
+                  th:src="${playlist.getLinkAvatar()}" width="288" height="288"
                   alt="song-thumbnail" class="img img-responsive p-4">
         </div>
         <div class="col-9">
@@ -187,7 +187,7 @@
     <span class="ml-5" id="like-btn" onclick="like();">
         <i id="heart-o" class="fa fa-heart-o"></i>
         <i id="heart" class="fa fa-heart text-danger"></i> Like</span>
-    <span class="ml-5"><a href="#comment" class="text-info"><i class="fa fa-comment"></i> Comment</a></span>
+    <span class="ml-5"><a href="#comment" class="text-info" id="comment-btn"><i class="fa fa-comment"></i> Comment</a></span>
   </section>
   <hr />
   <section class="bg-light p-3 my-4">
@@ -207,9 +207,10 @@
                 </a>
               </div>
               <div class="col-4">
-                <span class="mb-0 singer">Singer</span>
+                <span class="mb-0 singer" th:text="${song.getSingers()+ ' '}"></span>
               </div>
             </div>
+            <hr/>
           </li>
         </ul>
       </div>
@@ -218,7 +219,7 @@
         <ul class="list-group">
           <li class="list-group-item p-0 my-2 mt-3 bg-light" th:each="playlist, i: ${recommend_playlists}">
             <a href="" class="name-of-song">
-              <img th:src="${playlist.getLinkAvatar()}" alt="" class="img thumbnail pull-left mr-2">
+              <img th:src="${playlist.getLinkAvatar()}" width="40" height="40"  alt="" class="img thumbnail pull-left mr-2">
               <h6 class="mb-1 text-dark" th:text="${playlist.getName()}"></h6>
             </a>
           </li>
@@ -227,7 +228,7 @@
     </div>
   </section>
   <hr />
-  <section class="comment my-4">
+  <section class="comment my-4" id="comment">
     <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
   </section>
 </article>
@@ -247,6 +248,7 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script th:src="@{/js/like-heart.js}"></script>
+<script th:src="@{/js/scrollTo.js}"></script>
 </body>
 
 </html>

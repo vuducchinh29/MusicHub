@@ -182,7 +182,7 @@
         <div class="col-9">
           <div class="py-4 text-white mb-5">
             <h2 th:text="${song.getName()}"></h2>
-            <p>Singer: Chipu</p>
+            <p>Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
           </div>
           <div class="count-like-play text-white pull-right pr-3 mt-5">
             <i class="fa fa-play"><span id=count-play class="count-like-play mx-2" th:text="${song.getListen()}"></span></i>
@@ -197,7 +197,7 @@
     <span class="ml-5" id="like-btn" onclick="like();">
         <i id="heart-o" class="fa fa-heart-o"></i>
         <i id="heart" class="fa fa-heart text-danger"></i> Like</span>
-    <span class="ml-5"><a href="#comment" class="text-info"><i class="fa fa-comment"></i> Comment</a></span>
+    <span class="ml-5"><a href="#comment" class="text-info" id="comment-btn"><i class="fa fa-comment"></i> Comment</a></span>
   </section>
   <hr />
   <section class="bg-light p-3 my-4">
@@ -211,19 +211,22 @@
       <div class="col-5 px-5">
         <h3 class="mb-3">Recommend for you</h3>
         <ul class="list-group" th:each="song: ${songs}">
-          <li class="list-group-item p-0 mb-2 bg-light">
-            <a href="" class="name-of-song">
+          <li class="list-group-item p-0 py-2 bg-light">
+            <a href="#" class="name-of-song">
               <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
+              <i class="fa fa-play play-btn position-absolute"></i>
+            </a>
+            <a th:href="@{/songs/__${song.id}__}">
               <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
             </a>
-            <p class="mb-0 singer">Singer</p>
+            <p class="mb-0 singer">Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
           </li>
         </ul>
       </div>
     </div>
   </section>
   <hr />
-  <section class="comment my-4">
+  <section class="comment my-4" id="comment">
     <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
   </section>
 </article>
@@ -244,6 +247,7 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script th:src="@{/js/like-heart.js}"></script>
+<script th:src="@{/js/scrollTo.js}"></script>
 </body>
 
 </html>

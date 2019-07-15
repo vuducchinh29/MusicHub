@@ -1,19 +1,19 @@
 package codegym.cdkteam.musichub.service;
 
-import codegym.cdkteam.musichub.model.Singer;
+import codegym.cdkteam.musichub.model.SingerDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface SingerService {
-    List<Singer> findAll();
+    List<SingerDTO> findAll();
 
-    Optional<Singer> findById(Long id);
+    Optional<SingerDTO> findById(Long id);
 
-    void save(Singer singer);
+    void save(SingerDTO singerDTO);
 
     void remove(Long id);
 
-    List<Singer> findAllByNameContaining(String name);
+    List<SingerDTO> findAllByNameContaining(String name);
 
 }

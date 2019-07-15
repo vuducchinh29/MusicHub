@@ -78,14 +78,12 @@
              style="background: url(https://png.pngtree.com/thumb_back/fh260/back_pic/03/62/30/9157aa94e693d90.jpg) center center / cover no-repeat rgb(83, 62, 56);">
             <div class="lammonen row mx-0" style="background-color: rgba(0,0,0,.65);">
                 <div class="col-3">
-                    <img
-                           th:src="${singer.getLinkImage()}" width="288" height="288"
-                            alt="song-thumbnail" class="img img-responsive w-100 p-4">
+                    <img th:src="${singer.getLinkImage()}" width="288" height="288" alt="song-thumbnail" class="img img-responsive w-100 p-4">
                 </div>
                 <div class="col-9">
                     <div class="py-4 pr-5 text-white mb-5">
                         <h2 th:text="${singer.getName()}"></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto fugiat vitae corrupti impedit dolores obcaecati dolor eum. Blanditiis eveniet asperiores obcaecati nesciunt ipsa unde voluptatem nihil? Dignissimos debitis placeat repudiandae. Blanditiis eveniet asperiores obcaecati nesciunt ipsa unde voluptatem nihil? Dignissimos debitis placeat repudiandae.</p>
+                        <p th:text="${singer.getDescription()}"></p>
                     </div>
                 </div>
             </div>
@@ -103,7 +101,7 @@
         <div class="row">
             <div class="col-7 px-5 br-1">
                 <h3 class="mb-3">Famous songs</h3>
-                <ul class="list-group list-songs-group" th:each="song : ${singer.getSongs()}">
+                <ul class="list-group list-songs-group" th:each="song : ${songs}">
                     <li class="list-group-item py-2 my-2 list-song bg-light">
                         <div class="row">
                             <div class="col-1">

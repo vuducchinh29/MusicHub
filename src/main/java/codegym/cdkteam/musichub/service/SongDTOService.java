@@ -1,5 +1,6 @@
 package codegym.cdkteam.musichub.service;
 
+import codegym.cdkteam.musichub.model.SingerDTO;
 import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
@@ -18,10 +19,12 @@ public interface SongDTOService {
   void delete(long id);
 
   List<SongDTO> findAllByNameContaining(String name);
-  List<SongDTO> findAllByOrderByCreatedAtDesc();
-  List<SongDTO> findTop6ByOrderByListenDesc();
+  List<SongDTO> findTop5ByOrderByCreatedAtDesc();
+  List<SongDTO> findTop5ByOrderByListenDesc();
 
   int like (SongDTO song, UserDTO user);
 
   void listen(SongDTO song);
+
+  List<SingerDTO> uncheckedSinger(List<SingerDTO> allsongs, List<SingerDTO> checkedsongs);
 }

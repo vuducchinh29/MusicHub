@@ -83,13 +83,13 @@ public class PlaylistController {
   public ModelAndView detailPlaylist(@PathVariable Long id) {
     Optional<Playlist> playlist = playlistService.findById(id);
     ModelAndView modelAndView;
-    if (!playlist.isPresent()){
+    if (playlist.isPresent()){
+        modelAndView = new ModelAndView("playlist/detail");
+        modelAndView.addObject("playlist",playlist.get());
+        modelAndView.addObject("recommend_playlists", playlistService.findTop5ByOrderByCreatedAtDesc());
+    } else {
       modelAndView = new ModelAndView("404");
-      return modelAndView;
     }
-    modelAndView = new ModelAndView("playlist/detail");
-    modelAndView.addObject("playlist",playlist.get());
-    modelAndView.addObject("recommend_playlists", playlistService.findTop5ByOrderByCreatedAtDesc());
     return modelAndView;
   }
 

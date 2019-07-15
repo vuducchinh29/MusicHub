@@ -1,17 +1,20 @@
 package codegym.cdkteam.musichub.service.impl;
 
+import codegym.cdkteam.musichub.model.SingerDTO;
 import codegym.cdkteam.musichub.model.TagDTO;
 import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.repository.SongRepository;
 import codegym.cdkteam.musichub.repository.TagDTORepository;
+import codegym.cdkteam.musichub.service.SingerService;
 import codegym.cdkteam.musichub.service.SongDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +25,8 @@ public class SongDTOServiceImpl implements SongDTOService {
   SongRepository songRepository;
   @Autowired
   TagDTORepository tagDTORepository;
+  @Autowired
+  SingerService singerService;
 
   @Override
   public List<SongDTO> findAll() {
@@ -80,6 +85,17 @@ public class SongDTOServiceImpl implements SongDTOService {
       }
     }
     songDTO.setTags(tags);
+
+    String[] listSingerIDs = song.getSingerIDs();
+    List<SingerDTO> listSingers = new ArrayList<>();
+    for (int i=0; i<listSingerIDs.length; i++){
+      Long songID = Long.parseLong(listSingerIDs[i]);
+      SingerDTO singer = singerService.findById(songID).get();
+      listSingers.add(singer);
+    }
+    songDTO.setSingers(listSingers);
+
+
     return songRepository.save(songDTO);
   }
 
@@ -94,13 +110,13 @@ public class SongDTOServiceImpl implements SongDTOService {
   }
 
   @Override
-  public List<SongDTO> findAllByOrderByCreatedAtDesc() {
-    return songRepository.findAllByOrderByCreatedAtDesc();
+  public List<SongDTO> findTop5ByOrderByCreatedAtDesc() {
+    return songRepository.findTop5ByOrderByCreatedAtDesc();
   }
 
   @Override
-  public List<SongDTO> findTop6ByOrderByListenDesc() {
-    return songRepository.findTop6ByOrderByListenDesc();
+  public List<SongDTO> findTop5ByOrderByListenDesc() {
+    return songRepository.findTop5ByOrderByListenDesc();
   }
 
   @Override
@@ -117,5 +133,22 @@ public class SongDTOServiceImpl implements SongDTOService {
   @Override
   public void listen(SongDTO song) {
     song.setListen(song.getListen() + 1);
+  }
+
+  @Override
+  public List<SingerDTO> uncheckedSinger(List<SingerDTO> allSingers, List<SingerDTO> checkedSingers){
+    List<SingerDTO> uncheckSingers = new ArrayList<>();
+    for (int i = 0; i < allSingers.size(); i++) {
+      boolean check = false;
+      for (int a = 0; a < checkedSingers.size(); a++) {
+        if (allSingers.get(i).getId() == checkedSingers.get(a).getId()) {
+          check = true;
+        }
+      }
+      if (!check) {
+        uncheckSingers.add(allSingers.get(i));
+      }
+    }
+    return uncheckSingers;
   }
 }

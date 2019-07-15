@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Singer {
+public class SingerDTO {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,11 +31,6 @@ public class Singer {
     @Column(name = "linkImage")
     private String linkImage;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "singer_song",
-            joinColumns = @JoinColumn(name = "singer_id"),
-            inverseJoinColumns = @JoinColumn(name = "song_id"))
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "singers")
     private List<SongDTO> songs;
-
 }

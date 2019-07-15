@@ -1,5 +1,6 @@
 package codegym.cdkteam.musichub.model.song;
 
+import codegym.cdkteam.musichub.model.SingerDTO;
 import codegym.cdkteam.musichub.model.TagDTO;
 import codegym.cdkteam.musichub.model.UserDTO;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -63,4 +65,13 @@ public class SongDTO {
   @JoinColumn(name = "user_id", nullable = false, updatable = false)
   private UserDTO owner;
 
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "song_singer",
+      joinColumns = @JoinColumn(name = "song_id"),
+      inverseJoinColumns = @JoinColumn(name = "singer_id")
+  )
+  private List<SingerDTO> singers;
+
+  private String[] singerIDs;
 }

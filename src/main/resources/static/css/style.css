@@ -77,8 +77,26 @@ a.nav-link:focus{
   font-size: 24px;
   color: #17a2b8;
 }
+.play-btn {
+  opacity: 0;
+  font-size: 35px;
+  left: 6px;
+  top: 0px;
+  color: #17a2b8;
+}
+.song-close-btn{
+  margin-right: 100px;
+}
+.song-edit-btn{
+  margin-right: 150px;
+}
 
-.list-song:hover .play-opacity{
+.song-of-list:hover .play-opacity{
+  opacity: 1;
+  margin-top: -25px;
+}
+
+.name-of-song:hover .play-btn {
   opacity: 1;
 }
 

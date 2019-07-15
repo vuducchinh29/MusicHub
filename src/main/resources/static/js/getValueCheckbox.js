@@ -5,7 +5,8 @@ $(document).ready(function () {
       val.push($(this).val());
     });
     console.log(val);
-    document.getElementById('singer').innerHTML = val;
+    $('#singer').val(val);
+    //document.getElementById('singer').innerHTML = val;
   });
 });
 

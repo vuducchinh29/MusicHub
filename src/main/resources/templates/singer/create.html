@@ -90,7 +90,7 @@
             </div>
         </aside>
         <article class="col-9 pl-5">
-            <form th:action="@{/singers/create}" th:object="${singer}" method="post">
+            <form th:action="@{/singers/add}" th:object="${singer}" method="post">
                 <div class="form-group">
                     <label for="playlistName">Name of singer</label>
                     <input type="text" class="form-control" id="playlistName" th:field="*{name}">

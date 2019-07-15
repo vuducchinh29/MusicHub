@@ -36,4 +36,7 @@ public class Song {
   private Date createdAt;
 
   private UserDTO owner;
+
+  private String[] singerIDs;
+
 }

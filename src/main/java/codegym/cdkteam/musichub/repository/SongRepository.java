@@ -10,6 +10,6 @@ import java.util.List;
 public interface SongRepository extends JpaRepository<SongDTO, Long> {
   List<SongDTO> findAllByNameContaining(String name);
 
-  List<SongDTO> findAllByOrderByCreatedAtDesc();
-  List<SongDTO> findTop6ByOrderByListenDesc();
+  List<SongDTO> findTop5ByOrderByCreatedAtDesc();
+  List<SongDTO> findTop5ByOrderByListenDesc();
 }

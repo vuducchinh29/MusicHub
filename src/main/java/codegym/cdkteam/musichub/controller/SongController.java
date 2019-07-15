@@ -1,8 +1,10 @@
 package codegym.cdkteam.musichub.controller;
 
+import codegym.cdkteam.musichub.model.SingerDTO;
 import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.Song;
 import codegym.cdkteam.musichub.model.song.SongDTO;
+import codegym.cdkteam.musichub.service.SingerService;
 import codegym.cdkteam.musichub.service.SongDTOService;
 import codegym.cdkteam.musichub.service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,34 +29,37 @@ public class SongController {
   @Autowired
   UserDTOService userService;
 
+  @Autowired
+  SingerService singerService;
+
   @GetMapping("/songs/add")
   public ModelAndView addNewSong() {
     ModelAndView modelAndView = new ModelAndView("song/addNewSong");
+    List<SingerDTO> singers = singerService.findAll();
     modelAndView.addObject("song", new Song());
+    modelAndView.addObject("singers", singers);
     return modelAndView;
   }
 
   @PostMapping("/songs/add")
-  public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult, Principal principal) {
-    if (bindingResult.hasFieldErrors()){
-      ModelAndView modelAndView = new ModelAndView("song/addNewSong");
-      return modelAndView;
-    }
+  public ModelAndView createSong(@Validated @ModelAttribute("song") Song song, Principal principal, RedirectAttributes redirectAttributes) {
     song.setOwner(userService.findByEmail(principal.getName()));
     songService.save(song);
-    ModelAndView modelAndView = new ModelAndView("song/addNewSong");
-    modelAndView.addObject("song", new Song());
-    modelAndView.addObject("message", "Upload success!");
+    ModelAndView modelAndView = new ModelAndView("redirect:/songs/add");
+    redirectAttributes.addFlashAttribute("song", new Song());
+    redirectAttributes.addFlashAttribute("message", "Upload success!");
     return modelAndView;
   }
 
   @GetMapping("/songs/{id}")
   public ModelAndView showSongDetail(@PathVariable long id){
     Optional<SongDTO> song = songService.findById(id);
+    List<SongDTO> songs = songService.findTop5ByOrderByListenDesc();
     ModelAndView modelAndView;
     if (song.isPresent()) {
         modelAndView = new ModelAndView("song/details");
         modelAndView.addObject("song", song.get());
+        modelAndView.addObject("songs", songs);
       } else {
         modelAndView = new ModelAndView("404");
     }
@@ -80,12 +86,19 @@ public class SongController {
   @GetMapping("/songs/update/{id}")
   public ModelAndView showEditSong(@PathVariable Long id, Principal principal){
     UserDTO user = userService.findByEmail(principal.getName());
-    Song song = songService.findByIdWithTagIsString(id);
+    Optional<SongDTO> song = songService.findById(id);
     ModelAndView modelAndView;
+
     if (song != null) {
-      if (song.getOwner() == user){
+      if (song.get().getOwner() == user){
+        List<SingerDTO> allSinger = singerService.findAll();
+        List<SingerDTO> checkedSinger = song.get().getSingers();
+        List<SingerDTO> uncheckSinger = songService.uncheckedSinger(allSinger,checkedSinger);
         modelAndView = new ModelAndView("song/editsong");
-        modelAndView.addObject("song", song);
+        modelAndView.addObject("song", song.get());
+        modelAndView.addObject("allSinger", allSinger);
+        modelAndView.addObject("checkedSinger", checkedSinger);
+        modelAndView.addObject("uncheckSinger", uncheckSinger);
       } else {
         modelAndView = new ModelAndView("404");
       }
@@ -94,6 +107,7 @@ public class SongController {
     }
     return modelAndView;
   }
+
   @PostMapping("/songs/update")
     public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirect){
       songService.save(song);
