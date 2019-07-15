@@ -2,16 +2,20 @@ package codegym.cdkteam.musichub.controller;
 
 import codegym.cdkteam.musichub.model.Playlist;
 import codegym.cdkteam.musichub.model.SingerDTO;
+import codegym.cdkteam.musichub.model.UserDTO;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.PlaylistService;
 import codegym.cdkteam.musichub.service.SingerService;
 import codegym.cdkteam.musichub.service.SongDTOService;
+import codegym.cdkteam.musichub.service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -23,6 +27,9 @@ public class HomeController {
 
   @Autowired
   SingerService singerService;
+
+  @Autowired
+  UserDTOService userService;
 
   @GetMapping({"/" , "/home"})
   public ModelAndView showIndex(){
@@ -46,4 +53,15 @@ public class HomeController {
     return modelAndView;
   }
 
+  @GetMapping("/dashboard")
+  public ModelAndView showDashboard(Principal principal){
+    UserDTO user = userService.findByEmail(principal.getName());
+    Set<Playlist> playlists = user.getCreatedPlaylists();
+    Set<SongDTO> songs = user.getUploadedSongs();
+
+    ModelAndView modelAndView = new ModelAndView("dashboard");
+    modelAndView.addObject("playlists", playlists);
+    modelAndView.addObject("songs", songs);
+    return modelAndView;
+  }
 }
