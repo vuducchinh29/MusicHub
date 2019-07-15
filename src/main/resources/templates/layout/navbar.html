@@ -73,7 +73,7 @@
                             <span class="user-name" th:text="${#request.userPrincipal.name}"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" th:href="@{/dashboard}">Dashboard</a>
                             <a class="dropdown-item" th:href="@{/user/change-password}">Change Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" th:href="@{/logout}">Log Out</a>
