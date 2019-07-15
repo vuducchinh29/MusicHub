@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top fixed-top py-0" th:fragment="navbar(active)">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="http://musichub.scot/wp-content/uploads/2015/12/MusicHub_logo.jpg" height="50px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav pull-left text-uppercase text-center">
+                    <li class="nav-item mr-2" th:if="${active =='home'}">
+                        <a class="nav-link active" th:href="@{/}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mr-2" th:unless="${active =='home'}">
+                        <a class="nav-link" th:href="@{/}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item mr-2" th:if="${active == 'playlists'}">
+                        <a class="nav-link active" th:href="@{/allplaylists}">Playlists</a>
+                    </li>
+                    <li class="nav-item mr-2" th:unless="${active == 'playlists'}">
+                        <a class="nav-link" th:href="@{/allplaylists}">Playlists</a>
+                    </li>
+
+                    <li class="nav-item mr-2" th:if="${active == 'songs'}">
+                        <a class="nav-link active" th:href="@{/allsongs}">Songs</a>
+                    </li>
+                    <li class="nav-item mr-2" th:unless="${active == 'songs'}">
+                        <a class="nav-link" th:href="@{/allsongs}">Songs</a>
+                    </li>
+
+                    <li class="nav-item mr-2" th:if="${active == 'singers'}">
+                        <a class="nav-link active" href="singers.html">Singers</a>
+                    </li>
+                    <li class="nav-item mr-2" th:unless="${active == 'singers'}">
+                        <a class="nav-link" href="singers.html">Singers</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 ml-auto position-relative" method="get" action="/search">
+                    <div class="input-group mr-5">
+                        <select class="custom-select" id="inputGroupSelect04" name="type" style="border-radius: 25px 0px 0px 25px;">
+                            <option value="song" selected>Song</option>
+                            <option value="playlist">Playlist</option>
+                            <option value="singer">Singer</option>
+                        </select>
+                        <div class="input-group-append">
+                            <input type="text" name="query" placeholder="Search ...">
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit" style="border-radius: 0px 25px 25px 0px;"><i
+                                    class="fa fa-search text-white"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="navbar-nav pull-right">
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/register}">Register</a>
+                    </li>
+                    <li class="nav-item dropdown" th:unless="${#request.userPrincipal == null}">
+                        <a class="nav-link dropdown-toggle ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <span class="user-name" th:text="${#request.userPrincipal.name}"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" th:href="@{/user/change-password}">Change Password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/logout}">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
