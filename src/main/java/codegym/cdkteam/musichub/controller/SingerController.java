@@ -53,6 +53,8 @@ public class SingerController {
     @GetMapping("/singers/{id}")
     public ModelAndView detailSinger(@PathVariable Long id) {
         Optional<SingerDTO> singer = singerService.findById(id);
+        List<SongDTO> songs = singer.get().getSongs();
+        List<SingerDTO> singers = singerService.findAll();
         ModelAndView modelAndView;
         if (!singer.isPresent()) {
             modelAndView = new ModelAndView("404");
@@ -60,6 +62,8 @@ public class SingerController {
         }
             modelAndView = new ModelAndView("singer/detail");
             modelAndView.addObject("singer", singer.get());
+            modelAndView.addObject("songs", songs);
+            modelAndView.addObject("singers", singers);
         return modelAndView;
     }
     @GetMapping("/singers/update/{id}")
