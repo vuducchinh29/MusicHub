@@ -62,19 +62,19 @@ public class PlaylistController {
     playlistService.save(playlist);
   }
 
-  @GetMapping("/playlists")
+  @GetMapping("/allplaylists")
   public ModelAndView allPlaylist(){
     List<Playlist> playlists = playlistService.findAll();
-    ModelAndView modelAndView = new ModelAndView("playlist/playlists");
+    ModelAndView modelAndView = new ModelAndView("playlist/allplaylists");
     modelAndView.addObject("playlists", playlists);
     return modelAndView;
   }
 
-  @GetMapping("/myplaylists")
+  @GetMapping("/playlists")
   public ModelAndView myPlaylist(Principal principal){
     UserDTO user = userService.findByEmail(principal.getName());
     Set<Playlist> playlists = user.getCreatedPlaylists();
-    ModelAndView modelAndView = new ModelAndView("playlist/myplaylists");
+    ModelAndView modelAndView = new ModelAndView("playlist/playlists");
     modelAndView.addObject("playlists", playlists);
     return modelAndView;
   }
@@ -94,33 +94,51 @@ public class PlaylistController {
   }
 
   @GetMapping("/playlists/update/{id}")
-  public ModelAndView editPlaylist(@PathVariable Long id) {
+  public ModelAndView editPlaylist(@PathVariable Long id, Principal principal) {
+    UserDTO user = userService.findByEmail(principal.getName());
     Optional<Playlist> playlist = playlistService.findById(id);
-    List<SongDTO> allsongs = songService.findAll();
-    List<SongDTO> songs = playlist.get().getSongs();
-    List<SongDTO> uncheckSongs = playlistService.uncheckedSongs(allsongs,songs);
+    ModelAndView modelAndView;
+    if (playlist.isPresent()){
+      if (playlist.get().getOwner() == user){
+        List<SongDTO> allsongs = songService.findAll();
+        List<SongDTO> checkedsongs = playlist.get().getSongs();
+        List<SongDTO> unchecksongs = playlistService.uncheckedSongs(allsongs,checkedsongs);
 
-    ModelAndView modelAndView = new ModelAndView("playlist/edit");
-    modelAndView.addObject("playlist",playlist.get());
-    modelAndView.addObject("allsongs", allsongs);
-    modelAndView.addObject("songs", songs);
-    modelAndView.addObject("unchecksongs", uncheckSongs);
+        modelAndView = new ModelAndView("playlist/edit");
+        modelAndView.addObject("playlist",playlist.get());
+        modelAndView.addObject("allsongs", allsongs);
+        modelAndView.addObject("checkedsongs", checkedsongs);
+        modelAndView.addObject("unchecksongs", unchecksongs);
+      } else {
+        modelAndView = new ModelAndView("404");
+      }
+    } else {
+      modelAndView = new ModelAndView("404");
+    }
+
     return modelAndView;
   }
 
   @PostMapping("/playlists/update")
   public ModelAndView updatePlaylist(@ModelAttribute("playlist") Playlist playlist, RedirectAttributes redirectAttributes) {
-    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/edit/"+ playlist.getId());
+    ModelAndView modelAndView = new ModelAndView("redirect:/playlists/update/"+ playlist.getId());
     convertIdToSong(playlist);
     redirectAttributes.addFlashAttribute("message", "Playlist was update!");
     return modelAndView;
   }
 
   @GetMapping("/playlists/delete/{id}")
-  public ModelAndView deletePlaylist(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-    ModelAndView modelAndView = new ModelAndView("redirect:/playlist/list");
-    playlistService.remove(id);
-    redirectAttributes.addFlashAttribute("message", "Playlist was deleted");
+  public ModelAndView deletePlaylist(@PathVariable Long id, RedirectAttributes redirectAttributes, Principal principal) {
+    UserDTO user = userService.findByEmail(principal.getName());
+    Optional<Playlist> playlist = playlistService.findById(id);
+    ModelAndView modelAndView;
+    if (playlist.get().getOwner() == user){
+      modelAndView = new ModelAndView("redirect:/playlists");
+      playlistService.remove(id);
+      redirectAttributes.addFlashAttribute("message", "Playlist was deleted");
+    } else {
+      modelAndView = new ModelAndView("404");
+    }
     return modelAndView;
   }
 
