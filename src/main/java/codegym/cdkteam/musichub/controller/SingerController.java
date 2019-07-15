@@ -17,10 +17,17 @@ public class SingerController {
     @Autowired
     private SingerService singerService;
 
-    @GetMapping("")
+    @GetMapping("/list")
     public ModelAndView listSinger(){
         List<Singer> singers = singerService.findAll();
         ModelAndView modelAndView = new ModelAndView("singer/list");
+        modelAndView.addObject("singers", singers);
+        return modelAndView;
+    }
+    @GetMapping("")
+    public ModelAndView Singer() {
+        List<Singer> singers = singerService.findAll();
+        ModelAndView modelAndView = new ModelAndView("singer/singers");
         modelAndView.addObject("singers", singers);
         return modelAndView;
     }
@@ -49,7 +56,6 @@ public class SingerController {
         Singer singers = singerService.findById(id).get();
         modelAndView = new ModelAndView("singer/detail");
         modelAndView.addObject("singer", singer.get());
-        modelAndView.addObject("singers", singers);
         return modelAndView;
     }
     @GetMapping("/edit/{id}")
