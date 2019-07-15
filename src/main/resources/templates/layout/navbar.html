@@ -38,10 +38,10 @@
                     </li>
 
                     <li class="nav-item mr-2" th:if="${active == 'singers'}">
-                        <a class="nav-link active" href="singers.html">Singers</a>
+                        <a class="nav-link active" th:href="@{/allsingers}">Singers</a>
                     </li>
                     <li class="nav-item mr-2" th:unless="${active == 'singers'}">
-                        <a class="nav-link" href="singers.html">Singers</a>
+                        <a class="nav-link" th:href="@{/allsingers}">Singers</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 ml-auto position-relative" method="get" action="/search">

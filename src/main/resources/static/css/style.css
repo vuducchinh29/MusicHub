@@ -81,7 +81,7 @@ a.nav-link:focus{
   opacity: 0;
   font-size: 35px;
   left: 6px;
-  top: 0px;
+  top: 18px;
   color: #17a2b8;
 }
 .song-close-btn{
@@ -89,6 +89,9 @@ a.nav-link:focus{
 }
 .song-edit-btn{
   margin-right: 150px;
+}
+.list-song:hover .play-opacity{
+  opacity: 1;
 }
 
 .song-of-list:hover .play-opacity{
@@ -215,4 +218,9 @@ pre {
 
 .comment {
   margin-bottom: 100px!important;
+}
+
+.view-more:hover {
+  color: #ffffff!important;
+  background: #17a2b8;
 }

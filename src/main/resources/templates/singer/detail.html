@@ -15,6 +15,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/hover-singer.css}">
 </head>
 
 <body>
@@ -78,7 +79,7 @@
              style="background: url(https://png.pngtree.com/thumb_back/fh260/back_pic/03/62/30/9157aa94e693d90.jpg) center center / cover no-repeat rgb(83, 62, 56);">
             <div class="lammonen row mx-0" style="background-color: rgba(0,0,0,.65);">
                 <div class="col-3">
-                    <img th:src="${singer.getLinkImage()}" width="288" height="288" alt="song-thumbnail" class="img img-responsive w-100 p-4">
+                    <img th:src="${singer.getLinkImage()}" width="288" height="288" alt="song-thumbnail" class="img img-responsive p-4">
                 </div>
                 <div class="col-9">
                     <div class="py-4 pr-5 text-white mb-5">
@@ -101,20 +102,20 @@
         <div class="row">
             <div class="col-7 px-5 br-1">
                 <h3 class="mb-3">Famous songs</h3>
-                <ul class="list-group list-songs-group" th:each="song : ${songs}">
-                    <li class="list-group-item py-2 my-2 list-song bg-light">
+                <ul class="list-group list-songs-group">
+                    <li class="list-group-item py-2 my-2 list-song bg-light" th:each="song, i : ${songs}" >
                         <div class="row">
                             <div class="col-1">
                                 <a href="#"><i class="fa fa-play play-opacity pull-left position-absolute"></i></a>
-                                <span>1</span>
+                                <span th:text="${i.count}"></span>
                             </div>
                             <div class="col-7">
-                                <a href="#" class="name-of-song">
-                                    <h6 class="my-1 text-dark">Name of song</h6>
+                                <a th:href="@{/songs/__${song.id}__}" class="name-of-song">
+                                    <h6 class="my-1 text-dark" th:text="${song.getName()}"></h6>
                                 </a>
                             </div>
                             <div class="col-4">
-                                <span class="mb-0 singer">Singer</span>
+                                <span class="mb-0 singer" th:each="singer: ${song.getSingers()}" th:text="${singer.getName()+ ' '}"></span>
                             </div>
                         </div>
                     </li>
@@ -122,12 +123,12 @@
                 </ul>
             </div>
             <div class="col-5 px-5">
-                <h3 class="mb-3">Other singer</h3>
+                <h3 class="mb-3">Recommend singer</h3>
                 <ul class="list-group">
-                    <li class="list-group-item p-0 my-2 mt-3 bg-light">
-                        <a href="" class="name-of-song">
-                            <img src="http://placehold.it/40x40" alt="" class="img thumbnail pull-left mr-2">
-                            <h6 class="mb-1 text-dark"></h6>
+                    <li class="list-group-item p-0 my-2 mt-3 bg-light" th:each="singer: ${singers}">
+                        <a th:href="@{/singers/__${singer.id}__}" class="name-of-song">
+                            <img th:src="${singer.getLinkImage()}" alt="" class="img thumbnail pull-left mr-2" width="40" height="40">
+                            <h6 class="mb-1 text-dark" th:text="${singer.getName()}"></h6>
                         </a>
                     </li>
                 </ul>
@@ -136,9 +137,7 @@
     </section>
     <hr />
     <section class="comment my-4">
-        <div id="comment" class="border border-warning" style="height: 400px">
-            This is comment area
-        </div>
+        <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
     </section>
 </article>
 <div class="music-player fixed-bottom" style="height: 70px;">
@@ -156,7 +155,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="js/like-heart.js"></script>
+<script th:src="@{/js/like-heart.js}"></script>
 </body>
 
 </html>

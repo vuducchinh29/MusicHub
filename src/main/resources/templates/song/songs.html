@@ -199,9 +199,9 @@
                 <a th:href="@{/songs/__${song.id}__}">
                   <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
                 </a>
-                <a th:href="@{songs/delete/__${song.id}__}" class="pull-right song-close-btn"><i class="fa fa-close play-opacity position-absolute"></i></a>
+                <a th:href="@{songs/delete/__${song.id}__}" onclick="return confirm('Are you sure to remove this song???')" class="pull-right song-close-btn"><i class="fa fa-close play-opacity position-absolute"></i></a>
                 <a th:href="@{songs/update/__${song.id}__}" class="pull-right song-edit-btn"><i class="fa fa-edit play-opacity position-absolute"></i></a>
-                <p class="mb-0 singer">Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
+                <p class="mb-0 singer"><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
               </li>
             </ul>
           </div>

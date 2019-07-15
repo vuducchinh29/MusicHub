@@ -202,23 +202,22 @@
                 <span th:text="${i.count}"></span>
               </div>
               <div class="col-7">
-                <a href="#" class="name-of-song">
+                <a th:href="@{/songs/__${song.id}__}" class="name-of-song">
                   <h6 class="my-1 text-dark" th:text="${song.getName()}"></h6>
                 </a>
               </div>
               <div class="col-4">
-                <span class="mb-0 singer" th:text="${song.getSingers()+ ' '}"></span>
+                <span class="mb-0 singer" th:each="singer: ${song.getSingers()}" th:text="${singer.getName()+ ' '}"></span>
               </div>
             </div>
-            <hr/>
           </li>
         </ul>
       </div>
       <div class="col-5 px-5">
-        <h3 class="mb-3">Recomment playlist</h3>
+        <h3 class="mb-3">Recommend playlist</h3>
         <ul class="list-group">
           <li class="list-group-item p-0 my-2 mt-3 bg-light" th:each="playlist, i: ${recommend_playlists}">
-            <a href="" class="name-of-song">
+            <a th:href="@{/playlists/__${playlist.id}__}" class="name-of-song">
               <img th:src="${playlist.getLinkAvatar()}" width="40" height="40"  alt="" class="img thumbnail pull-left mr-2">
               <h6 class="mb-1 text-dark" th:text="${playlist.getName()}"></h6>
             </a>

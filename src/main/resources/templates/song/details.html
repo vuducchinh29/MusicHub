@@ -182,7 +182,7 @@
         <div class="col-9">
           <div class="py-4 text-white mb-5">
             <h2 th:text="${song.getName()}"></h2>
-            <p>Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
+            <p><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
           </div>
           <div class="count-like-play text-white pull-right pr-3 mt-5">
             <i class="fa fa-play"><span id=count-play class="count-like-play mx-2" th:text="${song.getListen()}"></span></i>
@@ -219,7 +219,7 @@
             <a th:href="@{/songs/__${song.id}__}">
               <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
             </a>
-            <p class="mb-0 singer">Singer: <span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
+            <p class="mb-0 singer"><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
           </li>
         </ul>
       </div>
