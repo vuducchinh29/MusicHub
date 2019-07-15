@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Singers</title>
@@ -76,7 +76,7 @@
                 <div class="item col-3" th:each="singer, i : ${singers}">
                     <img class="d-block w-100 pull-left p-4 rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
                     <h6 class="p-2 font-weight-bold" th:text="${singer.getName()}"></h6>
-                    <div class="btn btn-light border-info text-info"><i class="fa fa-plus"></i> View more</div>
+                    <div class="btn btn-light border-info text-info"><a class="fa fa-plus"></a> View more</div>
                 </div>
             </div>
         </div>
