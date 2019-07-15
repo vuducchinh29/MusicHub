@@ -1,8 +1,104 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+<!--    <title>User Dashboard</title>-->
+<!--    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link th:href="@{/css/style.css}" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="d-flex" id="wrapper">-->
+<!--    <div class="bg-light border-right" id="sidebar-wrapper">-->
+<!--        <div class="sidebar-heading"><b>Music Hub</b></div>-->
+<!--        <div class="list-group list-group-flush">-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+<!--            <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>-->
+<!--            <a th:href="@{/list}"  class="list-group-item list-group-item-action bg-light">Playlist</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="page-content-wrapper">-->
+<!--        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">-->
+<!--            <span class="navbar-toggler-icon" id="menu-toggle"></span>-->
+<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">-->
+<!--                    <li class="nav-item active">-->
+<!--                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Admin</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
+<!--                           aria-haspopup="true" aria-expanded="false">-->
+<!--                            Option-->
+<!--                        </a>-->
+<!--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">-->
+<!--                            <a class="dropdown-item" href="#">Change Password</a>-->
+<!--                            <a class="dropdown-item" href="#">User Manager</a>-->
+<!--                            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                            <div class="dropdown-divider"></div>-->
+<!--                            <a class="dropdown-item" href="#">Log out</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--        <div class="container-fluid mt-50">-->
+<!--            <h1>List Song</h1>-->
+<!--            <form th:align="center">-->
+<!--                <input name="song" type="text" placeholder="name song">-->
+<!--                <input type="submit" value="Search">-->
+<!--                <p>-->
+<!--                    <a th:href="@{/}">Back to song home</a>-->
+<!--                </p>-->
+<!--            </form>-->
+<!--            <br/>-->
+<!--            <form>-->
+<!--                <table border="1" align="center">-->
+<!--                    <tr>-->
+<!--                        <td >STT</td>-->
+<!--                        <td >Name of song</td>-->
+<!--                        <td colspan="2">Options</td>-->
+<!--                    </tr>-->
+<!--                    <tr th:each="song,i : ${songs}">-->
+<!--                        <td th:text="${i.count}"></td>-->
+<!--                        <td style="text-align: left"><a th:href="@{/play/__${song.id}__}"><span th:text="${song.getName()}"></span></a>-->
+<!--                        </td>-->
+<!--                        <td ><a th:href="@{/edit-song/__${song.id}__}">Edit</a></td>-->
+<!--                        <td ><a th:href="@{/delete/__${song.id}__}" onclick="return confirm('Are you sure to delete this song???')">Delete</a></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </form>-->
+<!--            <th:block th:if="${message}">-->
+<!--                <p th:text="${message}" th:align="center"></p>-->
+<!--            </th:block>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="../js/toggleMenu.js"></script>-->
+<!--<script src="../js/uploadSong.js"></script>-->
+<!--<script src="../js/uploadImage.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Songs</title>
+  <title>Dashboard - Songs</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,7 +134,7 @@
           <a class="nav-link" href="playlists.html">Playlists</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link active" href="songs.html">Songs</a>
+          <a class="nav-link" href="allsongs.html">Songs</a>
         </li>
         </li>
         <li class="nav-item mr-2">
@@ -72,27 +168,43 @@
     </div>
   </div>
 </nav>
-<section class="container below-nav position-relative">
-  <div class="col-10 mx-auto bg-light px-5 mb-5">
-    <div class="pt-5">
-      <span class="btn btn-info pull-right d-inline-block btn-playall">Play all songs</span>
-      <h4 class="font-weight-bold">All Songs</h4>
-    </div>
-    <div class="row my-5">
-      <div class="col-12">
-        <ul class="list-group" th:each="song : ${songs}">
-          <li class="list-group-item bg-light p-0 pb-4">
-            <a href="#" class="name-of-song">
-              <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
-            </a>
-            <p class="mb-0 singer">Singer</p>
-          </li>
-        </ul>
+<div class="container position-relative below-nav bg-light">
+  <div class="row py-4">
+    <aside class="col-3 pl-5 dashboard-sidebar">
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+          <a href="dashboard.html" class="list-group-item list-group-item-action bg-light px-1">Dashboard</a>
+          <a href="uploadsong.html" class="list-group-item list-group-item-action bg-light px-1">Upload song</a>
+          <a href="dashboard-songs.html" class="list-group-item list-group-item-action bg-light px-1 active">Songs</a>
+          <a href="create-playlist.html" class="list-group-item list-group-item-action bg-light px-1">Create
+            playlist</a>
+          <a href="dashboard-playlists.html"
+             class="list-group-item list-group-item-action bg-light px-1">Playlists</a>
+          <a href="dashboard-singers.html" class="list-group-item list-group-item-action bg-light px-1">Singer</a>
+        </div>
       </div>
-    </div>
+    </aside>
+    <article class="col-9 pl-5">
+      <section>
+        <span class="btn btn-info pull-right d-inline-block mr-5 btn-playall">Play all songs</span>
+        <h4 class="font-weight-bold">Songs</h4>
+        <div class="row mt-5">
+          <div class="col-12">
+            <ul class="list-group" th:each="song : ${songs}">
+              <li class="list-group-item bg-light p-0 pb-4">
+                <a href="#" class="name-of-song">
+                  <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
+                  <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
+                </a>
+                <p class="mb-0 singer">Singer</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </article>
   </div>
-</section>
+</div>
 <div class="music-player fixed-bottom" style="height: 70px;">
   <audio class="d-block mx-auto mt-2" controls>
     <source src="music/hay_trao_cho_anh_ft_snoop_dogg.mp3" type="audio/ogg">
