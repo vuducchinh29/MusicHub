@@ -78,9 +78,12 @@ public class PlaylistServiceImpl implements PlaylistService {
     return playlistRepository.findTop6ByOrderByListenDesc();
   }
 
+  List<Playlist> findAllByNameContaining(String name) {
+    return playlistRepository.findAllByNameContaining(name);
+  }
 
   @Override
-  public void listen (Playlist playlist) {
+  public void listen(Playlist playlist) {
     playlist.setListen(playlist.getListen() + 1);
     playlistRepository.save(playlist);
   }
