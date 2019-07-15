@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard - Singers</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/hover-singer.css}">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top fixed-top py-0">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="http://musichub.scot/wp-content/uploads/2015/12/MusicHub_logo.jpg" height="50px" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav pull-left text-uppercase text-center">
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="index.html">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="playlists.html">Playlists</a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="songs.html">Songs</a>
+                </li>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="singers.html">Singers</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 ml-auto position-relative">
+                <select name="type" id="typesearch" class="form-control position-absolute rounded-0 select-type px-2">
+                    <option value="1">Song</option>
+                    <option value="2">Playlist</option>
+                    <option value="3">Singer</option>
+                </select>
+                <input class="form-control mr-sm-2 input-search rounded-0" type="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-search position-absolute border-info bg-info rounded-0" type="submit"><i
+                        class="fa fa-search text-white"></i></button>
+            </form>
+            <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <span class="user-name">Kú Mèo</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="#">Log out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container position-relative below-nav bg-light">
+    <div class="row py-4">
+        <aside class="col-3 pl-5 dashboard-sidebar">
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="list-group list-group-flush">
+                    <a href="dashboard.html" class="list-group-item list-group-item-action bg-light px-1">Dashboard</a>
+                    <a href="uploadsong.html" class="list-group-item list-group-item-action bg-light px-1">Upload song</a>
+                    <a href="dashboard-songs.html" class="list-group-item list-group-item-action bg-light px-1">Songs</a>
+                    <a href="create-playlist.html" class="list-group-item list-group-item-action bg-light px-1">Create
+                        playlist</a>
+                    <a href="dashboard-playlists.html"
+                       class="list-group-item list-group-item-action bg-light px-1">Playlists</a>
+                    <a href="dashboard-singers.html" class="list-group-item list-group-item-action bg-light px-1 active">Singer</a>
+                </div>
+            </div>
+        </aside>
+        <article class="col-9 pl-5">
+            <section class="mb-5">
+                <a href="create-singer.html"><span class="btn btn-info pull-right mr-2 btn-showall">Add new singer</span></a>
+                <h4 class="font-weight-bold mb-5">All singers</h4>
+                <div class="row mt-3" th:each="singer, i : ${singers}">
+                    <div class="col-4 my-2">
+                        <div class="parent p-3">
+                            <div class="child">
+                                <img class="d-block w-100 pull-left p-4 rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
+                                <a class="close-btn" th:href="@{/singers/delete/__${singer.id}__}" onclick="return confirm('Are you sure to delete this singer???')"><i class="fa fa-close"></i></a>
+                                <a class="edit-btn" th:href="@{/singers/edit/__${singer.id}__}"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </div>
+                        <a href="#" class="text-dark">
+                            <h6 class="py-3 font-weight-bold text-center" th:text="${singer.getName()}"></h6>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+
+</html>
