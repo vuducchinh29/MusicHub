@@ -194,3 +194,7 @@ pre {
   font-family: sans-serif;
   font-size: 15px;
 }
+
+.comment {
+  margin-bottom: 100px!important;
+}
