@@ -1,16 +1,39 @@
-let heart = document.getElementById('heart');
-let hearto = document.getElementById('heart-o');
-let toggle = true;
+function likePlaylist(id) {
+  $.ajax({
+    type: "GET",
+    enctype: 'multipart/form-data',
+    url: "/playlists/like/" + id,
+    success: function (data) {
+      if (data === 'no login') {
+        alert("Please login to like this playlist");
+      } else if (data === "not found") {
+        alert("Playlist not found")
+      } else {
+        document.getElementById("count-like").innerText = data;
+      }
+    },
+    error: function () {
+      alert("Error! Please try again.")
+    }
+  });
+}
 
-heart.style.display = 'none';
-function like() {
-  if (toggle) {
-    heart.style.display = 'inline-block';
-    hearto.style.display = 'none';
-    toggle = false;
-  } else {
-    hearto.style.display = 'inline-block';
-    heart.style.display = 'none';
-    toggle = true;
-  }
+function likeSong(id) {
+  $.ajax({
+    type: "GET",
+    enctype: 'multipart/form-data',
+    url: "/songs/like/" + id,
+    success: function (data) {
+      if (data === 'no login') {
+        alert("Please login to like this playlist");
+      } else if (data === "not found") {
+        alert("Playlist not found")
+      } else {
+        document.getElementById("count-like").innerText = data;
+      }
+    },
+    error: function () {
+      alert("Error! Please try again.")
+    }
+  });
 }
