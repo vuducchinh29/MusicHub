@@ -1,8 +1,10 @@
 package codegym.cdkteam.musichub.controller;
 
 import codegym.cdkteam.musichub.model.Playlist;
+import codegym.cdkteam.musichub.model.SingerDTO;
 import codegym.cdkteam.musichub.model.song.SongDTO;
 import codegym.cdkteam.musichub.service.PlaylistService;
+import codegym.cdkteam.musichub.service.SingerService;
 import codegym.cdkteam.musichub.service.SongDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class SearchController {
   @Autowired
   PlaylistService playlistService;
 
+  @Autowired
+  SingerService singerService;
+
   @GetMapping("/search")
   public String search (@RequestParam(defaultValue = "song") String type, @RequestParam(defaultValue = "") String query, Model model) {
     if (type.equals("song")) {
@@ -31,7 +36,9 @@ public class SearchController {
       model.addAttribute("result", playlists);
       return "search/playlist";
     } else if (type.equals("singer")) {
-      return null;
+      List<SingerDTO> singers = singerService.findAllByNameContaining(query);
+      model.addAttribute("result", singers);
+      return "search/singer";
     } else {
       return "404";
     }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Songs</title>
+  <title>Singers</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,27 +15,21 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/hover-playlist.css}">
 </head>
 
 <body>
-<nav th:replace="layout/navbar :: navbar('songs')"></nav>
-
-<section class="container below-nav position-relative">
-  <div class="col-10 mx-auto bg-light px-5 mb-5">
-    <div class="pt-5">
-      <h4 class="font-weight-bold">Result search: <span th:text="${param.query}"></span></h4>
-    </div>
-    <div class="row my-5">
-      <div class="col-12">
-        <ul class="list-group" th:each="song : ${result}">
-          <li class="list-group-item bg-light p-0 pb-4">
-            <a href="#" class="name-of-song">
-              <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
-              <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
-            </a>
-            <p class="mb-0 singer" th:each="singer: ${song.getSingers()}" th:text="${singer.getName()}"></p>
-          </li>
-        </ul>
+<nav th:replace="layout/navbar :: navbar('singers')"></nav>
+<section class="container" id="artists">
+  <div class="most-playlist mt-5 bg-white">
+    <div class="p-5">
+      <h4 class="ml-2 font-weight-bold">Result Search: <span th:text="${param.query}"></span></h4>
+      <div class="text-center row mb-5">
+        <div class="item col-3" th:each="singer : ${result}">
+          <img class="d-block w-100 pull-left p-4 rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
+          <h6 class="p-2 font-weight-bold" th:text="${singer.getName()}"></h6>
+          <a th:href="@{/singers/__${singer.id}__}"><div class="btn btn-light border-info text-info view-more"><i class="fa fa-plus"></i> View more</div></a>
+        </div>
       </div>
     </div>
   </div>
