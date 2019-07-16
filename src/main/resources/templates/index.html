@@ -91,7 +91,7 @@
                 <img th:src="${newestSong.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
                 <h6 class="mb-1 text-dark" th:text="${newestSong.getName()}"></h6>
               </a>
-              <p class="mb-0 singer" th:each="singer: ${song.getSingers()}" th:text="${singer.getName()+ ' '}"></p>
+              <p class="mb-0 singer" th:each="singer: ${newestSong.getSingers()}" th:text="${singer.getName()+ ' '}"></p>
             </li>
 
           </ul>
@@ -107,7 +107,7 @@
                 <img th:src="${mostPlayedSong.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
                 <h6 class="mb-1 text-dark" th:text="${mostPlayedSong.getName()}">Name of song</h6>
               </a>
-              <p class="mb-0 singer" th:each="singer: ${song.getSingers()}" th:text="${singer.getName()+ ' '}"></p>
+              <p class="mb-0 singer" th:each="singer: ${mostPlayedSong.getSingers()}" th:text="${singer.getName()+ ' '}"></p>
             </li>
 
           </ul>
