@@ -70,7 +70,7 @@
             </div>
             <div class="col-5 px-5">
                 <h3 class="mb-3">Recommend singer</h3>
-                <ul class="list-group">
+                <ul class="list-group" style="max-height: 320px; overflow: hidden;">
                     <li class="list-group-item p-0 my-2 mt-3 bg-light" th:each="singer: ${singers}">
                         <a th:href="@{/singers/__${singer.id}__}" class="name-of-song">
                             <img th:src="${singer.getLinkImage()}" alt="" class="img thumbnail pull-left mr-2" width="40" height="40">
