@@ -112,11 +112,11 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/playdock/css/style.css}">
 </head>
 
 <body>
 <nav th:replace="layout/navbar :: navbar('')"></nav>
-
 <article class="container position-relative below-nav" th:object="${song}">
   <section id="song-detail-banner">
     <div class="bg-img"
@@ -141,7 +141,7 @@
     </div>
   </section>
   <section class="bg-light p-3 mb-4">
-    <div class="btn btn-info p-2 ml-4 btn-play"><i class="fa fa-play"></i> Play now</div>
+    <div class="btn btn-info p-2 ml-4 btn-play" th:onclick="'javascript:playSong(' + ${song.getId()} + ')'"><i class="fa fa-play"></i> Play now</div>
     <span class="ml-5" id="like-btn" onclick="like();">
         <i id="heart-o" class="fa fa-heart-o"></i>
         <i id="heart" class="fa fa-heart text-danger"></i> Like</span>
@@ -160,10 +160,10 @@
         <h3 class="mb-3">Recommend for you</h3>
         <ul class="list-group" th:each="song: ${songs}">
           <li class="list-group-item p-0 py-2 bg-light">
-            <a href="#" class="name-of-song">
+            <div th:onclick="'javascript:playSong(' + ${song.getId()} + ')'" class="name-of-song">
               <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
-              <i class="fa fa-play play-btn position-absolute"></i>
-            </a>
+              <i class="fa fa-play play-btn position-absolute" style="top: 12px;"></i>
+            </div>
             <a th:href="@{/songs/__${song.id}__}">
               <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
             </a>
@@ -178,11 +178,7 @@
     <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
   </section>
 </article>
-<div class="music-player fixed-bottom" style="height: 70px;">
-  <audio class="d-block mx-auto mt-2" controls>
-    <source src="music/hay_trao_cho_anh_ft_snoop_dogg.mp3" type="audio/ogg">
-  </audio>
-</div>
+<div th:replace="layout/playdock :: playdock"></div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -194,6 +190,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script th:src="@{/playdock/js/script.js}"></script>
 <script th:src="@{/js/like-heart.js}"></script>
 <script th:src="@{/js/scrollTo.js}"></script>
 </body>

@@ -107,6 +107,7 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/playdock/css/style.css}">
 </head>
 
 <body>
@@ -135,7 +136,7 @@
     </div>
   </section>
   <section class="bg-light p-3 mb-4">
-    <div class="btn btn-info p-2 ml-4 btn-play"><i class="fa fa-play"></i> Play all</div>
+    <div class="btn btn-info p-2 ml-4 btn-play" th:onclick="'javascript:playPlaylist(' + ${playlist.getId()} + ')'" ><i class="fa fa-play"></i> Play all</div>
     <span class="ml-5" id="like-btn" onclick="like();">
         <i id="heart-o" class="fa fa-heart-o"></i>
         <i id="heart" class="fa fa-heart text-danger"></i> Like</span>
@@ -150,7 +151,7 @@
           <li class="list-group-item py-2 my-2 list-song bg-light" th:each="song, i: ${playlist.getSongs()}">
             <div class="row">
               <div class="col-1">
-                <a href="#"><i class="fa fa-play play-opacity pull-left position-absolute"></i></a>
+                <div th:onclick="'javascript:playSong(' + ${song.getId()} + ')'"><i class="fa fa-play play-opacity pull-left position-absolute"></i></div>
                 <span th:text="${i.count}"></span>
               </div>
               <div class="col-7">
@@ -183,21 +184,19 @@
     <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
   </section>
 </article>
-<div class="music-player fixed-bottom" style="height: 70px;">
-  <audio class="d-block mx-auto mt-2" controls>
-    <source src="music/hay_trao_cho_anh_ft_snoop_dogg.mp3" type="audio/ogg">
-  </audio>
-</div>
+<div th:replace="layout/playdock :: playdock"></div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script th:src="@{/playdock/js/script.js}"></script>
 <script th:src="@{/js/like-heart.js}"></script>
 <script th:src="@{/js/scrollTo.js}"></script>
 </body>
