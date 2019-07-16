@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -58,4 +59,12 @@ public class Playlist {
   @CreationTimestamp
   @Column(name = "createdAt", updatable = false)
   private Date createdAt;
+
+  public List<String> getListEmailUserLiked() {
+    List<String> listEmail = new ArrayList<>();
+    for (UserDTO user: likedUsers) {
+      listEmail.add(user.getEmail());
+    }
+    return listEmail;
+  }
 }
