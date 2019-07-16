@@ -38,7 +38,7 @@ public class SongDTO {
   @Column(name = "linkImage")
   private String linkImage;
 
-  @Column(name = "listen")
+  @Column(name = "listen", columnDefinition = "integer default 299")
   private Integer listen;
 
   @CreationTimestamp
