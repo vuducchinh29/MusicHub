@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +39,8 @@ public class SongDTO {
   @Column(name = "linkImage")
   private String linkImage;
 
-  @Column(name = "listen")
-  private Integer listen = 9999;
+  @Column(name = "listen", columnDefinition = "int default 25")
+  private Integer listen = 11;
 
   @CreationTimestamp
   @Column(name = "createdAt", updatable = false)
@@ -74,4 +75,12 @@ public class SongDTO {
   private List<SingerDTO> singers;
 
   private String[] singerIDs;
+
+  public List<String> getListEmailUserLiked() {
+    List<String> listEmail = new ArrayList<>();
+    for (UserDTO user: likedUsers) {
+      listEmail.add(user.getEmail());
+    }
+    return listEmail;
+  }
 }
