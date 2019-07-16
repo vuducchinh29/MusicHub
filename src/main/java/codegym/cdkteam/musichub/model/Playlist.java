@@ -34,7 +34,7 @@ public class Playlist {
   private String linkAvatar;
 
   @Column(name = "listen")
-  private Integer listen;
+  private Integer listen = 999;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
