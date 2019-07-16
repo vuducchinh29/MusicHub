@@ -137,9 +137,14 @@
   </section>
   <section class="bg-light p-3 mb-4">
     <div class="btn btn-info p-2 ml-4 btn-play" th:onclick="'javascript:playPlaylist(' + ${playlist.getId()} + ')'" ><i class="fa fa-play"></i> Play all</div>
-    <span class="ml-5" id="like-btn" onclick="like();">
-        <i id="heart-o" class="fa fa-heart-o"></i>
-        <i id="heart" class="fa fa-heart text-danger"></i> Like</span>
+    <span th:unless="${#request.userPrincipal == null}" class="ml-5" id="like-btn" th:onclick="'javascript:likePlaylist(' + ${playlist.getId()} + ')'">
+        <i th:unless="${#lists.contains(playlist.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart fa-heart-o text-danger"></i>
+        <i th:if="${#lists.contains(playlist.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart text-danger"></i> Like
+    </span>
+    <span th:if="${#request.userPrincipal == null}" class="ml-5" th:onclick="'javascript:likePlaylist(' + ${playlist.getId()} + ')'">
+        <i class="fa fa-heart-o"></i>
+      <!--        <i th:if="${#lists.contains(playlist.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart text-danger"></i>--> Like
+    </span>
     <span class="ml-5"><a href="#comment" class="text-info" id="comment-btn"><i class="fa fa-comment"></i> Comment</a></span>
   </section>
   <hr />
@@ -199,6 +204,11 @@
 <script th:src="@{/playdock/js/script.js}"></script>
 <script th:src="@{/js/like-heart.js}"></script>
 <script th:src="@{/js/scrollTo.js}"></script>
+<script>
+  $('#like-btn').click(function () {
+    $('#heart').toggleClass('fa-heart-o')
+  });
+</script>
 </body>
 
 </html>
