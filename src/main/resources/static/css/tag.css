@@ -1,0 +1,105 @@
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.tags-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 15px;
+    width: 100%;
+    min-height: 34px;
+    line-height: 1.6;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+input.tag-input {
+    flex: 3;
+    border: 0;
+    outline: 0;
+}
+
+.tag {
+    position: relative;
+    margin: 2px 6px 2px 0;
+    padding: 1px 20px 1px 8px;
+    font-size: inherit;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    background-color: #317CAF;
+    border-radius: 3px;
+    transition: background-color .3s ease;
+    cursor: default;
+    top: -3px;
+}
+.tag:first-child {
+    margin-left: 0;
+}
+.tag--marked {
+    background-color: #6fadd7;
+}
+.tag--exists {
+    background-color: #EDB5A1;
+    -webkit-animation: shake 1s linear;
+    animation: shake 1s linear;
+}
+.tag__name {
+    margin-right: 3px;
+}
+
+.tag__remove {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    height: 100%;
+    padding: 0 5px;
+    font-size: 16px;
+    font-weight: 400;
+    transition: opacity .3s ease;
+    opacity: .5;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    color: #fff;
+    line-height: 1;
+}
+.tag__remove:hover {
+    opacity: 1;
+}
+.tag__remove:focus {
+    outline: 5px auto #fff;
+}
+
+@-webkit-keyframes shake {
+    0%, 100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translate3d(-5px, 0, 0);
+        transform: translate3d(-5px, 0, 0);
+    }
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translate3d(5px, 0, 0);
+        transform: translate3d(5px, 0, 0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translate3d(-5px, 0, 0);
+        transform: translate3d(-5px, 0, 0);
+    }
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translate3d(5px, 0, 0);
+        transform: translate3d(5px, 0, 0);
+    }
+}

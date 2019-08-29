@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="comment(url)">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&autoLogAppEvents=1&version=v3.3&appId=2261416917287521"></script>
+    <div class="fb-comments" th:data-href="${url}" data-width="100%" data-numposts="5"></div>
+</div>
+</body>
+</html>
+<!--Use-->
+<!--<div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>-->

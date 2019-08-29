@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Dashboard</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/hover-playlist.css}">
+</head>
+
+<body>
+<nav th:replace="layout/navbar :: navbar('')"></nav>
+
+<div class="container position-relative below-nav bg-light">
+  <div class="row py-4">
+    <aside th:replace="layout/dashboard :: dashboard('dashboard')"></aside>
+    <article class="col-9 pl-5">
+      <section>
+        <h4 class="font-weight-bold">Songs</h4>
+        <div class="row">
+          <div class="col-5">
+            <div id="carouselId" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active" th:each="song: ${songs}">
+                  <img
+                      th:src="${song.getLinkImage()}"
+                      width="300px" height="300px" alt="First slide">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-7">
+            <ul class="list-group" style="max-height: 300px; overflow: hidden;">
+              <li class="list-group-item bg-light p-0 pb-4" th:each="song: ${songs}">
+                <a th:href="@{/songs/__${song.id}__}" class="name-of-song">
+                  <img th:src="${song.getLinkImage()}" alt="" class="img thumbnail pull-left mr-2" width="40" height="40">
+                  <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
+                </a>
+                <p class="mb-0 singer"><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName() + ' '}"></span></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-center mt-4"><a th:href="@{/songs}" class="text-info">Show all songs</a></div>
+      </section>
+      <hr />
+      <section class="my-5">
+        <h4 class="font-weight-bold">Playlists</h4>
+        <div class="row">
+          <div class="col-4 my-2" th:each="playlist: ${playlists}">
+            <div class="parent">
+              <div class="child">
+                <img th:src="${playlist.getLinkAvatar()}" alt="" width="240" height="240">
+              </div>
+            </div>
+            <a th:href="@{/playlists/__${playlist.id}__}" class="text-dark">
+              <h6 class="py-3 font-weight-bold" th:text="${playlist.getName()}"></h6>
+            </a>
+          </div>
+        </div>
+        <div class="text-center mt-4"><a th:href="@{/playlists}" class="text-info">Show all playlists</a></div>
+      </section>
+      <hr />
+    </article>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+
+</html>

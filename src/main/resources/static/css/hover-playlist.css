@@ -1,0 +1,88 @@
+/* child - parent */
+.parent {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.child {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+
+/* Several different images */
+a.bonus, a.close-btn, a.edit-btn {
+  display: none;
+  font-size: 35px;
+  color: #ffffff !important;
+  font-family: sans-serif;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 50px;
+  cursor: pointer;
+  /*text-decoration: none;*/
+}
+a.bonus:hover{
+  text-decoration: none;
+  color: #c847ff;
+}
+
+.parent:hover .child:before, .parent:focus .child:before {
+  display: block;
+}
+
+.parent:hover a, .parent:focus a {
+  display: block;
+}
+
+.child:before {
+  content: "";
+  display: none;
+  height: 94%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(52,73,94,0.75);
+}
+
+.p-playlist .child:before {
+  height: 92%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 960px) {
+  .parent {width: 100%; margin: 20px 0px}
+  .wrapper {padding: 20px 20px;}
+}
+
+a.close-btn .fa-close{
+  position: absolute;
+  top: -93px;
+  left: 200px;
+}
+a.edit-btn .fa-edit{
+  position: absolute;
+  top: -90px;
+  left: 160px;
+}
+a.bonus .fa-play{
+  position: absolute;
+  left: 115px;
+  font-size:36px
+}

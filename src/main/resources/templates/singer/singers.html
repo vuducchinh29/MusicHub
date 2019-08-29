@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard - Singers</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/hover-singer.css}">
+</head>
+
+<body>
+<nav th:replace="layout/navbar :: navbar('singers')"></nav>
+
+<div class="container position-relative below-nav bg-light">
+    <div class="row py-4">
+        <aside th:replace="layout/dashboard :: dashboard('singer')"></aside>
+        <article class="col-9 pl-5">
+            <section class="mb-5">
+                <a th:href="@{/singers/add}"><span class="btn btn-info pull-right mr-2 btn-showall">Add new singer</span></a>
+                <h4 class="font-weight-bold mb-5">All singers</h4>
+                <div class="row mt-3">
+                    <div class="col-4 my-2" th:each="singer: ${singers}">
+                        <div class="parent p-3">
+                            <div class="child">
+                                <img class="d-block w-100 pull-left rounded-circle" th:src="${singer.getLinkImage()}" alt="Slide">
+                                <a class="close-btn" th:href="@{/singers/delete/__${singer.id}__}" onclick="return confirm('Are you sure to remove this singer???')"><i class="fa fa-close"></i></a>
+                                <a class="edit-btn" th:href="@{/singers/update/__${singer.id}__}"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </div>
+                        <a th:href="@{/singers/__${singer.id}__}" class="text-dark">
+                            <h6 class="py-3 font-weight-bold text-center" th:text="${singer.getName()}"></h6>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+
+</html>

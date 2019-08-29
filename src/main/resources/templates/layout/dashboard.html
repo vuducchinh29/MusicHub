@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <aside class="col-3 pl-5 dashboard-sidebar" th:fragment="dashboard(active)">
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+          <a th:href="@{/dashboard}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='dashboard'}">Dashboard</a>
+          <a th:href="@{/dashboard}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='dashboard'}">Dashboard</a>
+          <a th:href="@{/songs/add}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='uploadSong'}">Upload song</a>
+          <a th:href="@{/songs/add}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='uploadSong'}">Upload song</a>
+          <a th:href="@{/songs}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='songs'}">Songs</a>
+          <a th:href="@{/songs}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='songs'}">Songs</a>
+          <a th:href="@{/playlists/add}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='createPlaylist'}">Create playlist</a>
+          <a th:href="@{/playlists/add}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='createPlaylist'}">Create playlist</a>
+          <a th:href="@{/playlists}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='playlists'}">Playlists</a>
+          <a th:href="@{/playlists}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='playlists'}">Playlists</a>
+          <a th:href="@{/singers}" class="list-group-item list-group-item-action bg-light px-1 active" th:if="${active =='singer'}">Singer</a>
+          <a th:href="@{/singers}" class="list-group-item list-group-item-action bg-light px-1" th:unless="${active =='singer'}">Singer</a>
+        </div>
+      </div>
+    </aside>
+  </body>
+</html>

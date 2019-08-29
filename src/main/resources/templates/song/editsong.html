@@ -1,0 +1,257 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+<!--    <title>User Dashboard</title>-->
+<!--    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link href="/css/style.css" rel="stylesheet">-->
+<!--    <link href="/css/tag.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="d-flex" id="wrapper">-->
+<!--    <div class="bg-light border-right" id="sidebar-wrapper">-->
+<!--        <div class="sidebar-heading"><b>Music Hub</b></div>-->
+<!--        <div class="list-group list-group-flush">-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+<!--            <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Playlist</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="page-content-wrapper">-->
+<!--        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">-->
+<!--            <span class="navbar-toggler-icon" id="menu-toggle"></span>-->
+<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">-->
+<!--                    <li class="nav-item active">-->
+<!--                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Admin</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
+<!--                           aria-haspopup="true" aria-expanded="false">-->
+<!--                            Option-->
+<!--                        </a>-->
+<!--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">-->
+<!--                            <a class="dropdown-item" href="#">Change Password</a>-->
+<!--                            <a class="dropdown-item" href="#">User Manager</a>-->
+<!--                            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                            <div class="dropdown-divider"></div>-->
+<!--                            <a class="dropdown-item" href="#">Log out</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--        <div class="container-fluid mt-50">-->
+<!--            <h1 style="text-align: center">Edit song</h1>-->
+<!--            <div class="row mt-50">-->
+<!--                <div class="col-md-6">-->
+<!--                    <form th:action="@{/songs/update}" th:object="${song}" method="post">-->
+<!--                        <table align="left" cellpadding="5">-->
+<!--                            <input type="hidden" th:field="*{id}">-->
+<!--                            <tr class="form-group">-->
+<!--                                <td style="text-align: left">Name of song</td>-->
+<!--                                <td>-->
+<!--                                    <input type="text" class="form-control" th:field="*{name}" placeholder="Input name of song"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="form-group">-->
+<!--                                <td style="text-align: left">Description</td>-->
+<!--                                <td>-->
+<!--                  <textarea type="text" class="form-control" rows="5"-->
+<!--                            th:field="*{description}" placeholder="Type something about this song"></textarea>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="form-group">-->
+<!--                                <td style="text-align: left">Upload file of song</td>-->
+<!--                                <td>-->
+<!--                                    <input type="text" class="form-control" id="linkSong" th:field="*{linkSong}" placeholder="Input link or choose file"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="form-group">-->
+<!--                                <td style="text-align: left">Upload avatar</td>-->
+<!--                                <td>-->
+<!--                                    <input type="text" class="form-control" id="linkAvatar" th:field="*{linkImage}" placeholder="Input link or choose file"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="form-group">-->
+<!--                                <td style="text-align: left">Tags</td>-->
+<!--                                <td>-->
+<!--                                    <input type="text" class="form-control tagged" data-removeBtn="true" th:field="*{tags}">-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="form-group">-->
+<!--                                <td></td>-->
+<!--                                <td><input type="submit" class="btn btn-success" value="Save"></td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 mt-200">-->
+<!--                    <table cellpadding="5">-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <form method="post" enctype="multipart/form-data" id="songUploadForm">-->
+<!--                                    <input type="file" name="file" accept="audio/mp3"/>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <button type="button" id="uploadSongButton">Upload</button>-->
+<!--                            </td>-->
+<!--                        <tr>-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <form method="post" enctype="multipart/form-data" id="avatarUploadForm">-->
+<!--                                    <input type="file" name="file" accept="image/*"/>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <button type="button" id="uploadAvatarButton">Upload</button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <th:block th:if="${message}">-->
+<!--            <h3 th:text="${message}" class="message text-success"></h3>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script src="/vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="/js/toggleMenu.js"></script>-->
+<!--<script src="/js/uploadSong.js"></script>-->
+<!--<script src="/js/uploadImage.js"></script>-->
+<!--<script src="/js/tag.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard - Upload Song</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/tag.css}">
+</head>
+
+<body>
+<nav th:replace="layout/navbar :: navbar('')"></nav>
+
+<div class="container position-relative below-nav bg-light">
+    <div class="row py-4">
+        <aside th:replace="layout/dashboard :: dashboard('uploadSong')"></aside>
+        <article class="col-9 pl-5">
+            <form th:action="@{/songs/update}" th:object="${song}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="songName">Name of song</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="songName" placeholder="Name of song">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="singer">Singer</label>
+                        <input class="form-control" id="singer" hidden th:field="*{singerIDs}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="showSinger">List singers</label>
+                        <div class="btn btn-info choose-singer" id="showSinger" onclick="showHideSinger();">All singers <i
+                            class="fa fa-chevron-down"></i>
+                        </div>
+                        <div class="btn btn-info choose-singer" id="hideSinger" onclick="showHideSinger();">Hide list <i
+                            class="fa fa-chevron-up"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-control" id="listsingercheckbox" style="min-height: 60px;">
+                    <div class="form-check-inline" th:each="checkedsinger: ${checkedSinger}">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input singer-name" th:value="${checkedsinger.getId()}" th:text="${checkedsinger.getName()}" checked>
+                        </label>
+                    </div>
+                    <div class="form-check-inline" th:each="unchecksinger: ${uncheckSinger}">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input singer-name" th:value="${unchecksinger.getId()}" th:text="${unchecksinger.getName()}">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="songLyric">Lyric</label>
+                    <textarea th:field="*{description}" type="text" class="form-control" id="songLyric" rows="5"></textarea>
+                </div>
+                <div class="form-group col-6 pl-0 pr-5 mb-0">
+                    <label for="linkSong">Upload song file</label>
+                    <input type="text" class="form-control" id="linkSong" th:field="*{linkSong}" placeholder="Input link" />
+                    <span class="position-relative text-or">OR</span>
+                </div>
+                <div class="form-group col-6 pl-0 pr-5 mb-0">
+                    <label for="linkSong">Upload avatar</label>
+                    <input type="text" class="form-control" id="linkAvatar" th:field="*{linkImage}" placeholder="Input link" />
+                    <span class="position-relative text-or">OR</span>
+                </div>
+                <div class="form-group">
+                    <label for="songName">Tags</label>
+                    <input type="text" class="form-control tagged" id="tag" data-removeBtn="true" th:field="*{tags}" placeholder="Tags">
+                </div>
+                <button type="submit" class="btn btn-info">Save</button>
+            </form>
+            <div class="form-upload-file form-upload-song position-relative">
+                <form method="post" enctype="multipart/form-data" id="songUploadForm">
+                    <input type="file" name="file" accept="audio/mp3" />
+                    <button type="button" id="uploadSongButton" class="btn btn-info">Upload</button>
+                </form>
+            </div>
+            <div class="form-upload-file form-upload-avatar position-relative">
+                <form method="post" enctype="multipart/form-data" id="avatarUploadForm">
+                    <input type="file" name="file" accept="image/*" />
+                    <button type="button" id="uploadAvatarButton" class="btn btn-info">Upload</button>
+                </form>
+            </div>
+            <th:block th:if="${message}">
+                <h4 th:text="${message}"  style="margin-top: -60px;" class="message text-center text-success"></h4>
+            </th:block>
+        </article>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script th:src="@{/js/showHideSinger.js}"></script>
+<script th:src="@{/js/getValueCheckbox.js}"></script>
+<script th:src="@{/js/uploadSong.js}"></script>
+<script th:src="@{/js/uploadImage.js}"></script>
+<script th:src="@{/js/tag.js}"></script>
+</body>
+</html>

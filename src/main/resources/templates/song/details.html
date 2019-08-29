@@ -1,0 +1,208 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--  <meta name="description" content="">-->
+<!--  <meta name="author" content="">-->
+<!--  <title>User Dashboard</title>-->
+<!--  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+<!--  <link href="../css/style.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="d-flex" id="wrapper">-->
+<!--  <div class="bg-light border-right" id="sidebar-wrapper">-->
+<!--    <div class="sidebar-heading"><b>Music Hub</b></div>-->
+<!--    <div class="list-group list-group-flush">-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+<!--      <a th:href="@{/add-new-song}" class="list-group-item list-group-item-action bg-light">Upload song</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Favorite songs</a>-->
+<!--      <a th:href="@{/list}" class="list-group-item list-group-item-action bg-light">Playlist</a>-->
+<!--      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div id="page-content-wrapper">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">-->
+<!--      <span class="navbar-toggler-icon" id="menu-toggle"></span>-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">-->
+<!--          <li class="nav-item active">-->
+<!--            <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="#">Admin</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
+<!--               aria-haspopup="true" aria-expanded="false">-->
+<!--              Option-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">-->
+<!--              <a class="dropdown-item" href="#">Change Password</a>-->
+<!--              <a class="dropdown-item" href="#">User Manager</a>-->
+<!--              <a class="dropdown-item" href="#">Something else here</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Log out</a>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--    <div class="container-fluid mt-50">-->
+<!--      <h1 class="text-center">Song Detail</h1>-->
+<!--      <div class="container row mt-50" th:object="${song}">-->
+<!--        <div class="col-md-4">-->
+<!--          <img th:src="${song.getLinkImage()}" alt="Song thumbnail" width="100%">-->
+<!--        </div>-->
+<!--        <div class="col-md-8">-->
+<!--          <table border="1">-->
+<!--            <tr>-->
+<!--              <td class="col-md-3">Song ID</td>-->
+<!--              <td class="col-md-9" th:text="${song.getId()}"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td class="col-md-3">Song Name</td>-->
+<!--              <td class="col-md-9"><a th:href="@{/play/__${song.id}__}"><p class="nameSong" th:text="${song.getName()}"></p></a></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td class="col-md-3">Song Description</td>-->
+<!--              <td class="col-md-9" th:text="${song.getDescription()}"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td class="col-md-3">Link of song</td>-->
+<!--              <td class="col-md-9" th:text="${song.getLinkSong()}"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td class="col-md-3">Tags</td>-->
+<!--              <td class="col-md-9">-->
+<!--                <span class="badge badge-pill badge-primary" th:each="tag: ${song.getTags()}" th:text="${tag.name}"></span>-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--          </table>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="../js/toggleMenu.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Song detail</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/playdock/css/style.css}">
+</head>
+
+<body>
+<nav th:replace="layout/navbar :: navbar('')"></nav>
+<article class="container position-relative below-nav" th:object="${song}">
+  <section id="song-detail-banner">
+    <div class="bg-img"
+         style="background: url(https://png.pngtree.com/thumb_back/fh260/back_pic/03/62/30/9157aa94e693d90.jpg) center center / cover no-repeat rgb(83, 62, 56);">
+      <div class="lammonen row mx-0" style="background-color: rgba(0,0,0,.65);">
+        <div class="col-3">
+          <img
+              th:src="${song.getLinkImage()}" width="288" height="288"
+              alt="song-thumbnail" class="img img-responsive p-4">
+        </div>
+        <div class="col-9">
+          <div class="py-4 text-white mb-5">
+            <h2 th:text="${song.getName()}"></h2>
+            <p><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
+          </div>
+          <div class="count-like-play text-white pull-right pr-3 mt-5">
+            <i class="fa fa-play"><span id=count-play class="count-like-play mx-2" th:text="${song.getListen()}"></span></i>
+            <i class="fa fa-heart"><span id=count-like class="count-like-play mx-2" th:text="${song.getLikedUsers().size()}"></span></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-light p-3 mb-4">
+    <div class="btn btn-info p-2 ml-4 btn-play" th:onclick="'javascript:playSong(' + ${song.getId()} + ')'"><i class="fa fa-play"></i> Play now</div>
+    <span th:unless="${#request.userPrincipal == null}" class="ml-5" id="like-btn" th:onclick="'javascript:likeSong(' + ${song.getId()} + ')'">
+        <i th:unless="${#lists.contains(song.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart fa-heart-o text-danger"></i>
+        <i th:if="${#lists.contains(song.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart text-danger"></i> Like
+    </span>
+    <span th:if="${#request.userPrincipal == null}" class="ml-5" th:onclick="'javascript:likeSong(' + ${song.getId()} + ')'">
+        <i class="fa fa-heart-o"></i>
+      <!--        <i th:if="${#lists.contains(playlist.getListEmailUserLiked(), #request.userPrincipal.name)}" id="heart" class="fa fa-heart text-danger"></i>--> Like
+    </span>
+    <span class="ml-5"><a href="#comment" class="text-info" id="comment-btn"><i class="fa fa-comment"></i> Comment</a></span>
+  </section>
+  <hr />
+  <section class="bg-light p-3 my-4">
+    <div class="row">
+      <div class="col-7 px-5 br-1">
+        <h3 class="mb-3">Lyrics</h3>
+        <div class="lyric-content">
+          <pre th:text="${song.getDescription()}"></pre>
+        </div>
+      </div>
+      <div class="col-5 px-5">
+        <h3 class="mb-3">Recommend for you</h3>
+        <ul class="list-group" th:each="song: ${songs}">
+          <li class="list-group-item p-0 py-2 bg-light">
+            <div th:onclick="'javascript:playSong(' + ${song.getId()} + ')'" class="name-of-song">
+              <img th:src="${song.getLinkImage()}" width="40" height="40" alt="" class="img thumbnail pull-left mr-2">
+              <i class="fa fa-play play-btn position-absolute" style="top: 12px;"></i>
+            </div>
+            <a th:href="@{/songs/__${song.id}__}">
+              <h6 class="mb-1 text-dark" th:text="${song.getName()}"></h6>
+            </a>
+            <p class="mb-0 singer"><span th:each="singer: ${song.getSingers()}" th:text="${singer.getName()} + ' '"></span></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="comment my-4" id="comment">
+    <div th:replace="layout/comment :: comment(${#request.getRequestURL()})"></div>
+  </section>
+</article>
+<div th:replace="layout/playdock :: playdock"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script th:src="@{/playdock/js/script.js}"></script>
+<script th:src="@{/js/like-heart.js}"></script>
+<script th:src="@{/js/scrollTo.js}"></script>
+<script>
+  $('#like-btn').click(function () {
+    $('#heart').toggleClass('fa-heart-o')
+  });
+</script>
+</body>
+
+</html>
